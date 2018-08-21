@@ -1,7 +1,8 @@
 > Single/Multi Select React Component
 
-[Demo](https://darianstlex.github.io/react-sm-select) inspired by [React MultiSelect](https://github.com/Khan/react-multi-select)
+Inspired by [React MultiSelect](https://github.com/Khan/react-multi-select)
 
+[Demo](https://darianstlex.github.io/react-sm-select)
 ## Installation
 
 Install the react-sm-select npm package:
