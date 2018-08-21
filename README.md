@@ -18,8 +18,6 @@ npm install react-sm-select
 - **`options: array`** Array of options to select from in format: **Required**
 
 ```code
-lang: js
----
 [
   { value: 'red', label: 'Red' },
   { value: 'blue', label: 'Blue' }
@@ -29,16 +27,12 @@ lang: js
 - **`value: array: []`** Array of preselected options in format:
 
 ```code
-lang: js
----
 [ 'red', 'blue' ]
 ```
 
 - **`onChange: function`** Function to be executed on select: **Required**
 
 ```code
-lang: js
----
 onChange(value) {
   // value - see 'value' property
 }
@@ -54,8 +48,6 @@ onChange(value) {
 - **`filterOptions: function`** Custom filter function:
 
 ```code
-lang: js
----
 filterOptions(options, text) {
   // options - see 'options' property
   // text - search string
@@ -67,8 +59,6 @@ filterOptions(options, text) {
 - **`ValueRenderer: function`** Render custom Value:
 
 ```code
-lang: js
----
 ValueRenderer({value, options}) {
   // options: array - see 'options' property
   // value: array - see 'value' property
@@ -80,8 +70,6 @@ ValueRenderer({value, options}) {
 - **`OptionRenderer: function`** Render custom Option
 
 ```code
-lang: js
----
 OptionRenderer({option, checked, disabled, onClick}) {
   // option: object - from options props: { value, label }  
   // checked: boolean - define if option is checked
@@ -95,8 +83,6 @@ OptionRenderer({option, checked, disabled, onClick}) {
 - **`ArrowRenderer: function`** Render custom DropDown Arrow
 
 ```code
-lang: js
----
 ArrowRenderer({options, value, expanded, hasFocus}) {
   // options: array - see 'options' prop 
   // value: array - see 'value' property
@@ -110,8 +96,6 @@ ArrowRenderer({options, value, expanded, hasFocus}) {
 - **`LoadingRenderer: function`** Render custom Loading Indicator
 
 ```code
-lang: js
----
 LoadingRenderer() {
   return - component to render custom Loading Indicator
 }

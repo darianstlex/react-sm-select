@@ -30,7 +30,7 @@ export class MultiSelect extends Component {
       label: T.string,
     })).isRequired,
     value: T.arrayOf(T.string),
-    onChange: T.func,
+    onChange: T.func.isRequired,
     ArrowRenderer: T.func,
     ValueRenderer: T.func,
     OptionRenderer: T.func,
