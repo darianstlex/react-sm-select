@@ -1,0 +1,232 @@
+$backgroundColor: #fff;
+$focusColor: #1298d4;
+$fieldHeight: 40px;
+$borderRadius: 5px;
+$dividerColor: #cfd4d9;
+$borderColor: #AAA;
+$textColor: #333;
+$itemTextColor: #666666;
+$itemHoverColor: #ebf5ff;
+$searchPlaceholderColor: #c7c7c7;
+
+.MultiSelect {
+  &__header {
+    color: #aaa;
+  }
+
+  .DropDown {
+    position: relative;
+    box-sizing: border-box;
+    outline: none;
+
+    &__panel {
+      background-color: $backgroundColor;
+      border: 1px solid $borderColor;
+      border-bottom-right-radius: $borderRadius;
+      border-bottom-left-radius: $borderRadius;
+      border-top-color: $dividerColor;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+      box-sizing: border-box;
+      margin-top: -2px;
+      max-height: 300px;
+      position: absolute;
+      top: 100%;
+      width: 100%;
+      z-index: 1;
+      overflow-y: auto;
+    }
+
+    &__header {
+      box-sizing: border-box;
+      position: relative;
+      display: table;
+      background-color: $backgroundColor;
+      border: 1px solid $borderColor;
+      border-radius: $borderRadius;
+      color: $textColor;
+      cursor: default;
+      border-spacing: 0;
+      border-collapse: separate;
+      height: $fieldHeight;
+      outline: none;
+      overflow: hidden;
+      width: 100%;
+
+      &--focused {
+        border-color: $focusColor;
+        box-shadow: none;
+      }
+
+      &--expanded {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+
+    &__child {
+      box-sizing: border-box;
+      position: absolute;
+      max-width: 100%;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0 15px;
+      line-height: $fieldHeight - 2;
+      color: $textColor;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &--disabledChild {
+      opacity: 0.5;
+    }
+
+    &__rightBlock {
+      box-sizing: border-box;
+      position: absolute;
+      height: 100%;
+      right: 0;
+      padding: 0 10px;
+      line-height: $fieldHeight - 2;
+    }
+  }
+
+  .Arrow {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    cursor: pointer;
+
+    &--down {
+      position: relative;
+      height: 0;
+      width: 0;
+      top: 2px;
+      border-color: $borderColor transparent transparent;
+      border-style: solid;
+      border-width: 5px 5px 2.5px;
+    }
+
+    &--up {
+      position: relative;
+      height: 0;
+      width: 0;
+      top: -2px;
+      border-color: transparent transparent $borderColor;
+      border-style: solid;
+      border-width: 0 5px 5px;
+    }
+  }
+
+  .SelectPanel {
+    box-sizing: border-box;
+
+    ::placeholder {
+      color: $searchPlaceholderColor;
+      opacity: 1;
+    }
+
+    :-ms-input-placeholder {
+      color: $searchPlaceholderColor;
+    }
+
+    ::-ms-input-placeholder {
+      color: $searchPlaceholderColor;
+    }
+
+    &__searchContainer {
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    &__searchField {
+      box-sizing: border-box;
+      display: block;
+      max-width: 100%;
+      height: $fieldHeight;
+      line-height: $fieldHeight;
+      border: none;
+      color: $itemTextColor;
+      border-bottom: 1px solid $dividerColor;
+      padding: 10px 15px;
+      width: 100%;
+      outline: none;
+    }
+
+    &--searchFieldFocused {
+      border-bottom: 1px solid $borderColor;
+    }
+  }
+
+  .SelectList {
+    margin: 0;
+    padding-left: 0;
+
+    &__item {
+      list-style: none;
+    }
+  }
+
+  .SelectItem {
+    box-sizing: border-box;
+    background-color: #fff;
+    color: $itemTextColor;
+    cursor: pointer;
+    display: block;
+    padding: 12px 15px;
+    outline: none;
+
+    &--hover {
+      background-color: $itemHoverColor;
+      outline: 0;
+    }
+
+    &__label {
+      display: inline-block;
+      vertical-align: middle;
+      border-bottom-right-radius: 2px;
+      border-top-right-radius: 2px;
+      cursor: default;
+      padding: 2px 5px;
+    }
+
+    &--labelDisabled {
+      opacity: 0.5;
+    }
+
+    &__renderer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .LoadingIndicator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+    &__icon {
+      @keyframes loading_spin {
+        to {
+          transform: rotate(1turn);
+        }
+      }
+      box-sizing: border-box;
+      animation: loading_spin 800ms infinite linear;
+      width: 16px;
+      height: 16px;
+      border: 3px dotted $dividerColor;
+      border-radius: 50%;
+      border-right-color: $textColor;
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+    }
+  }
+}

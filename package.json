@@ -1,0 +1,50 @@
+{
+  "name": "react-sm-select",
+  "version": "0.0.5",
+  "description": "React Multi/Single Select Component",
+  "main": "./dist/index.js",
+  "module": "./es/index.js",
+  "scripts": {
+    "es": "babel src -d es -D",
+    "build": "npm run scss && webpack --mode production && npm run es",
+    "prepublish": "rm -rf dist && npm run build",
+    "scss": "node-sass src -o src",
+    "scss:w": "node-sass -w src -o src",
+    "catalog-start": "npm run sass:w && catalog start catalog",
+    "catalog-build": "catalog build -o .tmp --public-url /react-sm-select",
+    "catalog-publish": "bash scripts/publish_catalog.sh"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.6.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "catalog": "^3.5.5",
+    "copy-webpack-plugin": "^4.5.2",
+    "gh-pages": "^1.2.0",
+    "git-url-parse": "^10.0.1",
+    "node-sass": "^4.9.3",
+    "path": "^0.12.7",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0"
+  },
+  "keywords": [
+    "react-component",
+    "react-multiselect",
+    "react-select"
+  ],
+  "license": "MIT",
+  "author": "Ivan Uzun",
+  "homepage": "https://darianstlex.github.io/react-sm-select",
+  "repository": "https://github.com/darianstlex/react-sm-select.git"
+}
