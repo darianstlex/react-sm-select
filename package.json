@@ -9,8 +9,8 @@
     "es": "babel src -d es -D",
     "build": "npm run scss && webpack --mode production && npm run es",
     "prepublish": "rm -rf dist es && npm run build",
-    "scss": "node-sass src/styles.scss -o .|postcss styles.css -u autoprefixer -d src/",
-    "scss:w": "node-sass -w src/styles.scss -o .|postcss styles.css -u autoprefixer -d src/",
+    "scss": "node-sass src -o src && postcss src/styles.css -u autoprefixer -o src/styles.css",
+    "scss:w": "node-sass -w src -o src && postcss src/styles.css -u autoprefixer -o src/styles.css",
     "catalog-start": "catalog start catalog",
     "catalog-build": "catalog build -o .tmp --public-url /react-sm-select",
     "catalog-publish": "bash scripts/publish_catalog.sh"

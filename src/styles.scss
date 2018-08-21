@@ -130,14 +130,6 @@ $searchPlaceholderColor: #c7c7c7;
       opacity: 1;
     }
 
-    :-ms-input-placeholder {
-      color: $searchPlaceholderColor;
-    }
-
-    ::-ms-input-placeholder {
-      color: $searchPlaceholderColor;
-    }
-
     &__searchContainer {
       box-sizing: border-box;
       width: 100%;
