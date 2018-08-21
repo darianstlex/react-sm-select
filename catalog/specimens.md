@@ -15,7 +15,7 @@ state: {
   id="some-id"
   options={state.options}
   value={state.value}
-  onSelectedChanged={value => setState({ value })}
+  onChange={value => setState({ value })}
 />
 ```
 
@@ -36,7 +36,7 @@ state: {
   disabled
   options={state.options}
   value={state.value}
-  onSelectedChanged={value => setState({ value })}
+  onChange={value => setState({ value })}
 />
 ```
 
@@ -56,7 +56,7 @@ state: {
 <MultiSelect
   options={state.options}
   value={state.value}
-  onSelectedChanged={value => setState({ value })}
+  onChange={value => setState({ value })}
 />
 ```
 
@@ -78,7 +78,7 @@ state: {
   selectAllLabel="All Options"
   options={state.options}
   value={state.value}
-  onSelectedChanged={value => setState({ value })}
+  onChange={value => setState({ value })}
 />
 ```
 
@@ -100,7 +100,7 @@ state: {
   shouldToggleOnHover={true}
   options={state.options}
   value={state.value}
-  onSelectedChanged={value => setState({ value })}
+  onChange={value => setState({ value })}
 />
 ```
 
@@ -111,7 +111,7 @@ state: {
   isLoading
   options={[]}
   value={[]}
-  onSelectedChanged={() => {}}
+  onChange={() => {}}
 />
 ```
 
@@ -134,7 +134,7 @@ const LoadingRenderer  = () => 'Loading...';
   isLoading
   options={state.options}
   value={state.value}
-  onSelectedChanged={value => setState({ value })}
+  onChange={value => setState({ value })}
   LoadingRenderer={LoadingRenderer}
 />
 ```
@@ -160,7 +160,7 @@ const ValueRenderer = ({value, options}) => {
 <MultiSelect
   options={state.options}
   value={state.value}
-  onSelectedChanged={value => setState({ value })}
+  onChange={value => setState({ value })}
   ValueRenderer={ValueRenderer}
 />
 ```
@@ -186,7 +186,7 @@ const ArrowRenderer = ({expanded}) => {
 <MultiSelect
   options={state.options}
   value={state.value}
-  onSelectedChanged={value => setState({ value })}
+  onChange={value => setState({ value })}
   ArrowRenderer={ArrowRenderer}
 />
 ```
@@ -222,7 +222,7 @@ const OptionRenderer = ({checked, option, disabled, onClick }) => (
 <MultiSelect
   options={state.options}
   value={state.value}
-  onSelectedChanged={value => setState({ value })}
+  onChange={value => setState({ value })}
   OptionRenderer={OptionRenderer}
 />
 ```
@@ -244,6 +244,6 @@ state: {
   singleSelect
   options={state.options}
   value={state.value}
-  onSelectedChanged={value => setState({ value })}
+  onChange={value => setState({ value })}
 />
 ```

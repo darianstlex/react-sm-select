@@ -30,7 +30,7 @@ export class MultiSelect extends Component {
       label: T.string,
     })).isRequired,
     value: T.arrayOf(T.string),
-    onSelectedChanged: T.func,
+    onChange: T.func,
     ArrowRenderer: T.func,
     ValueRenderer: T.func,
     OptionRenderer: T.func,
@@ -51,8 +51,8 @@ export class MultiSelect extends Component {
   }
 
   handleSelectedChanged = selected => {
-    const {onSelectedChanged, disabled} = this.props;
-    if (!disabled && onSelectedChanged) onSelectedChanged(selected)
+    const {onChange, disabled} = this.props;
+    if (!disabled && onChange) onChange(selected)
   };
 
   render() {
@@ -87,7 +87,7 @@ export class MultiSelect extends Component {
             value,
             hasSelectAll,
             selectAllLabel,
-            onSelectedChanged: this.handleSelectedChanged,
+            onChange: this.handleSelectedChanged,
             disabled,
             enableSearch,
             filterOptions,

@@ -10,7 +10,7 @@ export class SelectList extends Component {
     OptionRenderer: T.func,
     options: T.array.isRequired,
     value: T.array.isRequired,
-    onSelectedChanged: T.func.isRequired,
+    onChange: T.func.isRequired,
     onClick: T.func.isRequired,
     disabled: T.bool,
     singleSelect: T.bool,
@@ -18,22 +18,22 @@ export class SelectList extends Component {
   };
 
   handleSelectionChanged = (option, checked) => {
-    const {value, onSelectedChanged, disabled, singleSelect, closePanel} = this.props;
+    const {value, onChange, disabled, singleSelect, closePanel} = this.props;
 
     if (disabled) return;
     if (singleSelect) {
-      onSelectedChanged([option.value]);
+      onChange([option.value]);
       closePanel();
       return;
     }
-    if (checked) onSelectedChanged([...value, option.value]);
+    if (checked) onChange([...value, option.value]);
     else {
       const index = value.indexOf(option.value);
       const removed = [
         ...value.slice(0, index),
         ...value.slice(index + 1),
       ];
-      onSelectedChanged(removed);
+      onChange(removed);
     }
   };
 
@@ -53,7 +53,7 @@ export class SelectList extends Component {
         <SelectItem
           focused={focusIndex === i}
           option={o}
-          onSelectionChanged={c => this.handleSelectionChanged(o, c)}
+          onChange={c => this.handleSelectionChanged(o, c)}
           checked={value.includes(o.value)}
           onClick={e => onClick(e, i)}
           OptionRenderer={OptionRenderer}

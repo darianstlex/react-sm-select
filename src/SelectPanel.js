@@ -14,7 +14,7 @@ export class SelectPanel extends Component {
     })).isRequired,
     value: T.array,
     selectAllLabel: T.string,
-    onSelectedChanged: T.func.isRequired,
+    onChange: T.func.isRequired,
     disabled: T.bool,
     enableSearch: T.bool,
     hasSelectAll: T.bool,
@@ -32,14 +32,14 @@ export class SelectPanel extends Component {
   };
 
   selectAll = () => {
-    const {onSelectedChanged, options} = this.props;
+    const {onChange, options} = this.props;
     const allValues = options.map(option => option.value);
 
-    onSelectedChanged(allValues);
+    onChange(allValues);
   };
 
   selectNone = () => {
-    this.props.onSelectedChanged([]);
+    this.props.onChange([]);
   };
 
   selectAllChanged = checked => {
@@ -139,7 +139,7 @@ export class SelectPanel extends Component {
             focused={focusIndex === 0}
             checked={this.allAreSelected()}
             option={selectAllOption}
-            onSelectionChanged={this.selectAllChanged}
+            onChange={this.selectAllChanged}
             onClick={() => this.handleItemClicked(0)}
             OptionRenderer={OptionRenderer}
             disabled={disabled}

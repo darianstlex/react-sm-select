@@ -34,12 +34,12 @@ lang: js
 [ 'red', 'blue' ]
 ```
 
-- **`onSelectedChanged: function`** Function to be executed on select: **Required**
+- **`onChange: function`** Function to be executed on select: **Required**
 
 ```code
 lang: js
 ---
-onSelectedChanged(value) {
+onChange(value) {
   // value - see 'value' property
 }
 ```

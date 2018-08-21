@@ -41,7 +41,7 @@ export class SelectItem extends Component {
     checked: T.bool,
     focused: T.bool,
     disabled: T.bool,
-    onSelectionChanged: T.func,
+    onChange: T.func,
     onClick: T.func,
     singleSelect: T.bool,
   };
@@ -64,7 +64,7 @@ export class SelectItem extends Component {
   itemRef = null;
 
   toggleChecked = () => {
-    this.props.onSelectionChanged(!this.props.checked);
+    this.props.onChange(!this.props.checked);
   };
 
   handleClick = event => {
