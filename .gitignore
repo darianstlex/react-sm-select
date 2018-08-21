@@ -2,13 +2,12 @@
 
 # dependencies
 node_modules
-dist
-es
-out
 
 # misc
-catalog/build
 .DS_Store
+dist
+es
+.tmp
 
 npm-debug.log*
 yarn-debug.log*

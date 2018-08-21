@@ -2,7 +2,8 @@
 
 Inspired by [React MultiSelect](https://github.com/Khan/react-multi-select)
 
-[Demo](https://darianstlex.github.io/react-sm-select)
+[Demo and Specimens](https://darianstlex.github.io/react-sm-select) Catalog
+
 ## Installation
 
 Install the react-sm-select npm package:

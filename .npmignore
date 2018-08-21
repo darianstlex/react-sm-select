@@ -1,5 +1,8 @@
 catalog
-out
+scripts
+.vscode
+.tmp
 .babelrc
 .gitignore
+.idea
 webpack.config.js

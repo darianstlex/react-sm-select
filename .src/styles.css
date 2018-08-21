@@ -1,0 +1,169 @@
+.MultiSelect__header {
+  color: #aaa; }
+
+.MultiSelect .DropDown {
+  position: relative;
+  box-sizing: border-box;
+  outline: none; }
+  .MultiSelect .DropDown__panel {
+    background-color: #fff;
+    border: 1px solid #AAA;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-color: #cfd4d9;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+    margin-top: -2px;
+    max-height: 300px;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 1;
+    overflow-y: auto; }
+  .MultiSelect .DropDown__header {
+    box-sizing: border-box;
+    position: relative;
+    display: table;
+    background-color: #fff;
+    border: 1px solid #AAA;
+    border-radius: 5px;
+    color: #333;
+    cursor: default;
+    border-spacing: 0;
+    border-collapse: separate;
+    height: 40px;
+    outline: none;
+    overflow: hidden;
+    width: 100%; }
+    .MultiSelect .DropDown__header--focused {
+      border-color: #1298d4;
+      box-shadow: none; }
+    .MultiSelect .DropDown__header--expanded {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0; }
+  .MultiSelect .DropDown__child {
+    box-sizing: border-box;
+    position: absolute;
+    max-width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 15px;
+    line-height: 38px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+  .MultiSelect .DropDown--disabledChild {
+    opacity: 0.5; }
+  .MultiSelect .DropDown__rightBlock {
+    box-sizing: border-box;
+    position: absolute;
+    height: 100%;
+    right: 0;
+    padding: 0 10px;
+    line-height: 38px; }
+
+.MultiSelect .Arrow {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  cursor: pointer; }
+  .MultiSelect .Arrow--down {
+    position: relative;
+    height: 0;
+    width: 0;
+    top: 2px;
+    border-color: #AAA transparent transparent;
+    border-style: solid;
+    border-width: 5px 5px 2.5px; }
+  .MultiSelect .Arrow--up {
+    position: relative;
+    height: 0;
+    width: 0;
+    top: -2px;
+    border-color: transparent transparent #AAA;
+    border-style: solid;
+    border-width: 0 5px 5px; }
+
+.MultiSelect .SelectPanel {
+  box-sizing: border-box; }
+  .MultiSelect .SelectPanel ::placeholder {
+    color: #c7c7c7;
+    opacity: 1; }
+  .MultiSelect .SelectPanel :-ms-input-placeholder {
+    color: #c7c7c7; }
+  .MultiSelect .SelectPanel ::-ms-input-placeholder {
+    color: #c7c7c7; }
+  .MultiSelect .SelectPanel__searchContainer {
+    box-sizing: border-box;
+    width: 100%; }
+  .MultiSelect .SelectPanel__searchField {
+    box-sizing: border-box;
+    display: block;
+    max-width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border: none;
+    color: #666666;
+    border-bottom: 1px solid #cfd4d9;
+    padding: 10px 15px;
+    width: 100%;
+    outline: none; }
+  .MultiSelect .SelectPanel--searchFieldFocused {
+    border-bottom: 1px solid #AAA; }
+
+.MultiSelect .SelectList {
+  margin: 0;
+  padding-left: 0; }
+  .MultiSelect .SelectList__item {
+    list-style: none; }
+
+.MultiSelect .SelectItem {
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #666666;
+  cursor: pointer;
+  display: block;
+  padding: 12px 15px;
+  outline: none; }
+  .MultiSelect .SelectItem--hover {
+    background-color: #ebf5ff;
+    outline: 0; }
+  .MultiSelect .SelectItem__label {
+    display: inline-block;
+    vertical-align: middle;
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    cursor: default;
+    padding: 2px 5px; }
+  .MultiSelect .SelectItem--labelDisabled {
+    opacity: 0.5; }
+  .MultiSelect .SelectItem__renderer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+
+.MultiSelect .LoadingIndicator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%; }
+  .MultiSelect .LoadingIndicator__icon {
+    box-sizing: border-box;
+    animation: loading_spin 800ms infinite linear;
+    width: 16px;
+    height: 16px;
+    border: 3px dotted #cfd4d9;
+    border-radius: 50%;
+    border-right-color: #333;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle; }
+
+@keyframes loading_spin {
+  to {
+    transform: rotate(1turn); } }
