@@ -1,7 +1,3 @@
-> Single/Multi Select React Component
-
-Inspired by [React MultiSelect](https://github.com/Khan/react-multi-select)
-
 ### Props
 
 - **`id: string`** ID attribute of the container

@@ -11,14 +11,14 @@ const markdownLoader = page => pageLoader(() => import(`./${page}.md`));
 const pages = [
   {
     path: '/',
-    title: 'Info',
-    content: markdownLoader('info'),
+    title: 'Installation',
+    content: markdownLoader('install'),
   },
-  // {
-  //   title: 'Installation',
-  //   path: 'installation/create-catalog',
-  //   content: markdownLoader('installation'),
-  // },
+  {
+    title: 'Props',
+    path: 'props',
+    content: markdownLoader('props'),
+  },
   {
     imports: {MultiSelect},
     path: 'specimens',
