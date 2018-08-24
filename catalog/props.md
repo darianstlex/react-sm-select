@@ -43,6 +43,7 @@ onClose(value) {
 - **`selectAllLabel: boolean: Select All`** Provides custom label for 'Select All'
 - **`shouldToggleOnHover: boolean: false`** Toggle select drop-down on hover
 - **`singleSelect: boolean: false`** Set component to behave as a single select
+- **`maxOptionsToRender: number: undefined`** Maximum Options to render, but search over all
 - **`filterOptions: function`** Custom filter function:
 
 ```code

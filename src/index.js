@@ -41,6 +41,7 @@ export class MultiSelect extends Component {
     LoadingRenderer: T.func,
     selectAllLabel: T.string,
     filterOptions: T.func,
+    searchPlaceholder: T.string,
     // controls
     hasSelectAll: T.bool,
     isLoading: T.bool,
@@ -48,15 +49,16 @@ export class MultiSelect extends Component {
     enableSearch: T.bool,
     shouldToggleOnHover: T.bool,
     singleSelect: T.bool,
+    maxOptionsToRender: T.number,
   };
 
   state = {
-    localValue: omitAlienValues(this.props.options, this.props.value),
+    localValue: omitAlienValues(this.props.options, this.props.value, this.props.singleSelect),
     changed: false,
   };
 
   static getDerivedStateFromProps(props, state) {
-    const clearValue = omitAlienValues(props.options, props.value);
+    const clearValue = omitAlienValues(props.options, props.value, props.singleSelect);
     if (!areValuesEqual(props.value, state.localValue)) return {localValue: clearValue};
     return null;
   }
@@ -97,6 +99,8 @@ export class MultiSelect extends Component {
       shouldToggleOnHover,
       hasSelectAll,
       singleSelect,
+      maxOptionsToRender,
+      searchPlaceholder,
     } = this.props;
     const { onClose, onChange, state: {localValue} } = this;
 
@@ -122,6 +126,8 @@ export class MultiSelect extends Component {
             enableSearch,
             filterOptions,
             singleSelect,
+            maxOptionsToRender,
+            searchPlaceholder,
           }}
         >
           {this.renderHeader()}
