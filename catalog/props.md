@@ -20,13 +20,19 @@ lang: js
 [ 'red', 'blue' ]
 ```
 
-- **`onChange: function`** Function to be executed on select: **Required**
+- **`onChange: function`** Function to be executed on change:
 
 ```code
-lang: js
----
 onChange(value) {
-  // value - see 'value' property
+  // value - array of selected values, see 'value' property
+}
+```
+
+- **`onClose: function`** Function to be executed on close:
+
+```code
+onClose(value) {
+  // value - array of selected values, see 'value' property
 }
 ```
 

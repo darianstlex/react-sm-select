@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import T from 'prop-types';
 import {classes} from './utils';
 
+import {SelectPanel} from './SelectPanel';
+
 const DefaultLoadingRenderer  = () => (
   <span className="LoadingIndicator">
     <span className="LoadingIndicator__icon" />
@@ -22,14 +24,13 @@ const DefaultArrowRenderer = ({expanded}) => (
 export class DropDown extends Component {
   static displayName = 'DropDown';
   static propTypes = {
-    children: T.object,
-    ContentComponent: T.func.isRequired,
     contentProps: T.object.isRequired,
     isLoading: T.bool,
     disabled: T.bool,
     shouldToggleOnHover: T.bool,
     ArrowRenderer: T.func,
     LoadingRenderer: T.func,
+    onClose: T.func,
   };
 
   static defaultProps = {
@@ -44,19 +45,25 @@ export class DropDown extends Component {
 
   wrapper = null;
 
-  componentWillUpdate() {
+  componentWillUpdate = () => {
     document.addEventListener('touchstart', this.handleDocumentClick);
     document.addEventListener('mousedown', this.handleDocumentClick);
-  }
+  };
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     document.removeEventListener('touchstart', this.handleDocumentClick);
     document.removeEventListener('mousedown', this.handleDocumentClick);
-  }
+  };
 
+  emitClose = (expanded = false) => {
+    this.setState(oldState => {
+      if (oldState.expanded) this.props.onClose();
+      return {expanded};
+    });
+  };
 
   handleDocumentClick = event => {
-    if (this.wrapper && !this.wrapper.contains(event.target)) this.setState({expanded: false});
+    if (this.wrapper && !this.wrapper.contains(event.target)) this.emitClose();
   };
 
   handleKeyDown = event => {
@@ -89,22 +96,19 @@ export class DropDown extends Component {
   };
 
   toggleExpanded = value => {
-    const {isLoading} = this.props;
     const {expanded} = this.state;
 
-    if (isLoading) return;
+    if (this.props.isLoading) return;
 
     const newExpanded = value === undefined ? !expanded : !!value;
-    this.setState({expanded: newExpanded});
+    this.emitClose(newExpanded);
     if (!newExpanded && this.wrapper) this.wrapper.focus();
   };
 
   renderPanel = () => {
-    const {ContentComponent, contentProps} = this.props;
-
     return (
       <div className="DropDown__panel">
-        <ContentComponent {...contentProps} closePanel={() => this.setState({expanded: false})} />
+        <SelectPanel {...this.props.contentProps} closePanel={() => this.emitClose()} />
       </div>
     );
   };

@@ -17,7 +17,7 @@ export class SelectList extends Component {
     closePanel: T.func.isRequired,
   };
 
-  handleSelectionChanged = (option, checked) => {
+  onChange = (option, checked) => {
     const {value, onChange, disabled, singleSelect, closePanel} = this.props;
 
     if (disabled) return;
@@ -37,7 +37,7 @@ export class SelectList extends Component {
     }
   };
 
-  renderItems() {
+  renderItems = () => {
     const {
       OptionRenderer,
       options,
@@ -48,21 +48,21 @@ export class SelectList extends Component {
       singleSelect,
     } = this.props;
 
-    return options.map((o, i) => (
-      <li className="SelectList__item" key={o.hasOwnProperty('key') ? o.key : i}>
+    return options.map((option, idx) => (
+      <li className="SelectList__item" key={option.hasOwnProperty('key') ? option.key : idx}>
         <SelectItem
-          focused={focusIndex === i}
-          option={o}
-          onChange={c => this.handleSelectionChanged(o, c)}
-          checked={value.includes(o.value)}
-          onClick={e => onClick(e, i)}
+          focused={focusIndex === idx}
+          option={option}
+          onChange={event => this.onChange(option, event)}
+          checked={value.includes(option.value)}
+          onClick={event => onClick(event, idx)}
           OptionRenderer={OptionRenderer}
           disabled={disabled}
           singleSelect={singleSelect}
         />
       </li>
     ));
-  }
+  };
 
   render() {
     return (

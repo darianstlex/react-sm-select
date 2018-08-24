@@ -25,10 +25,16 @@ export class SelectPanel extends Component {
     enableSearch: false,
   };
 
+  searchInput = null;
+
   state = {
     searchHasFocus: false,
     searchText: "",
     focusIndex: 0,
+  };
+
+  componentDidMount = () => {
+    if (this.searchInput) this.searchInput.focus();
   };
 
   selectAll = () => {
@@ -42,7 +48,7 @@ export class SelectPanel extends Component {
     this.props.onChange([]);
   };
 
-  selectAllChanged = checked => {
+  selectAllChange = checked => {
     if (checked) this.selectAll();
     else this.selectNone();
   };
@@ -54,7 +60,7 @@ export class SelectPanel extends Component {
     });
   };
 
-  handleItemClicked = focusIndex => {
+  handleItemClick = focusIndex => {
     this.setState({focusIndex});
   };
 
@@ -128,6 +134,7 @@ export class SelectPanel extends Component {
             className={classes('SelectPanel__searchField', {'SelectPanel--searchFieldFocused': searchHasFocus})}
             placeholder="Search"
             type="text"
+            ref={ref => (this.searchInput = ref)}
             onChange={this.handleSearchChange}
             onFocus={() => this.handleSearchFocus(true)}
             onBlur={() => this.handleSearchFocus(false)}
@@ -139,8 +146,8 @@ export class SelectPanel extends Component {
             focused={focusIndex === 0}
             checked={this.allAreSelected()}
             option={selectAllOption}
-            onChange={this.selectAllChanged}
-            onClick={() => this.handleItemClicked(0)}
+            onChange={this.selectAllChange}
+            onClick={() => this.handleItemClick(0)}
             OptionRenderer={OptionRenderer}
             disabled={disabled}
           />
@@ -150,7 +157,7 @@ export class SelectPanel extends Component {
           {...this.props}
           options={this.filteredOptions()}
           focusIndex={focusIndex - 1}
-          onClick={(e, index) => this.handleItemClicked(index + 1)}
+          onClick={(e, index) => this.handleItemClick(index + 1)}
           OptionRenderer={OptionRenderer}
           disabled={disabled}
           singleSelect={singleSelect}

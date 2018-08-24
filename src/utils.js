@@ -12,3 +12,13 @@ export const defaultFilterOptions = (options, filter) =>
   options.filter(option =>
     option.label.toLowerCase().includes(filter.toLowerCase())
   );
+
+export const areValuesEqual = (first, second) => {
+  if (!Array.isArray(first)) return first === second;
+  return !first.reduce((A, item, idx) => item !== second[idx] ? [...A, item] : A,[]).length
+};
+
+export const omitAlienValues = (origin, part) => {
+  const flatOrigin = origin.map(item => item.value);
+  return part.reduce((A, item) => flatOrigin.includes(item) ? [...A, item] : A, []);
+};

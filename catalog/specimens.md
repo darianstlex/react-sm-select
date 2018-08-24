@@ -60,6 +60,26 @@ state: {
 />
 ```
 
+### Emit changes OnClose
+
+```react
+state: {
+ value: ['red', 'blue'],
+ options: [
+   {value: 'red', label: 'Red'},
+   {value: 'green', label: 'Green'},
+   {value: 'blue', label: 'Blue'},
+   {value: 'brown', label: 'Brown'},
+ ],
+}
+---
+<MultiSelect
+  options={state.options}
+  value={state.value}
+  onClose={value => setState({ value })}
+/>
+```
+
 ### With Search and custom Select All label
 
 ```react
@@ -143,7 +163,7 @@ const LoadingRenderer  = () => 'Loading...';
 
 ```react
 state: {
- value: ['red', 'blue'],
+ value: ['red', 'blue', 'black'],
  options: [
    {value: 'red', label: 'Red'},
    {value: 'green', label: 'Green'},
@@ -245,5 +265,49 @@ state: {
   options={state.options}
   value={state.value}
   onChange={value => setState({ value })}
+/>
+```
+
+### Single Select Mode with Search
+
+```react
+state: {
+ value: ['blue'],
+ options: [
+   {value: 'red', label: 'Red'},
+   {value: 'green', label: 'Green'},
+   {value: 'blue', label: 'Blue'},
+   {value: 'brown', label: 'Brown'},
+ ],
+}
+---
+<MultiSelect
+  singleSelect
+  enableSearch
+  options={state.options}
+  value={state.value}
+  onChange={value => setState({ value })}
+/>
+```
+
+### Single Select Mode OnClose with OnHover
+
+```react
+state: {
+ value: ['blue'],
+ options: [
+   {value: 'red', label: 'Red'},
+   {value: 'green', label: 'Green'},
+   {value: 'blue', label: 'Blue'},
+   {value: 'brown', label: 'Brown'},
+ ],
+}
+---
+<MultiSelect
+  singleSelect
+  shouldToggleOnHover={true}
+  options={state.options}
+  value={state.value}
+  onClose={value => setState({ value })}
 />
 ```

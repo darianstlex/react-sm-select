@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import T from 'prop-types';
 
+import {areValuesEqual, omitAlienValues} from './utils';
 import {DropDown} from './DropDown';
-import {SelectPanel} from './SelectPanel';
 
 const DefaultValueRenderer = ({value, options}) => {
   if (value.length && value.length === options.length) return (<span>All items are selected</span>);
@@ -17,83 +17,112 @@ const DefaultValueRenderer = ({value, options}) => {
 export class MultiSelect extends Component {
   static displayName = 'MultiSelect';
   static defaultProps = {
-    hasSelectAll: true,
-    shouldToggleOnHover: false,
     value: [],
     ValueRenderer: DefaultValueRenderer,
+    hasSelectAll: true,
+    shouldToggleOnHover: false,
     singleSelect: false,
   };
   static propTypes = {
+    // data
     id: T.string,
     options: T.arrayOf(T.shape({
       value: T.string,
       label: T.string,
     })).isRequired,
     value: T.arrayOf(T.string),
-    onChange: T.func.isRequired,
+    // methods
+    onChange: T.func,
+    onClose: T.func,
+    // overrides
     ArrowRenderer: T.func,
     ValueRenderer: T.func,
     OptionRenderer: T.func,
     LoadingRenderer: T.func,
-    hasSelectAll: T.bool,
     selectAllLabel: T.string,
+    filterOptions: T.func,
+    // controls
+    hasSelectAll: T.bool,
     isLoading: T.bool,
     disabled: T.bool,
     enableSearch: T.bool,
     shouldToggleOnHover: T.bool,
-    filterOptions: T.func,
     singleSelect: T.bool,
   };
 
-  renderHeader() {
-    const {options, value, ValueRenderer} = this.props;
-    return (<ValueRenderer options={options} value={value}/>);
+  state = {
+    localValue: omitAlienValues(this.props.options, this.props.value),
+    changed: false,
+  };
+
+  static getDerivedStateFromProps(props, state) {
+    const clearValue = omitAlienValues(props.options, props.value);
+    if (!areValuesEqual(props.value, state.localValue)) return {localValue: clearValue};
+    return null;
   }
 
-  handleSelectedChanged = selected => {
-    const {onChange, disabled} = this.props;
-    if (!disabled && onChange) onChange(selected)
+  renderHeader = () => {
+    const { props: {ValueRenderer, options}, state: {localValue: value} } = this;
+    return (<ValueRenderer {...{options, value}}/>);
+  };
+
+  onChange = value => {
+    const {onChange, onClose, disabled, singleSelect} = this.props;
+    if (!disabled) {
+      if (onChange) onChange(value);
+      this.setState({localValue: value, changed: true}, () => {
+        if (singleSelect && onClose) onClose(value);
+      });
+    }
+  };
+
+  onClose = () => {
+    const {props: {onClose, disabled}, state: {localValue, changed} } = this;
+    if (onClose && changed && !disabled) onClose(localValue);
+    this.setState({changed: false});
   };
 
   render() {
     const {
       id,
+      options,
       ArrowRenderer,
       OptionRenderer,
       LoadingRenderer,
-      options,
-      value,
+      filterOptions,
       selectAllLabel,
       isLoading,
       disabled,
       enableSearch,
-      filterOptions,
       shouldToggleOnHover,
       hasSelectAll,
       singleSelect,
     } = this.props;
+    const { onClose, onChange, state: {localValue} } = this;
 
     return (
       <div className="MultiSelect" id={id}>
         <DropDown
-          isLoading={isLoading}
-          ContentComponent={SelectPanel}
-          shouldToggleOnHover={shouldToggleOnHover}
-          ArrowRenderer={ArrowRenderer}
-          LoadingRenderer={LoadingRenderer}
+          {...{
+            onClose,
+            ArrowRenderer,
+            LoadingRenderer,
+            isLoading,
+            shouldToggleOnHover,
+            disabled
+          }}
           contentProps={{
             OptionRenderer,
             options,
-            value,
+            value: localValue,
             hasSelectAll,
             selectAllLabel,
-            onChange: this.handleSelectedChanged,
+            onChange,
             disabled,
             enableSearch,
             filterOptions,
             singleSelect,
           }}
-          disabled={disabled}
         >
           {this.renderHeader()}
         </DropDown>

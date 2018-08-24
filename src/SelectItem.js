@@ -53,13 +53,13 @@ export class SelectItem extends Component {
     hovered: false,
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.updateFocus();
-  }
+  };
 
-  componentDidUpdate() {
+  componentDidUpdate = () => {
     this.updateFocus();
-  }
+  };
 
   itemRef = null;
 
@@ -72,11 +72,11 @@ export class SelectItem extends Component {
     this.props.onClick(event);
   };
 
-  updateFocus() {
+  updateFocus = () => {
     if (this.props.focused && this.itemRef) {
       this.itemRef.focus();
     }
-  }
+  };
 
   handleKeyDown = event => {
     switch (event.which) {
