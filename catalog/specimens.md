@@ -365,7 +365,6 @@ state: {
 }
 ---
 <MultiSelect
-enableSearch
   enableSearch
   singleSelect
   searchPlaceholder="Type something ..."
