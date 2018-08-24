@@ -20,6 +20,8 @@ export class MultiSelect extends Component {
     value: [],
     ValueRenderer: DefaultValueRenderer,
     hasSelectAll: true,
+    resetable: true,
+    resetTo: [],
     shouldToggleOnHover: false,
     singleSelect: false,
   };
@@ -42,11 +44,13 @@ export class MultiSelect extends Component {
     selectAllLabel: T.string,
     filterOptions: T.func,
     searchPlaceholder: T.string,
+    resetTo: T.array,
     // controls
     hasSelectAll: T.bool,
     isLoading: T.bool,
     disabled: T.bool,
     enableSearch: T.bool,
+    resetable: T.bool,
     shouldToggleOnHover: T.bool,
     singleSelect: T.bool,
     maxOptionsToRender: T.number,
@@ -57,9 +61,9 @@ export class MultiSelect extends Component {
     changed: false,
   };
 
-  static getDerivedStateFromProps(props, state) {
-    const clearValue = omitAlienValues(props.options, props.value, props.singleSelect);
-    if (!areValuesEqual(props.value, state.localValue)) return {localValue: clearValue};
+  static getDerivedStateFromProps({options, value, singleSelect}, {localValue}) {
+    const clearValue = omitAlienValues(options, value, singleSelect);
+    if (!areValuesEqual(value, localValue)) return {localValue: clearValue};
     return null;
   }
 
@@ -84,6 +88,18 @@ export class MultiSelect extends Component {
     this.setState({changed: false});
   };
 
+  onReset = event => {
+    const {onChange, disabled, resetTo} = this.props;
+
+    if (!disabled) {
+      this.setState({localValue: resetTo});
+      if (onChange) onChange(resetTo);
+    }
+
+    event.stopPropagation();
+    event.preventDefault();
+  };
+
   render() {
     const {
       id,
@@ -96,24 +112,29 @@ export class MultiSelect extends Component {
       isLoading,
       disabled,
       enableSearch,
+      resetable,
+      resetTo,
       shouldToggleOnHover,
       hasSelectAll,
       singleSelect,
       maxOptionsToRender,
       searchPlaceholder,
     } = this.props;
-    const { onClose, onChange, state: {localValue} } = this;
+    const { onClose, onChange, onReset, state: {localValue} } = this;
 
     return (
       <div className="MultiSelect" id={id}>
         <DropDown
           {...{
             onClose,
+            onReset,
             ArrowRenderer,
             LoadingRenderer,
             isLoading,
             shouldToggleOnHover,
-            disabled
+            disabled,
+            resetable,
+            resetTo,
           }}
           contentProps={{
             OptionRenderer,

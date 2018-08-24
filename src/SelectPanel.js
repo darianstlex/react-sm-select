@@ -68,25 +68,26 @@ export class SelectPanel extends Component {
 
   handleKeyDown = event => {
     if (event.altKey) return;
-    switch (event.which) {
-      case 38: // Up Arrow
-        this.updateFocus(-1);
-        break;
-      case 40: // Down Arrow
-        this.updateFocus(1);
-        break;
-      default:
-        return;
-    }
-    event.stopPropagation();
-    event.preventDefault();
+
+    const update = offset => {
+      this.updateFocus(offset);
+      event.stopPropagation();
+      event.preventDefault();
+    };
+
+    if (event.which === 38 || (event.shiftKey && event.which === 9)) update(-1);
+    else if (event.which === 40 || event.which === 9) update(1);
   };
 
-  handleSearchFocus = searchHasFocus => {
+  searchFocus = () => {
     this.setState({
-      searchHasFocus,
+      searchHasFocus: true,
       focusIndex: -1,
     });
+  };
+
+  searchBlur = () => {
+    this.setState({searchHasFocus: false});
   };
 
   allAreSelected = () => {
@@ -108,8 +109,10 @@ export class SelectPanel extends Component {
   };
 
   updateFocus = offset => {
-    const newFocus = this.state.focusIndex + offset;
-    this.setState({focusIndex: Math.min(Math.max(0, newFocus), this.props.options.length)});
+    this.setState(({searchText, focusIndex}) => {
+      const start = !!searchText ? 1 : 0;
+      return {focusIndex: Math.min(Math.max(start, focusIndex + offset), this.filteredOptions().length)}
+    });
   };
 
   render() {
@@ -145,13 +148,14 @@ export class SelectPanel extends Component {
             type="text"
             ref={ref => (this.searchInput = ref)}
             onChange={this.handleSearchChange}
-            onFocus={() => this.handleSearchFocus(true)}
-            onBlur={() => this.handleSearchFocus(false)}
+            onFocus={this.searchFocus}
+            onBlur={this.searchBlur}
           />
         </div>}
 
         {!singleSelect && hasSelectAll && !searchText &&
           <SelectItem
+            className="SelectPanel__selectAll"
             focused={focusIndex === 0}
             checked={this.allAreSelected()}
             option={selectAllOption}

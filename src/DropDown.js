@@ -27,10 +27,13 @@ export class DropDown extends Component {
     contentProps: T.object.isRequired,
     isLoading: T.bool,
     disabled: T.bool,
+    resetable: T.bool,
+    resetTo: T.array,
     shouldToggleOnHover: T.bool,
     ArrowRenderer: T.func,
     LoadingRenderer: T.func,
     onClose: T.func,
+    onReset: T.func,
   };
 
   static defaultProps = {
@@ -115,7 +118,17 @@ export class DropDown extends Component {
 
   render() {
     const {expanded, hasFocus} = this.state;
-    const {children, isLoading, disabled, ArrowRenderer, LoadingRenderer, contentProps: { options, value }} = this.props;
+    const {
+      ArrowRenderer,
+      LoadingRenderer,
+      onReset,
+      children,
+      isLoading,
+      disabled,
+      resetable,
+      resetTo,
+      contentProps: { options, value }
+    } = this.props;
 
     return (
       <div
@@ -141,6 +154,7 @@ export class DropDown extends Component {
         >
           <span className={classes('DropDown__child', {'DropDown--disabledChild':  disabled})}>{children}</span>
           <div className="DropDown__rightBlock">
+            {resetable && (!!value.length || !!resetTo.length) && <div className="DropDown__reset" onClick={onReset}>✕</div>}
             {isLoading && <LoadingRenderer />}
             {!isLoading && <ArrowRenderer {...{options, value, expanded, hasFocus}}/>}
           </div>

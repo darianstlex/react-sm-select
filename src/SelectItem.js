@@ -44,6 +44,7 @@ export class SelectItem extends Component {
     onChange: T.func,
     onClick: T.func,
     singleSelect: T.bool,
+    className: T.string,
   };
   static defaultProps = {
     OptionRenderer: DefaultOptionRenderer,
@@ -91,12 +92,15 @@ export class SelectItem extends Component {
   };
 
   render() {
-    const {OptionRenderer, option, checked, focused, disabled, singleSelect} = this.props;
+    const {OptionRenderer, option, checked, focused, disabled, singleSelect, className} = this.props;
     const {hovered} = this.state;
 
     return (
       <label
-        className={classes('SelectItem', {'SelectItem--hover': focused || hovered})}
+        className={classes('SelectItem', {
+          'SelectItem--hover': focused || hovered,
+          [className]: className
+        })}
         role="option"
         aria-selected={checked}
         tabIndex="-1"

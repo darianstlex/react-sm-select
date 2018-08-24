@@ -40,7 +40,7 @@ state: {
 />
 ```
 
-### With PreSelected Values
+### With PreSelected Values and Resetable
 
 ```react
 state: {
@@ -54,6 +54,7 @@ state: {
 }
 ---
 <MultiSelect
+  resetable
   options={state.options}
   value={state.value}
   onChange={value => setState({ value })}

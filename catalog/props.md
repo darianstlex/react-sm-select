@@ -40,6 +40,8 @@ onClose(value) {
 - **`isLoading: boolean: false`** Shows loading indicator
 - **`disabled: boolean: false`** Disable component
 - **`hasSelectAll: boolean: true`** Shows 'Select All' options
+- **`resetable: boolean: true`** Add clear button to reset value
+- **`resetTo: array: []`** Value to be reseted to
 - **`selectAllLabel: boolean: Select All`** Provides custom label for 'Select All'
 - **`shouldToggleOnHover: boolean: false`** Toggle select drop-down on hover
 - **`singleSelect: boolean: false`** Set component to behave as a single select

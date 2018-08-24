@@ -25,6 +25,12 @@ const pages = [
     title: 'Specimens',
     content: markdownLoader('specimens'),
   },
+  {
+    imports: {MultiSelect},
+    title: 'SandBox',
+    path: 'sandbox',
+    content: markdownLoader('sandbox'),
+  },
 ];
 
 ReactDOM.render(

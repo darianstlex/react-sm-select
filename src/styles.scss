@@ -3,7 +3,7 @@ $focusColor: #1298d4;
 $fieldHeight: 40px;
 $borderRadius: 5px;
 $dividerColor: #cfd4d9;
-$borderColor: #AAA;
+$borderColor: #aaa;
 $textColor: #333;
 $itemTextColor: #666666;
 $itemHoverColor: #ebf5ff;
@@ -11,7 +11,7 @@ $searchPlaceholderColor: #c7c7c7;
 
 .MultiSelect {
   &__header {
-    color: #aaa;
+    color: $borderColor;
   }
 
   .DropDown {
@@ -84,12 +84,24 @@ $searchPlaceholderColor: #c7c7c7;
     }
 
     &__rightBlock {
+      display: flex;
       box-sizing: border-box;
       position: absolute;
       height: 100%;
       right: 0;
       padding: 0 10px;
       line-height: $fieldHeight - 2;
+    }
+
+    &__reset {
+      cursor: pointer;
+      margin: 0 8px;
+      color: $borderColor;
+      font-size: 1.125rem;
+
+      &:hover {
+        color: $focusColor;
+      }
     }
   }
 
@@ -109,6 +121,10 @@ $searchPlaceholderColor: #c7c7c7;
       border-color: $borderColor transparent transparent;
       border-style: solid;
       border-width: 5px 5px 2.5px;
+
+      &:hover {
+        border-color: $focusColor transparent transparent;
+      }
     }
 
     &--up {
@@ -119,6 +135,10 @@ $searchPlaceholderColor: #c7c7c7;
       border-color: transparent transparent $borderColor;
       border-style: solid;
       border-width: 0 5px 5px;
+
+      &:hover {
+        border-color: transparent transparent $focusColor;
+      }
     }
   }
 
@@ -142,7 +162,7 @@ $searchPlaceholderColor: #c7c7c7;
       height: $fieldHeight;
       line-height: $fieldHeight;
       border: none;
-      color: $itemTextColor;
+      color: $borderColor;
       border-bottom: 1px solid $dividerColor;
       padding: 10px 15px;
       width: 100%;
@@ -150,7 +170,12 @@ $searchPlaceholderColor: #c7c7c7;
     }
 
     &--searchFieldFocused {
-      border-bottom: 1px solid $borderColor;
+      color: $itemTextColor;
+    }
+
+    &__selectAll {
+      font-weight: 500;
+      color: $borderColor !important;
     }
   }
 
