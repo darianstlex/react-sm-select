@@ -5,17 +5,17 @@ import {classes} from './utils';
 import {SelectPanel} from './SelectPanel';
 
 const DefaultLoadingRenderer  = () => (
-  <span className="LoadingIndicator">
-    <span className="LoadingIndicator__icon" />
+  <span className="DropDown__loading">
+    <span className="DropDown__loading__icon" />
   </span>
 );
 
 const DefaultArrowRenderer = ({expanded}) => (
-  <div className="Arrow">
+  <div className="DropDown__arrow">
     <div
       className={classes({
-        'Arrow--up': expanded,
-        'Arrow--down': !expanded,
+        'DropDown__arrow--up': expanded,
+        'DropDown__arrow--down': !expanded,
       })}
     />
   </div>
@@ -48,15 +48,15 @@ export class DropDown extends Component {
 
   wrapper = null;
 
-  componentWillUpdate = () => {
+  componentWillUpdate() {
     document.addEventListener('touchstart', this.handleDocumentClick);
     document.addEventListener('mousedown', this.handleDocumentClick);
-  };
+  }
 
-  componentWillUnmount = () => {
+  componentWillUnmount() {
     document.removeEventListener('touchstart', this.handleDocumentClick);
     document.removeEventListener('mousedown', this.handleDocumentClick);
-  };
+  }
 
   emitClose = (expanded = false) => {
     this.setState(oldState => {

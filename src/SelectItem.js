@@ -54,13 +54,13 @@ export class SelectItem extends Component {
     hovered: false,
   };
 
-  componentDidMount = () => {
+  componentDidMount() {
     this.updateFocus();
-  };
+  }
 
-  componentDidUpdate = () => {
+  componentDidUpdate() {
     this.updateFocus();
-  };
+  }
 
   itemRef = null;
 

@@ -11,7 +11,8 @@ module.exports = {
   },
   plugins:[
     new CopyWebpackPlugin([
-      { from: 'src/styles.*', to: '[name].[ext]', toType: 'template' },
+      { from: 'src/styles.css', to: '[name].[ext]', toType: 'template' },
+      { from: 'src/scss/*.*', to: '[name].[ext]', toType: 'template' },
     ]),
   ],
   module: {

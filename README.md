@@ -40,7 +40,25 @@ state = {
 
 ### Styling
 
-Almost every block is stylable using CSS/SCSS, there is a scss file if it's needed for your project. Check it out for all possible CSS classes.
+Can be used css overriding, see compiled css. Or use scss variables for general styling.
+
+```code
+@import 'react-sm-select/scss/variables';
+
+$MS-backgroundColor: #fff;
+$MS-focusColor: #1298d4;
+$MS-fieldHeight: 40px;
+$MS-borderRadius: 5px;
+$MS-dividerColor: #cfd4d9;
+$MS-borderColor: #aaa;
+$MS-textColor: #333;
+$MS-itemTextColor: #666666;
+$MS-itemHoverColor: #ebf5ff;
+$MS-searchPlaceholderColor: #c7c7c7;
+$MS-dropDownHeight: 300px;
+
+@import 'react-sm-select/scss/main';
+```
 
 ### Props
 
@@ -80,7 +98,7 @@ onClose(value) {
 - **`isLoading: boolean: false`** Shows loading indicator
 - **`disabled: boolean: false`** Disable component
 - **`hasSelectAll: boolean: true`** Shows 'Select All' options
-- **`resetable: boolean: true`** Add clear button to reset value
+- **`resetable: boolean: false`** Add clear button to reset value
 - **`resetTo: array: []`** Value to be reseted to
 - **`selectAllLabel: boolean: Select All`** Provides custom label for 'Select All'
 - **`shouldToggleOnHover: boolean: false`** Toggle select drop-down on hover

@@ -20,10 +20,51 @@ const pages = [
     content: markdownLoader('props'),
   },
   {
-    imports: {MultiSelect},
-    path: 'specimens',
-    title: 'Specimens',
-    content: markdownLoader('specimens'),
+    title: "Specimens",
+    pages: [
+      {
+        imports: {MultiSelect},
+        path: "spec/basic",
+        title: "Basic",
+        content: markdownLoader("spec/basic")
+      },
+      {
+        imports: {MultiSelect},
+        path: "spec/initialized",
+        title: "Initial Value",
+        content: markdownLoader("spec/initialized")
+      },
+      {
+        imports: {MultiSelect},
+        path: "spec/reset",
+        title: "Reset Value",
+        content: markdownLoader("spec/reset")
+      },
+      {
+        imports: {MultiSelect},
+        path: "spec/search",
+        title: "Search",
+        content: markdownLoader("spec/search")
+      },
+      {
+        imports: {MultiSelect},
+        path: "spec/hover",
+        title: "Hover",
+        content: markdownLoader("spec/hover")
+      },
+      {
+        imports: {MultiSelect},
+        path: "spec/loading",
+        title: "Loading",
+        content: markdownLoader("spec/loading")
+      },
+      {
+        imports: {MultiSelect},
+        path: "spec/custom",
+        title: "Customization",
+        content: markdownLoader("spec/custom")
+      },
+    ]
   },
   {
     imports: {MultiSelect},

@@ -11,7 +11,7 @@ const DefaultValueRenderer = ({value, options}) => {
 
   return value.length
     ? (<span>{labels}</span>)
-    : (<span className="MultiSelect__header">Select some items...</span>);
+    : (<span className="MultiSelect__header">Select ...</span>);
 };
 
 export class MultiSelect extends Component {

@@ -1,0 +1,239 @@
+.MultiSelect {
+  &__header {
+    color: $MS-borderColor;
+  }
+
+  .DropDown {
+    position: relative;
+    box-sizing: border-box;
+    outline: none;
+
+    &__panel {
+      background-color: $MS-backgroundColor;
+      border: 1px solid $MS-borderColor;
+      border-bottom-right-radius: $MS-borderRadius;
+      border-bottom-left-radius: $MS-borderRadius;
+      border-top-color: $MS-dividerColor;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+      box-sizing: border-box;
+      margin-top: -2px;
+      max-height: $MS-dropDownHeight;
+      position: absolute;
+      top: 100%;
+      width: 100%;
+      z-index: 1;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    &__header {
+      box-sizing: border-box;
+      position: relative;
+      display: table;
+      background-color: $MS-backgroundColor;
+      border: 1px solid $MS-borderColor;
+      border-radius: $MS-borderRadius;
+      color: $MS-textColor;
+      cursor: default;
+      border-spacing: 0;
+      border-collapse: separate;
+      height: $MS-fieldHeight;
+      outline: none;
+      overflow: hidden;
+      width: 100%;
+
+      &--focused {
+        border-color: $MS-focusColor;
+        box-shadow: none;
+      }
+
+      &--expanded {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+
+    &__child {
+      box-sizing: border-box;
+      position: absolute;
+      max-width: 100%;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0 15px;
+      line-height: $MS-fieldHeight - 2;
+      color: $MS-textColor;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &--disabledChild {
+      opacity: 0.5;
+    }
+
+    &__rightBlock {
+      display: flex;
+      box-sizing: border-box;
+      position: absolute;
+      height: 100%;
+      right: 0;
+      padding: 0 12px;
+      line-height: $MS-fieldHeight - 2;
+      cursor: pointer;
+
+      :not(:first-child) {
+        margin-left: 10px;
+      }
+    }
+
+    &__reset {
+      cursor: pointer;
+      color: $MS-borderColor;
+
+      &:hover {
+        color: $MS-focusColor;
+      }
+    }
+
+    &__arrow {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      border-bottom-color: $MS-borderColor;
+
+      &:hover {
+        border-bottom-color: $MS-focusColor;
+      }
+
+      .arrow {
+        border: 5.5px solid transparent;
+        border-top-width: 0;
+        border-bottom-color: inherit;
+        height: 0;
+        width: 0;
+        transition: 0.4s;
+      }
+
+      &--up {
+        @extend .arrow;
+        transform: rotate(360deg);
+        border-bottom-color: $MS-focusColor !important;
+      }
+
+      &--down {
+        @extend .arrow;
+        transform: rotate(180deg);
+      }
+    }
+
+    &__loading {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+
+      &__icon {
+        @keyframes loading_spin {
+          to {
+            transform: rotate(1turn);
+          }
+        }
+        box-sizing: border-box;
+        animation: loading_spin 800ms infinite linear;
+        width: 16px;
+        height: 16px;
+        border: 3px dotted $MS-dividerColor;
+        border-radius: 50%;
+        border-right-color: $MS-textColor;
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .SelectPanel {
+    box-sizing: border-box;
+
+    ::placeholder {
+      color: $MS-searchPlaceholderColor;
+      opacity: 1;
+    }
+
+    &__searchContainer {
+      box-sizing: border-box;
+      position: sticky;
+      top: 0;
+    }
+
+    &__searchField {
+      box-sizing: border-box;
+      display: block;
+      max-width: 100%;
+      height: $MS-fieldHeight;
+      line-height: $MS-fieldHeight;
+      border: none;
+      color: $MS-borderColor;
+      border-bottom: 1px solid $MS-dividerColor;
+      padding: 10px 15px;
+      width: 100%;
+      outline: none;
+    }
+
+    &--searchFieldFocused {
+      color: $MS-itemTextColor;
+    }
+
+    &__selectAll {
+      font-weight: 500;
+      color: $MS-borderColor !important;
+    }
+  }
+
+  .SelectList {
+    margin: 0;
+    padding-left: 0;
+
+    &__item {
+      list-style: none;
+    }
+  }
+
+  .SelectItem {
+    box-sizing: border-box;
+    background-color: #fff;
+    color: $MS-itemTextColor;
+    cursor: pointer;
+    display: block;
+    padding: 12px 15px;
+    outline: none;
+
+    &--hover {
+      background-color: $MS-itemHoverColor;
+      outline: 0;
+    }
+
+    &__label {
+      display: inline-block;
+      vertical-align: middle;
+      border-bottom-right-radius: 2px;
+      border-top-right-radius: 2px;
+      cursor: default;
+      padding: 2px 5px;
+    }
+
+    &--labelDisabled {
+      opacity: 0.5;
+    }
+
+    &__renderer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}

@@ -35,9 +35,9 @@ export class SelectPanel extends Component {
     focusIndex: 0,
   };
 
-  componentDidMount = () => {
+  componentDidMount() {
     if (this.searchInput) this.searchInput.focus();
-  };
+  }
 
   selectAll = () => {
     const {onChange, options} = this.props;
