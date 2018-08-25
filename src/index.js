@@ -20,7 +20,7 @@ export class MultiSelect extends Component {
     value: [],
     ValueRenderer: DefaultValueRenderer,
     hasSelectAll: true,
-    resetable: true,
+    resetable: false,
     resetTo: [],
     shouldToggleOnHover: false,
     singleSelect: false,
