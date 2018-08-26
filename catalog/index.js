@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Catalog, pageLoader, ReactSpecimen} from 'catalog';
+import {Controller} from './playground/controller';
 import logo from "./static/r-logo.svg";
 import {MultiSelect} from '../src';
+import {MultiselectWrapper} from './playground/multiselect-wrapper';
+import 'bulma/css/bulma.min.css';
+import 'bulma-switch/dist/css/bulma-switch.min.css';
 import './catalog.css';
 import '../src/styles.css';
 
@@ -67,10 +71,10 @@ const pages = [
     ]
   },
   {
-    imports: {MultiSelect},
-    title: 'SandBox',
-    path: 'sandbox',
-    content: markdownLoader('sandbox'),
+    imports: {MultiselectWrapper, Controller},
+    title: 'PlayGround',
+    path: 'playground/playground',
+    content: markdownLoader('playground/playground'),
   },
 ];
 
