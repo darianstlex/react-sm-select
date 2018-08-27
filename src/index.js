@@ -5,46 +5,18 @@ import {areValuesEqual, omitDirtyValues} from './utils';
 import {DropDown} from './DropDown';
 
 const DefaultValueRenderer = ({value, options}) => {
-  if (value.length && value.length === options.length) return (<span>All items are selected</span>);
-
-  const labels = value.map(val => options.find(opt => opt.value === val).label).join(', ');
-
-  return value.length
-    ? (<span>{labels}</span>)
-    : (<span className="MultiSelect__value">Select ...</span>);
+  return (<span>{value.map(val => options.find(opt => opt.value === val).label).join(', ')}</span>);
 };
 
-const DefaultTagsRenderer = ({value, options, TagRenderer, onTagRemove, removableTag}) => {
-  const labels = value.map(val => options.find(opt => opt.value === val).label);
-  return (
-    <div className="MultiSelect__tags">
-      {labels.map((tag, index) => <TagRenderer key={index} {...{tag, index, onTagRemove, removableTag}}/>)}
-    </div>
-  );
-};
-
-const DefaultTagRenderer = ({tag, index, removableTag, onTagRemove}) => (
+const DefaultTagRenderer = ({label, index, removableTag, onTagRemove}) => (
   <div className="MultiSelect__tag">
-    <div className="MultiSelect__tag__label">{tag}</div>
+    <div className="MultiSelect__tag__label">{label}</div>
     {removableTag && <div className="MultiSelect__tag__close" onClick={event => onTagRemove(index, event)}>✕</div>}
   </div>
 );
 
 export class MultiSelect extends Component {
   static displayName = 'MultiSelect';
-  static defaultProps = {
-    value: [],
-    ValueRenderer: DefaultValueRenderer,
-    TagsRenderer: DefaultTagsRenderer,
-    TagRenderer: DefaultTagRenderer,
-    hasSelectAll: true,
-    resetable: false,
-    resetTo: [],
-    shouldToggleOnHover: false,
-    singleSelect: false,
-    valueAsTag: false,
-    removableTag: true,
-  };
   static propTypes = {
     // data
     id: T.string,
@@ -59,13 +31,15 @@ export class MultiSelect extends Component {
     // overrides
     ArrowRenderer: T.func,
     ValueRenderer: T.func,
-    TagsRenderer: T.func,
     TagRenderer: T.func,
     OptionRenderer: T.func,
     LoadingRenderer: T.func,
+    valuePlaceholder: T.string,
+    allSelectedLabel: T.string,
     selectAllLabel: T.string,
     filterOptions: T.func,
     searchPlaceholder: T.string,
+    searchMorePlaceholder: T.string,
     resetTo: T.array,
     // controls
     valueAsTag: T.bool,
@@ -78,6 +52,20 @@ export class MultiSelect extends Component {
     shouldToggleOnHover: T.bool,
     singleSelect: T.bool,
     maxOptionsToRender: T.number,
+  };
+  static defaultProps = {
+    value: [],
+    ValueRenderer: DefaultValueRenderer,
+    TagRenderer: DefaultTagRenderer,
+    hasSelectAll: true,
+    resetable: false,
+    resetTo: [],
+    shouldToggleOnHover: false,
+    singleSelect: false,
+    valueAsTag: false,
+    removableTag: true,
+    valuePlaceholder: 'Select ...',
+    allSelectedLabel: 'All items are selected',
   };
 
   state = {
@@ -105,14 +93,34 @@ export class MultiSelect extends Component {
 
   renderValue = () => {
     const {
-      props: {ValueRenderer, TagsRenderer, TagRenderer, options, valueAsTag, removableTag, singleSelect},
+      props: {
+        ValueRenderer,
+        TagRenderer,
+        options,
+        valueAsTag,
+        removableTag,
+        singleSelect,
+        valuePlaceholder,
+        allSelectedLabel,
+      },
       state: {localValue: value},
       onTagRemove,
     } = this;
 
-    return !singleSelect && valueAsTag && ValueRenderer === DefaultValueRenderer
-      ? <TagsRenderer {...{value, options, TagRenderer, onTagRemove, removableTag}}/>
-      : <ValueRenderer {...{options, value}}/>;
+    if (!value.length) return (<span className="MultiSelect__value">{valuePlaceholder}</span>);
+    if (!valueAsTag && value.length && value.length === options.length)
+      return (<span className="MultiSelect__value">{allSelectedLabel}</span>);
+
+    if (!singleSelect && valueAsTag && ValueRenderer === DefaultValueRenderer) {
+      const labels = value.map(val => options.find(opt => opt.value === val).label);
+      return (
+        <div className="MultiSelect__tags">
+          {labels.map((label, index) => <TagRenderer key={index} {...{label, index, onTagRemove, removableTag}}/>)}
+        </div>
+      );
+    }
+
+    return <ValueRenderer {...{options, value}}/>
   };
 
   onChange = value => {
@@ -162,6 +170,7 @@ export class MultiSelect extends Component {
       singleSelect,
       maxOptionsToRender,
       searchPlaceholder,
+      searchMorePlaceholder,
     } = this.props;
     const { onClose, onChange, onReset, state: {localValue} } = this;
 
@@ -192,6 +201,7 @@ export class MultiSelect extends Component {
             singleSelect,
             maxOptionsToRender,
             searchPlaceholder,
+            searchMorePlaceholder,
           }}
         >
           {this.renderValue()}

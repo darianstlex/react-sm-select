@@ -38,7 +38,7 @@ export class Controller extends React.Component {
       <div className="control">
         <input className="input" type="number"
           value={this.state[control.prop]}
-          onChange={event => this.setState({[control.prop]: event.target.value})}
+          onChange={event => this.setState({[control.prop]: parseInt(event.target.value)})}
         />
       </div>
     </div>;

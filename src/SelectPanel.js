@@ -22,9 +22,13 @@ export class SelectPanel extends Component {
     closePanel: T.func.isRequired,
     maxOptionsToRender: T.number,
     searchPlaceholder: T.string,
+    searchMorePlaceholder: T.string,
   };
   static defaultProps = {
     enableSearch: false,
+    searchPlaceholder: 'Search',
+    searchMorePlaceholder: 'Search to see more ...',
+    selectAllLabel: 'Select All',
   };
 
   searchInput = null;
@@ -104,7 +108,7 @@ export class SelectPanel extends Component {
       : defaultFilterOptions(options, searchText);
 
     return maxOptionsToRender
-      ? optionsToRender.slice(0, maxOptionsToRender - 1)
+      ? optionsToRender.slice(0, maxOptionsToRender)
       : optionsToRender;
   };
 
@@ -127,13 +131,13 @@ export class SelectPanel extends Component {
       closePanel,
       maxOptionsToRender,
       searchPlaceholder,
+      searchMorePlaceholder,
     } = this.props;
 
     const selectAllOption = {
-      label: selectAllLabel || "Select All",
+      label: selectAllLabel,
       value: "",
     };
-    const placeholder = searchPlaceholder || (maxOptionsToRender ? 'Search to see more ...' : 'Search');
 
     return (
       <div
@@ -144,7 +148,7 @@ export class SelectPanel extends Component {
         {enableSearch && <div className="SelectPanel__searchContainer">
           <input
             className={classes('SelectPanel__searchField', {'SelectPanel--searchFieldFocused': searchHasFocus})}
-            placeholder={placeholder}
+            placeholder={!maxOptionsToRender ? searchPlaceholder : searchMorePlaceholder}
             type="text"
             ref={ref => (this.searchInput = ref)}
             onChange={this.handleSearchChange}

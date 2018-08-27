@@ -21,7 +21,7 @@ export class MultiselectWrapper extends React.Component {
       {value: 'brown3', label: 'Brown 3'},
     ],
     resetable: true,
-    resetTo: ['red', 'blue'],
+    resetTo: [],
     enableSearch: true,
     maxOptionsToRender: 7,
     isLoading: false,
@@ -33,11 +33,17 @@ export class MultiselectWrapper extends React.Component {
     shouldToggleOnHover: false,
     singleSelect: false,
     searchPlaceholder: 'Search for color ...',
+    searchMorePlaceholder: 'Type to see more ...',
+    valuePlaceholder: 'Select something ...',
+    allSelectedLabel: 'All colors are selected',
   };
 
   getControls = () => [
-    {place: 'left', prop: 'selectAllLabel', type: 'string', value: this.state.selectAllLabel},
+    {place: 'left', prop: 'valuePlaceholder', type: 'string', value: this.state.valuePlaceholder},
+    {place: 'left', prop: 'allSelectedLabel', type: 'string', value: this.state.allSelectedLabel},
     {place: 'left', prop: 'searchPlaceholder', type: 'string', value: this.state.searchPlaceholder},
+    {place: 'left', prop: 'searchMorePlaceholder', type: 'string', value: this.state.searchMorePlaceholder},
+    {place: 'left', prop: 'selectAllLabel', type: 'string', value: this.state.selectAllLabel},
     {place: 'left', prop: 'maxOptionsToRender', type: 'number', value: this.state.maxOptionsToRender},
     {place: 'right', prop: 'resetable', type: 'boolean', value: this.state.resetable},
     {place: 'right', prop: 'enableSearch', type: 'boolean', value: this.state.enableSearch},
@@ -58,16 +64,19 @@ export class MultiselectWrapper extends React.Component {
     return (
       <Fragment>
         <MultiSelect
-          disabled={this.state.disabled}
+          valuePlaceholder={this.state.valuePlaceholder}
+          allSelectedLabel={this.state.allSelectedLabel}
+          enableSearch={this.state.enableSearch}
           searchPlaceholder={this.state.searchPlaceholder}
+          searchMorePlaceholder={this.state.searchMorePlaceholder}
+          selectAllLabel={this.state.selectAllLabel}
+          disabled={this.state.disabled}
           singleSelect={this.state.singleSelect}
           shouldToggleOnHover={this.state.shouldToggleOnHover}
-          selectAllLabel={this.state.selectAllLabel}
           hasSelectAll={this.state.hasSelectAll}
           isLoading={this.state.isLoading}
           resetable={this.state.resetable}
           resetTo={this.state.resetTo}
-          enableSearch={this.state.enableSearch}
           maxOptionsToRender={this.state.maxOptionsToRender}
           options={this.state.options}
           value={this.state.value}

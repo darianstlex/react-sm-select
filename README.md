@@ -105,11 +105,15 @@ onClose(value) {
 - **`hasSelectAll: boolean: true`** Shows 'Select All' options
 - **`resetable: boolean: false`** Add clear button to reset value
 - **`resetTo: array: []`** Value to be reseted to
-- **`selectAllLabel: boolean: Select All`** Provides custom label for 'Select All'
+- **`valuePlaceholder: string: 'Select ...'`** Provides custom placeholder for 'Select ...'
+- **`searchPlaceholder: string: 'Search'`** Search Field placeholder
+- **`searchMorePlaceholder: string: 'Search to see more ...'`** Placeholder if 'maxOptionsToRender' is defined
+- **`selectAllLabel: string: 'Select All'`** Provides custom label for 'Select All'
+- **`allSelectedLabel: string: 'All items are selected'`** Provides custom label for all selected items
 - **`shouldToggleOnHover: boolean: false`** Toggle select drop-down on hover
 - **`singleSelect: boolean: false`** Set component to behave as a single select
 - **`maxOptionsToRender: number: undefined`** Maximum Options to render, but search over all
-- **`searchPlaceholder: string: undefined`** Search Field placeholder
+
 - **`filterOptions: function`** Custom filter function:
 
 ```code
@@ -166,27 +170,13 @@ LoadingRenderer() {
 }
 ```
 
-- **`TagsRenderer: function`** Render custom Tags Container, shows in MultiSelect only
-
-```code
-lang: js
----
-TagsRenderer({value, options, TagRenderer, onTagRemove, removableTag}) {
-  // value: array - see 'value' property
-  // options: array - see 'options' prop 
-  // TagRenderer: function - default tag renderer
-  // onTagRemove: function - callback to remove selected tag
-  // removableTag: boolean - display/hide remove tag button
-}
-```
-
 - **`TagRenderer: function`** Render custom Tag, shows in MultiSelect only
 
 ```code
 lang: js
 ---
-TagRenderer({tag, index, removableTag, onTagRemove}) {
-  // tag: string - tag label
+TagRenderer({label, index, removableTag, onTagRemove}) {
+  // label: string - tag label
   // index: number - tag index in array used in removal 
   // removableTag: boolean - display/hide remove tag button
   // onTagRemove: function - callback to remove selected tag
