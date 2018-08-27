@@ -2,7 +2,6 @@
 
 ```react
 state: {
- value: [],
  options: [
    {value: 'red', label: 'Red'},
    {value: 'green', label: 'Green'},
@@ -14,7 +13,6 @@ state: {
 <MultiSelect
   id="some-id"
   options={state.options}
-  value={state.value}
   onChange={value => setState({ value })}
 />
 ```
@@ -23,7 +21,6 @@ state: {
 
 ```react
 state: {
- value: [],
  options: [
    {value: 'red', label: 'Red'},
    {value: 'green', label: 'Green'},
@@ -36,7 +33,6 @@ state: {
   id="some-id"
   hasSelectAll={false}
   options={state.options}
-  value={state.value}
   onChange={value => setState({ value })}
 />
 ```
@@ -45,7 +41,6 @@ state: {
 
 ```react
 state: {
- value: [],
  options: [
    {value: 'red', label: 'Red'},
    {value: 'green', label: 'Green'},
@@ -58,7 +53,6 @@ state: {
   hasSelectAll
   singleSelect
   options={state.options}
-  value={state.value}
   onChange={value => setState({ value })}
 />
 ```
@@ -67,7 +61,6 @@ state: {
 
 ```react
 state: {
- value: ['brown', 'red'],
  options: [
    {value: 'red', label: 'Red'},
    {value: 'green', label: 'Green'},
@@ -79,7 +72,6 @@ state: {
 <MultiSelect
   disabled
   options={state.options}
-  value={state.value}
   onChange={value => setState({ value })}
 />
 ```

@@ -1,4 +1,4 @@
-### PreSelected Value
+### Tags
 
 ```react
 state: {
@@ -12,17 +12,18 @@ state: {
 }
 ---
 <MultiSelect
+  valueAsTag
   options={state.options}
   value={state.value}
   onChange={value => setState({ value })}
 />
 ```
 
-### Single Select PreSelected
+### Tags without close button
 
 ```react
 state: {
- value: ['blue'],
+ value: ['blue', 'brown'],
  options: [
    {value: 'red', label: 'Red'},
    {value: 'green', label: 'Green'},
@@ -32,7 +33,8 @@ state: {
 }
 ---
 <MultiSelect
-  singleSelect
+  valueAsTag
+  removableTag={false}
   options={state.options}
   value={state.value}
   onChange={value => setState({ value })}

@@ -27,6 +27,8 @@ export class MultiselectWrapper extends React.Component {
     isLoading: false,
     disabled: false,
     hasSelectAll: true,
+    valueAsTag: false,
+    removableTag: true,
     selectAllLabel: 'Select All Colors',
     shouldToggleOnHover: false,
     singleSelect: false,
@@ -44,6 +46,8 @@ export class MultiselectWrapper extends React.Component {
     {place: 'right', prop: 'hasSelectAll', type: 'boolean', value: this.state.hasSelectAll},
     {place: 'right', prop: 'shouldToggleOnHover', type: 'boolean', value: this.state.shouldToggleOnHover},
     {place: 'right', prop: 'singleSelect', type: 'boolean', value: this.state.singleSelect},
+    {place: 'right', prop: 'valueAsTag', type: 'boolean', value: this.state.valueAsTag},
+    {place: 'right', prop: 'removableTag', type: 'boolean', value: this.state.removableTag},
     {place: 'bottom', prop: 'value', type: 'array', value: this.state.value, rows: 1},
     {place: 'bottom', prop: 'resetTo', type: 'array', value: this.state.resetTo, rows: 1},
     {place: 'bottom', prop: 'options', type: 'array', value: this.state.options, rows: 12},
@@ -67,6 +71,8 @@ export class MultiselectWrapper extends React.Component {
           maxOptionsToRender={this.state.maxOptionsToRender}
           options={this.state.options}
           value={this.state.value}
+          valueAsTag={this.state.valueAsTag}
+          removableTag={this.state.removableTag}
           onChange={value => this.setState({value})}
         />
         <Controller key={this.state.value} controls={controls} onUpdate={value => this.setState(value)} />

@@ -56,6 +56,11 @@ $MS-itemTextColor: #666666;
 $MS-itemHoverColor: #ebf5ff;
 $MS-searchPlaceholderColor: #c7c7c7;
 $MS-dropDownHeight: 300px;
+$MS-tagBackgroundColor: $MS-focusColor;
+$MS-tagColor: #fff;
+$MS-tagCloseBackgroundColor: #d1d1d1;
+$MS-tagCloseColor: $MS-textColor;
+$MS-tagBorderRadius: 3px;
 
 @import 'react-sm-select/scss/main';
 ```
@@ -158,5 +163,32 @@ ArrowRenderer({options, value, expanded, hasFocus}) {
 ```code
 LoadingRenderer() {
   return - component to render custom Loading Indicator
+}
+```
+
+- **`TagsRenderer: function`** Render custom Tags Container, shows in MultiSelect only
+
+```code
+lang: js
+---
+TagsRenderer({value, options, TagRenderer, onTagRemove, removableTag}) {
+  // value: array - see 'value' property
+  // options: array - see 'options' prop 
+  // TagRenderer: function - default tag renderer
+  // onTagRemove: function - callback to remove selected tag
+  // removableTag: boolean - display/hide remove tag button
+}
+```
+
+- **`TagRenderer: function`** Render custom Tag, shows in MultiSelect only
+
+```code
+lang: js
+---
+TagRenderer({tag, index, removableTag, onTagRemove}) {
+  // tag: string - tag label
+  // index: number - tag index in array used in removal 
+  // removableTag: boolean - display/hide remove tag button
+  // onTagRemove: function - callback to remove selected tag
 }
 ```

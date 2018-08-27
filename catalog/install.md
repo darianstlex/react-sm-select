@@ -54,6 +54,11 @@ $MS-itemTextColor: #666666;
 $MS-itemHoverColor: #ebf5ff;
 $MS-searchPlaceholderColor: #c7c7c7;
 $MS-dropDownHeight: 300px;
+$MS-tagBackgroundColor: $MS-focusColor;
+$MS-tagColor: #fff;
+$MS-tagCloseBackgroundColor: #d1d1d1;
+$MS-tagCloseColor: $MS-textColor;
+$MS-tagBorderRadius: 3px;
 
 @import 'react-sm-select/scss/main';
 ```

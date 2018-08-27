@@ -111,3 +111,30 @@ LoadingRenderer() {
   return - component to render custom Loading Indicator
 }
 ```
+
+- **`TagsRenderer: function`** Render custom Tags Container, shows in MultiSelect only
+
+```code
+lang: js
+---
+TagsRenderer({value, options, TagRenderer, onTagRemove, removableTag}) {
+  // value: array - see 'value' property
+  // options: array - see 'options' prop 
+  // TagRenderer: function - default tag renderer
+  // onTagRemove: function - callback to remove selected tag
+  // removableTag: boolean - display/hide remove tag button
+}
+```
+
+- **`TagRenderer: function`** Render custom Tag, shows in MultiSelect only
+
+```code
+lang: js
+---
+TagRenderer({tag, index, removableTag, onTagRemove}) {
+  // tag: string - tag label
+  // index: number - tag index in array used in removal 
+  // removableTag: boolean - display/hide remove tag button
+  // onTagRemove: function - callback to remove selected tag
+}
+```

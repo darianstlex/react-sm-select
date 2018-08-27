@@ -18,7 +18,7 @@ export const areValuesEqual = (first, second) => {
   return !first.reduce((A, item, idx) => item !== second[idx] ? [...A, item] : A,[]).length
 };
 
-export const omitAlienValues = (origin, part, single) => {
+export const omitDirtyValues = (origin, part, single) => {
   const flatOrigin = origin.map(item => item.value);
   const result = part.reduce((A, item) => flatOrigin.includes(item) ? [...A, item] : A, []);
   if (!single) return result;

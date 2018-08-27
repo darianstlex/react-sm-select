@@ -64,6 +64,12 @@ const pages = [
       },
       {
         imports: {MultiSelect},
+        path: "spec/tags",
+        title: "Tags",
+        content: markdownLoader("spec/tags")
+      },
+      {
+        imports: {MultiSelect},
         path: "spec/custom",
         title: "Customization",
         content: markdownLoader("spec/custom")

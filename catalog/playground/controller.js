@@ -1,7 +1,7 @@
 import React from 'react';
 import './controller.css';
 
-const isString = string => Object.prototype.toString.call(string) === "[object String]";
+const is = (type, target) => target.constructor === type;
 
 export class Controller extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ export class Controller extends React.Component {
     props.controls.forEach(control => {
       if (control.type === 'array') {
         const [first] = control.value;
-        const pretty = first && isString(first) ? 0 : 2;
+        const pretty = first && is(String, first) ? 0 : 2;
         this.toParse.push(control.prop);
         this.state[control.prop] = JSON.stringify(control.value, null, pretty);
       }
