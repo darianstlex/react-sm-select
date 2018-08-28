@@ -142,7 +142,7 @@ export class SelectPanel extends React.Component {
           />
         </div>}
 
-        {!p.mode === 'single' && p.hasSelectAll && !s.searchText &&
+        {p.mode !== 'single' && p.hasSelectAll && !s.searchText &&
           <Option
             className="SelectPanel__selectAll"
             focused={s.focusIndex === 0}

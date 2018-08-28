@@ -60,24 +60,6 @@ export class MultiSelect extends React.Component {
     allSelectedLabel: 'All items are selected',
   };
 
-  // constructor(props) {
-  //   super(props);
-  //
-  //   const modeMap = {
-  //     list: props.ValueRenderer || DefValue,
-  //     counter: props.ValueRenderer || DefCounter,
-  //     tag: props.TagRenderer || DefTag,
-  //   };
-  //
-  //   if (props.mode === 'counter') props.ValueRenderer = DefCounter;
-  //
-  //
-  //   this.state = {
-  //     localValue: omitDirtyValues(this.props.options, this.props.value, this.props.singleSelect),
-  //     changed: false,
-  //   };
-  // }
-
   state = {
     localValue: omitDirtyValues(this.props.options, this.props.value, this.props.mode === 'single'),
     changed: false,
