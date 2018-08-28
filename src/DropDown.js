@@ -3,23 +3,8 @@ import T from 'prop-types';
 import {classes} from './utils';
 
 import {SelectPanel} from './SelectPanel';
-
-const DefaultLoadingRenderer  = () => (
-  <span className="DropDown__loading">
-    <span className="DropDown__loading__icon" />
-  </span>
-);
-
-const DefaultArrowRenderer = ({expanded}) => (
-  <div className="DropDown__arrow">
-    <div
-      className={classes({
-        'DropDown__arrow--up': expanded,
-        'DropDown__arrow--down': !expanded,
-      })}
-    />
-  </div>
-);
+import {DefLoading} from './default/DefLoading';
+import {DefArrow} from './default/DefArrow';
 
 export class DropDown extends Component {
   static displayName = 'DropDown';
@@ -37,8 +22,8 @@ export class DropDown extends Component {
   };
 
   static defaultProps = {
-    ArrowRenderer: DefaultArrowRenderer,
-    LoadingRenderer: DefaultLoadingRenderer,
+    ArrowRenderer: DefArrow,
+    LoadingRenderer: DefLoading,
   };
 
   state = {
@@ -94,8 +79,8 @@ export class DropDown extends Component {
     if (this.state.hasFocus) this.setState({hasFocus: false});
   };
 
-  handleHover = toggleExpanded => {
-    if (this.props.shouldToggleOnHover) this.toggleExpanded(toggleExpanded);
+  handleHover = expanded => {
+    if (this.props.shouldToggleOnHover) this.toggleExpanded(expanded);
   };
 
   toggleExpanded = value => {
@@ -108,36 +93,18 @@ export class DropDown extends Component {
     if (!newExpanded && this.wrapper) this.wrapper.focus();
   };
 
-  renderPanel = () => {
-    return (
-      <div className="DropDown__panel">
-        <SelectPanel {...this.props.contentProps} closePanel={() => this.emitClose()} />
-      </div>
-    );
-  };
-
   render() {
-    const {expanded, hasFocus} = this.state;
-    const {
-      ArrowRenderer,
-      LoadingRenderer,
-      onReset,
-      children,
-      isLoading,
-      disabled,
-      resetable,
-      resetTo,
-      contentProps: { options, value }
-    } = this.props;
+    const {state: s, props: p} = this;
+    const {LoadingRenderer, ArrowRenderer, contentProps: { options, value }} = p;
 
     return (
       <div
         className="DropDown"
         tabIndex="0"
         role="combobox"
-        aria-expanded={expanded}
+        aria-expanded={s.expanded}
         aria-readonly="true"
-        aria-disabled={disabled}
+        aria-disabled={p.disabled}
         ref={ref => this.wrapper = ref}
         onKeyDown={this.handleKeyDown}
         onFocus={this.handleFocus}
@@ -147,19 +114,28 @@ export class DropDown extends Component {
       >
         <div
           className={classes('DropDown__header', {
-            'DropDown__header--focused':  hasFocus || expanded,
-            'DropDown__header--expanded':  expanded,
+            'DropDown__header--focused':  s.hasFocus || s.expanded,
+            'DropDown__header--expanded':  s.expanded,
           })}
           onClick={() => this.toggleExpanded()}
         >
-          <span className={classes('DropDown__child', {'DropDown--disabledChild':  disabled})}>{children}</span>
+          <span className={classes('DropDown__child', {'DropDown--disabledChild':  p.disabled})}>{p.children}</span>
           <div className="DropDown__rightBlock">
-            {resetable && (!!value.length || !!resetTo.length) && <div className="DropDown__reset" onClick={onReset}>✕</div>}
-            {isLoading && <LoadingRenderer />}
-            {!isLoading && <ArrowRenderer {...{options, value, expanded, hasFocus}}/>}
+            {p.resetable && (!!value.length || !!p.resetTo.length) && <div className="DropDown__reset" onClick={p.onReset}>✕</div>}
+            {p.isLoading && <LoadingRenderer />}
+            {!p.isLoading && <ArrowRenderer
+              options={options}
+              value={value}
+              expanded={s.expanded}
+              hasFocus={s.hasFocus}
+            />}
           </div>
         </div>
-        {expanded && this.renderPanel()}
+        {s.expanded && (
+          <div className="DropDown__panel">
+            <SelectPanel {...p.contentProps} closePanel={this.emitClose} />
+          </div>
+        )}
       </div>
     );
   }

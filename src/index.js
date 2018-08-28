@@ -1,21 +1,13 @@
-import React, {Component} from 'react';
+import React from 'react';
 import T from 'prop-types';
 
 import {areValuesEqual, omitDirtyValues} from './utils';
 import {DropDown} from './DropDown';
+import {DefValue} from './default/DefValue';
+import {DefTag} from './default/DefTag';
+import {DefCounter} from './default/DefCounter';
 
-const DefaultValueRenderer = ({value, options}) => {
-  return (<span>{value.map(val => options.find(opt => opt.value === val).label).join(', ')}</span>);
-};
-
-const DefaultTagRenderer = ({label, index, removableTag, onTagRemove}) => (
-  <div className="MultiSelect__tag">
-    <div className="MultiSelect__tag__label">{label}</div>
-    {removableTag && <div className="MultiSelect__tag__close" onClick={event => onTagRemove(index, event)}>✕</div>}
-  </div>
-);
-
-export class MultiSelect extends Component {
+export class MultiSelect extends React.Component {
   static displayName = 'MultiSelect';
   static propTypes = {
     // data
@@ -25,24 +17,25 @@ export class MultiSelect extends Component {
       label: T.string,
     })).isRequired,
     value: T.arrayOf(T.string),
+    mode: T.oneOf(['list', 'tags', 'counter', 'single']),
+    resetTo:T.arrayOf(T.string),
     // methods
     onChange: T.func,
     onClose: T.func,
-    // overrides
+    // renderers / overrides
     ArrowRenderer: T.func,
     ValueRenderer: T.func,
     TagRenderer: T.func,
     OptionRenderer: T.func,
     LoadingRenderer: T.func,
+    filterOptions: T.func,
+    // labels / placeholders
     valuePlaceholder: T.string,
     allSelectedLabel: T.string,
     selectAllLabel: T.string,
-    filterOptions: T.func,
     searchPlaceholder: T.string,
     searchMorePlaceholder: T.string,
-    resetTo: T.array,
     // controls
-    valueAsTag: T.bool,
     removableTag: T.bool,
     hasSelectAll: T.bool,
     isLoading: T.bool,
@@ -50,31 +43,49 @@ export class MultiSelect extends Component {
     enableSearch: T.bool,
     resetable: T.bool,
     shouldToggleOnHover: T.bool,
-    singleSelect: T.bool,
     maxOptionsToRender: T.number,
   };
   static defaultProps = {
+    mode: 'list',
     value: [],
-    ValueRenderer: DefaultValueRenderer,
-    TagRenderer: DefaultTagRenderer,
+    ValueRenderer: DefValue,
+    TagRenderer: DefTag,
     hasSelectAll: true,
     resetable: false,
     resetTo: [],
     shouldToggleOnHover: false,
-    singleSelect: false,
     valueAsTag: false,
     removableTag: true,
-    valuePlaceholder: 'Select ...',
+    valuePlaceholder: 'Select',
     allSelectedLabel: 'All items are selected',
   };
 
+  // constructor(props) {
+  //   super(props);
+  //
+  //   const modeMap = {
+  //     list: props.ValueRenderer || DefValue,
+  //     counter: props.ValueRenderer || DefCounter,
+  //     tag: props.TagRenderer || DefTag,
+  //   };
+  //
+  //   if (props.mode === 'counter') props.ValueRenderer = DefCounter;
+  //
+  //
+  //   this.state = {
+  //     localValue: omitDirtyValues(this.props.options, this.props.value, this.props.singleSelect),
+  //     changed: false,
+  //   };
+  // }
+
   state = {
-    localValue: omitDirtyValues(this.props.options, this.props.value, this.props.singleSelect),
+    localValue: omitDirtyValues(this.props.options, this.props.value, this.props.mode === 'single'),
     changed: false,
   };
 
-  static getDerivedStateFromProps({options, value, singleSelect}, {localValue}) {
-    const clearValue = omitDirtyValues(options, value, singleSelect);
+
+  static getDerivedStateFromProps({options, value, mode}, {localValue}) {
+    const clearValue = omitDirtyValues(options, value, mode === 'single');
     if (!areValuesEqual(value, localValue)) return {localValue: clearValue};
     return null;
   }
@@ -97,21 +108,21 @@ export class MultiSelect extends Component {
         ValueRenderer,
         TagRenderer,
         options,
-        valueAsTag,
         removableTag,
-        singleSelect,
         valuePlaceholder,
         allSelectedLabel,
+        mode,
       },
       state: {localValue: value},
       onTagRemove,
     } = this;
 
-    if (!value.length) return (<span className="MultiSelect__value">{valuePlaceholder}</span>);
-    if (!valueAsTag && value.length && value.length === options.length)
+    if (mode !== 'tags' && mode !== 'counter' && value.length === options.length)
       return (<span className="MultiSelect__value">{allSelectedLabel}</span>);
 
-    if (!singleSelect && valueAsTag && ValueRenderer === DefaultValueRenderer) {
+    if (!value.length) return (<span className="MultiSelect__value">{valuePlaceholder}</span>);
+
+    if (mode === 'tags') {
       const labels = value.map(val => options.find(opt => opt.value === val).label);
       return (
         <div className="MultiSelect__tags">
@@ -119,16 +130,17 @@ export class MultiSelect extends Component {
         </div>
       );
     }
+    if (mode === 'counter') return <DefCounter {...{valuePlaceholder, value, options}}/>;
 
-    return <ValueRenderer {...{options, value}}/>
+    return <ValueRenderer {...{options, value}}/>;
   };
 
   onChange = value => {
-    const {onChange, onClose, disabled, singleSelect} = this.props;
+    const {onChange, onClose, disabled, mode} = this.props;
     if (!disabled) {
       if (onChange) onChange(value);
       this.setState({localValue: value, changed: true}, () => {
-        if (singleSelect && onClose) onClose(value);
+        if (mode === 'single' && onClose) onClose(value);
       });
     }
   };
@@ -154,6 +166,7 @@ export class MultiSelect extends Component {
   render() {
     const {
       id,
+      mode,
       options,
       ArrowRenderer,
       OptionRenderer,
@@ -167,7 +180,6 @@ export class MultiSelect extends Component {
       resetTo,
       shouldToggleOnHover,
       hasSelectAll,
-      singleSelect,
       maxOptionsToRender,
       searchPlaceholder,
       searchMorePlaceholder,
@@ -189,6 +201,7 @@ export class MultiSelect extends Component {
             resetTo,
           }}
           contentProps={{
+            mode,
             OptionRenderer,
             options,
             value: localValue,
@@ -198,7 +211,6 @@ export class MultiSelect extends Component {
             disabled,
             enableSearch,
             filterOptions,
-            singleSelect,
             maxOptionsToRender,
             searchPlaceholder,
             searchMorePlaceholder,

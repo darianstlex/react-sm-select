@@ -1,18 +1,19 @@
-import React, {Component} from 'react';
+import React from 'react';
 import T from 'prop-types';
 import {classes, defaultFilterOptions} from './utils';
 
-import {SelectItem} from './SelectItem';
-import {SelectList} from './SelectList';
+import {Option} from './Option';
+import {OptionList} from './OptionList';
 
-export class SelectPanel extends Component {
+export class SelectPanel extends React.Component {
   static propTypes = {
     OptionRenderer: T.func,
     options: T.arrayOf(T.shape({
       value: T.string,
       label: T.string,
     })).isRequired,
-    value: T.array,
+    value: T.arrayOf(T.string),
+    mode: T.string,
     selectAllLabel: T.string,
     onChange: T.func.isRequired,
     disabled: T.bool,
@@ -44,10 +45,8 @@ export class SelectPanel extends Component {
   }
 
   selectAll = () => {
-    const {onChange, options} = this.props;
-    const allValues = options.map(option => option.value);
-
-    onChange(allValues);
+    const {props: p} = this;
+    p.onChange(p.options.map(option => option.value));
   };
 
   selectNone = () => {
@@ -95,20 +94,18 @@ export class SelectPanel extends Component {
   };
 
   allAreSelected = () => {
-    const {options, value} = this.props;
-    return options.length === value.length;
+    const {props: p} = this;
+    return p.options.length === p.value.length;
   };
 
   filteredOptions = () => {
-    const {searchText} = this.state;
-    const {options, filterOptions: customFilterOptions, maxOptionsToRender} = this.props;
+    const {state: s, props: p} = this;
+    const optionsToRender = p.filterOptions
+      ? p.filterOptions(p.options, s.searchText)
+      : defaultFilterOptions(p.options, s.searchText);
 
-    const optionsToRender = customFilterOptions
-      ? customFilterOptions(options, searchText)
-      : defaultFilterOptions(options, searchText);
-
-    return maxOptionsToRender
-      ? optionsToRender.slice(0, maxOptionsToRender)
+    return p.maxOptionsToRender
+      ? optionsToRender.slice(0, p.maxOptionsToRender)
       : optionsToRender;
   };
 
@@ -120,22 +117,10 @@ export class SelectPanel extends Component {
   };
 
   render() {
-    const {focusIndex, searchHasFocus, searchText} = this.state;
-    const {
-      OptionRenderer,
-      selectAllLabel,
-      disabled,
-      enableSearch,
-      hasSelectAll,
-      singleSelect,
-      closePanel,
-      maxOptionsToRender,
-      searchPlaceholder,
-      searchMorePlaceholder,
-    } = this.props;
+    const {state: s, props: p} = this;
 
     const selectAllOption = {
-      label: selectAllLabel,
+      label: p.selectAllLabel,
       value: "",
     };
 
@@ -145,10 +130,10 @@ export class SelectPanel extends Component {
         role="listbox"
         onKeyDown={this.handleKeyDown}
       >
-        {enableSearch && <div className="SelectPanel__searchContainer">
+        {p.enableSearch && <div className="SelectPanel__searchContainer">
           <input
-            className={classes('SelectPanel__searchField', {'SelectPanel--searchFieldFocused': searchHasFocus})}
-            placeholder={!maxOptionsToRender ? searchPlaceholder : searchMorePlaceholder}
+            className={classes('SelectPanel__searchField', {'SelectPanel--searchFieldFocused': s.searchHasFocus})}
+            placeholder={!p.maxOptionsToRender ? p.searchPlaceholder : p.searchMorePlaceholder}
             type="text"
             ref={ref => (this.searchInput = ref)}
             onChange={this.handleSearchChange}
@@ -157,28 +142,28 @@ export class SelectPanel extends Component {
           />
         </div>}
 
-        {!singleSelect && hasSelectAll && !searchText &&
-          <SelectItem
+        {!p.mode === 'single' && p.hasSelectAll && !s.searchText &&
+          <Option
             className="SelectPanel__selectAll"
-            focused={focusIndex === 0}
+            focused={s.focusIndex === 0}
             checked={this.allAreSelected()}
             option={selectAllOption}
             onChange={this.selectAllChange}
             onClick={() => this.handleItemClick(0)}
-            OptionRenderer={OptionRenderer}
-            disabled={disabled}
+            OptionRenderer={p.OptionRenderer}
+            disabled={p.disabled}
           />
         }
 
-        <SelectList
+        <OptionList
           {...this.props}
           options={this.filteredOptions()}
-          focusIndex={focusIndex - 1}
+          focusIndex={p.focusIndex - 1}
           onClick={(e, index) => this.handleItemClick(index + 1)}
-          OptionRenderer={OptionRenderer}
-          disabled={disabled}
-          singleSelect={singleSelect}
-          closePanel={closePanel}
+          OptionRenderer={p.OptionRenderer}
+          disabled={p.disabled}
+          mode={p.mode}
+          closePanel={p.closePanel}
         />
       </div>
     );

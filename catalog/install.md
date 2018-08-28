@@ -59,6 +59,7 @@ $MS-tagColor: #fff;
 $MS-tagCloseBackgroundColor: #d1d1d1;
 $MS-tagCloseColor: $MS-textColor;
 $MS-tagBorderRadius: 3px;
+$MS-counterColor: $MS-focusColor;
 
 @import 'react-sm-select/scss/main';
 ```

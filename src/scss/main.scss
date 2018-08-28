@@ -59,6 +59,10 @@
     box-sizing: border-box;
     outline: none;
 
+    &__counter {
+      color: $MS-counterColor;
+    }
+
     &__panel {
       background-color: $MS-backgroundColor;
       border: 1px solid $MS-borderColor;
@@ -246,7 +250,7 @@
     }
   }
 
-  .SelectList {
+  .OptionList {
     margin: 0;
     padding-left: 0;
 
@@ -255,7 +259,7 @@
     }
   }
 
-  .SelectItem {
+  .Option {
     box-sizing: border-box;
     background-color: #fff;
     color: $MS-itemTextColor;

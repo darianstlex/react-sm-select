@@ -1,40 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 import T from 'prop-types';
 import {classes} from './utils';
 
+import {DefOption} from './default/DefOption';
 
-class DefaultOptionRenderer extends Component {
-  static propTypes = {
-    checked: T.bool.isRequired,
-    option: T.object.isRequired,
-    disabled: T.bool,
-    onClick: T.func,
-    singleSelect: T.bool,
-  };
-
-  render() {
-    const {checked, option, onClick, disabled, singleSelect} = this.props;
-
-    return (
-      <div className="SelectItem__renderer">
-        <span className={classes('SelectItem__label', {'SelectItem--labelDisabled': disabled})}>
-          {option.label}
-        </span>
-        <input
-          style={{visibility: singleSelect ? 'hidden' : 'visible'}}
-          type="checkbox"
-          checked={checked}
-          tabIndex="-1"
-          disabled={disabled}
-          onChange={onClick}
-        />
-      </div>
-    );
-  }
-}
-
-export class SelectItem extends Component {
-  static displayName = 'SelectItem';
+export class Option extends React.Component {
+  static displayName = 'Option';
   static propTypes = {
     OptionRenderer: T.func.isRequired,
     option: T.object.isRequired,
@@ -43,11 +14,11 @@ export class SelectItem extends Component {
     disabled: T.bool,
     onChange: T.func,
     onClick: T.func,
-    singleSelect: T.bool,
+    mode: T.string,
     className: T.string,
   };
   static defaultProps = {
-    OptionRenderer: DefaultOptionRenderer,
+    OptionRenderer: DefOption,
   };
 
   state = {
@@ -92,17 +63,17 @@ export class SelectItem extends Component {
   };
 
   render() {
-    const {OptionRenderer, option, checked, focused, disabled, singleSelect, className} = this.props;
-    const {hovered} = this.state;
+    const {state: s, props: p} = this;
+    const {OptionRenderer} = p;
 
     return (
       <label
-        className={classes('SelectItem', {
-          'SelectItem--hover': focused || hovered,
-          [className]: className
+        className={classes('Option', {
+          'Option--hover': p.focused || s.hovered,
+          [p.className]: p.className
         })}
         role="option"
-        aria-selected={checked}
+        aria-selected={p.checked}
         tabIndex="-1"
         ref={ref => this.itemRef = ref}
         onKeyDown={this.handleKeyDown}
@@ -110,11 +81,11 @@ export class SelectItem extends Component {
         onMouseOut={() => this.setState({hovered: false})}
       >
         <OptionRenderer
-          option={option}
-          checked={checked}
+          option={p.option}
+          checked={p.checked}
           onClick={this.handleClick}
-          disabled={disabled}
-          singleSelect={singleSelect}
+          disabled={p.disabled}
+          mode={p.mode}
         />
       </label>
     );

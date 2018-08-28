@@ -5,6 +5,7 @@ import {MultiSelect} from '../../src'
 export class MultiselectWrapper extends React.Component {
 
   state = {
+    mode: 'list',
     value: ['red2', 'blue3'],
     options: [
       {value: 'red', label: 'Red'},
@@ -27,11 +28,9 @@ export class MultiselectWrapper extends React.Component {
     isLoading: false,
     disabled: false,
     hasSelectAll: true,
-    valueAsTag: false,
     removableTag: true,
     selectAllLabel: 'Select All Colors',
     shouldToggleOnHover: false,
-    singleSelect: false,
     searchPlaceholder: 'Search for color ...',
     searchMorePlaceholder: 'Type to see more ...',
     valuePlaceholder: 'Select something ...',
@@ -51,8 +50,6 @@ export class MultiselectWrapper extends React.Component {
     {place: 'right', prop: 'disabled', type: 'boolean', value: this.state.disabled},
     {place: 'right', prop: 'hasSelectAll', type: 'boolean', value: this.state.hasSelectAll},
     {place: 'right', prop: 'shouldToggleOnHover', type: 'boolean', value: this.state.shouldToggleOnHover},
-    {place: 'right', prop: 'singleSelect', type: 'boolean', value: this.state.singleSelect},
-    {place: 'right', prop: 'valueAsTag', type: 'boolean', value: this.state.valueAsTag},
     {place: 'right', prop: 'removableTag', type: 'boolean', value: this.state.removableTag},
     {place: 'bottom', prop: 'value', type: 'array', value: this.state.value, rows: 1},
     {place: 'bottom', prop: 'resetTo', type: 'array', value: this.state.resetTo, rows: 1},
@@ -64,6 +61,7 @@ export class MultiselectWrapper extends React.Component {
     return (
       <Fragment>
         <MultiSelect
+          mode={this.state.mode}
           valuePlaceholder={this.state.valuePlaceholder}
           allSelectedLabel={this.state.allSelectedLabel}
           enableSearch={this.state.enableSearch}
@@ -71,7 +69,6 @@ export class MultiselectWrapper extends React.Component {
           searchMorePlaceholder={this.state.searchMorePlaceholder}
           selectAllLabel={this.state.selectAllLabel}
           disabled={this.state.disabled}
-          singleSelect={this.state.singleSelect}
           shouldToggleOnHover={this.state.shouldToggleOnHover}
           hasSelectAll={this.state.hasSelectAll}
           isLoading={this.state.isLoading}
@@ -80,7 +77,6 @@ export class MultiselectWrapper extends React.Component {
           maxOptionsToRender={this.state.maxOptionsToRender}
           options={this.state.options}
           value={this.state.value}
-          valueAsTag={this.state.valueAsTag}
           removableTag={this.state.removableTag}
           onChange={value => this.setState({value})}
         />

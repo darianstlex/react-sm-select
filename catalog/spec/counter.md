@@ -1,8 +1,8 @@
-### PreSelected Value
+### Counter
 
 ```react
 state: {
- value: ['red', 'blue'],
+ value: ['red'],
  options: [
    {value: 'red', label: 'Red'},
    {value: 'green', label: 'Green'},
@@ -12,6 +12,8 @@ state: {
 }
 ---
 <MultiSelect
+  resetable
+  mode="counter"
   options={state.options}
   value={state.value}
   onChange={value => setState({ value })}

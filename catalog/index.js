@@ -64,9 +64,21 @@ const pages = [
       },
       {
         imports: {MultiSelect},
+        path: "spec/single",
+        title: "Single",
+        content: markdownLoader("spec/single-mode")
+      },
+      {
+        imports: {MultiSelect},
         path: "spec/tags",
         title: "Tags",
         content: markdownLoader("spec/tags")
+      },
+      {
+        imports: {MultiSelect},
+        path: "spec/counter",
+        title: "Counter",
+        content: markdownLoader("spec/counter")
       },
       {
         imports: {MultiSelect},

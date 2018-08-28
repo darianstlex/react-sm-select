@@ -37,26 +37,6 @@ state: {
 />
 ```
 
-### Single Select
-
-```react
-state: {
- options: [
-   {value: 'red', label: 'Red'},
-   {value: 'green', label: 'Green'},
-   {value: 'blue', label: 'Blue'},
-   {value: 'brown', label: 'Brown'},
- ],
-}
----
-<MultiSelect
-  hasSelectAll
-  singleSelect
-  options={state.options}
-  onChange={value => setState({ value })}
-/>
-```
-
 ### Disabled
 
 ```react

@@ -61,6 +61,7 @@ $MS-tagColor: #fff;
 $MS-tagCloseBackgroundColor: #d1d1d1;
 $MS-tagCloseColor: $MS-textColor;
 $MS-tagBorderRadius: 3px;
+$MS-counterColor: $MS-focusColor;
 
 @import 'react-sm-select/scss/main';
 ```
@@ -99,19 +100,19 @@ onClose(value) {
 }
 ```
 
+- **`mode: string: list`** Behaviour mode: 'list', 'tags', 'counter', 'single'
 - **`enableSearch: boolean: false`** Enables search field
 - **`isLoading: boolean: false`** Shows loading indicator
 - **`disabled: boolean: false`** Disable component
 - **`hasSelectAll: boolean: true`** Shows 'Select All' options
 - **`resetable: boolean: false`** Add clear button to reset value
-- **`resetTo: array: []`** Value to be reseted to
+- **`resetTo: array: []`** Value to be reset to
 - **`valuePlaceholder: string: 'Select ...'`** Provides custom placeholder for 'Select ...'
 - **`searchPlaceholder: string: 'Search'`** Search Field placeholder
 - **`searchMorePlaceholder: string: 'Search to see more ...'`** Placeholder if 'maxOptionsToRender' is defined
 - **`selectAllLabel: string: 'Select All'`** Provides custom label for 'Select All'
 - **`allSelectedLabel: string: 'All items are selected'`** Provides custom label for all selected items
 - **`shouldToggleOnHover: boolean: false`** Toggle select drop-down on hover
-- **`singleSelect: boolean: false`** Set component to behave as a single select
 - **`maxOptionsToRender: number: undefined`** Maximum Options to render, but search over all
 
 - **`filterOptions: function`** Custom filter function:

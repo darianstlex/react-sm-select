@@ -12,7 +12,7 @@ state: {
 }
 ---
 <MultiSelect
-  valueAsTag
+  mode="tags"
   options={state.options}
   value={state.value}
   onChange={value => setState({ value })}
@@ -33,7 +33,7 @@ state: {
 }
 ---
 <MultiSelect
-  valueAsTag
+  mode="tags"
   removableTag={false}
   options={state.options}
   value={state.value}
