@@ -33,6 +33,14 @@ onClose(value) {
 }
 ```
 
+- **`onBlur: function`** Function to be executed on blur:
+
+```code
+onBlur(value) {
+  // value - array of selected values, see 'value' property
+}
+```
+
 - **`resetTo: array: []`** Value to be reset to
 - **`enableSearch: boolean: false`** Enables search field
 - **`isLoading: boolean: false`** Shows loading indicator

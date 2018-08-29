@@ -22,6 +22,7 @@ export class MultiSelect extends React.Component {
     // methods
     onChange: T.func,
     onClose: T.func,
+    onBlur: T.func,
     // renderers / overrides
     ArrowRenderer: T.func,
     ValueRenderer: T.func,
@@ -121,27 +122,32 @@ export class MultiSelect extends React.Component {
   };
 
   onChange = value => {
-    const {onChange, onClose, disabled} = this.props;
-    if (!disabled) {
-      if (onChange) onChange(value);
+    const { props: p } = this;
+    if (!p.disabled) {
+      if (p.onChange) p.onChange(value);
       this.setState({localValue: value, changed: true}, () => {
-        if (this.is('single') && onClose) onClose(value);
+        if (this.is('single') && p.onClose) p.onClose(value);
       });
     }
   };
 
   onClose = () => {
-    const {props: {onClose, disabled}, state: {localValue, changed}} = this;
-    if (onClose && changed && !disabled) onClose(localValue);
+    const { props: p, state: s } = this;
+    if (p.onClose && s.changed && !p.disabled) p.onClose(s.localValue);
     this.setState({changed: false});
   };
 
-  onReset = event => {
-    const {onChange, disabled, resetTo, isLoading} = this.props;
+  onBlur = () => {
+    const { props: p, state: s } = this;
+    if (p.onBlur) p.onBlur(s.localValue);
+  };
 
-    if (!disabled && !isLoading) {
-      this.setState({localValue: resetTo});
-      if (onChange) onChange(resetTo);
+  onReset = event => {
+    const { props: p } = this;
+
+    if (!p.disabled && !p.isLoading) {
+      this.setState({localValue: p.resetTo});
+      if (p.onChange) p.onChange(p.resetTo);
     }
 
     event.stopPropagation();
@@ -168,10 +174,10 @@ export class MultiSelect extends React.Component {
       searchPlaceholder,
       searchMorePlaceholder,
     } = this.props;
-    const { onClose, onChange, onReset, state: {localValue}, is } = this;
+    const { onClose, onChange, onReset, onBlur, state: {localValue}, is } = this;
 
     return (
-      <div className="MultiSelect" id={id}>
+      <div className="MultiSelect" id={id} onBlur={onBlur}>
         <DropDown
           {...{
             onClose,
