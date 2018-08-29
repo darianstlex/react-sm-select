@@ -33,7 +33,7 @@ export class DropDown extends Component {
 
   wrapper = null;
 
-  componentWillUpdate() {
+  componentWillMount() {
     document.addEventListener('touchstart', this.handleDocumentClick);
     document.addEventListener('mousedown', this.handleDocumentClick);
   }

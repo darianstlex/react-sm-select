@@ -31,6 +31,7 @@ export class MultiSelect extends React.Component {
     filterOptions: T.func,
     // labels / placeholders
     valuePlaceholder: T.string,
+    counterLabel: T.string,
     allSelectedLabel: T.string,
     selectAllLabel: T.string,
     searchPlaceholder: T.string,
@@ -56,11 +57,14 @@ export class MultiSelect extends React.Component {
     shouldToggleOnHover: false,
     removableTag: true,
     valuePlaceholder: 'Select',
+    counterLabel: 'Selected',
     allSelectedLabel: 'All items are selected',
   };
 
+  is = mode => this.props.mode === mode;
+
   state = {
-    localValue: omitDirtyValues(this.props.options, this.props.value, this.props.mode === 'single'),
+    localValue: omitDirtyValues(this.props.options, this.props.value, this.is('single')),
     changed: false,
   };
 
@@ -91,19 +95,20 @@ export class MultiSelect extends React.Component {
         options,
         removableTag,
         valuePlaceholder,
+        counterLabel,
         allSelectedLabel,
-        mode,
       },
       state: {localValue: value},
       onTagRemove,
+      is,
     } = this;
 
-    if (mode !== 'tags' && mode !== 'counter' && value.length === options.length)
+    if (!is('tags') && !is('counter') && value.length === options.length)
       return (<span className="MultiSelect__value">{allSelectedLabel}</span>);
 
     if (!value.length) return (<span className="MultiSelect__value">{valuePlaceholder}</span>);
 
-    if (mode === 'tags') {
+    if (is('tags')) {
       const labels = value.map(val => options.find(opt => opt.value === val).label);
       return (
         <div className="MultiSelect__tags">
@@ -111,17 +116,17 @@ export class MultiSelect extends React.Component {
         </div>
       );
     }
-    if (mode === 'counter') return <DefCounter {...{valuePlaceholder, value, options}}/>;
+    if (is('counter')) return <DefCounter {...{valuePlaceholder, counterLabel, value, options}}/>;
 
     return <ValueRenderer {...{options, value}}/>;
   };
 
   onChange = value => {
-    const {onChange, onClose, disabled, mode} = this.props;
+    const {onChange, onClose, disabled} = this.props;
     if (!disabled) {
       if (onChange) onChange(value);
       this.setState({localValue: value, changed: true}, () => {
-        if (mode === 'single' && onClose) onClose(value);
+        if (this.is('single') && onClose) onClose(value);
       });
     }
   };
@@ -147,7 +152,6 @@ export class MultiSelect extends React.Component {
   render() {
     const {
       id,
-      mode,
       options,
       ArrowRenderer,
       OptionRenderer,
@@ -165,7 +169,7 @@ export class MultiSelect extends React.Component {
       searchPlaceholder,
       searchMorePlaceholder,
     } = this.props;
-    const { onClose, onChange, onReset, state: {localValue} } = this;
+    const { onClose, onChange, onReset, state: {localValue}, is } = this;
 
     return (
       <div className="MultiSelect" id={id}>
@@ -182,7 +186,7 @@ export class MultiSelect extends React.Component {
             resetTo,
           }}
           contentProps={{
-            mode,
+            isSingle: is('single'),
             OptionRenderer,
             options,
             value: localValue,

@@ -80,6 +80,7 @@ state: {
 <MultiSelect
   resetable
   enableSearch
+  hasSelectAll
   selectAllLabel="All Options"
   options={state.options}
   value={state.value}

@@ -13,15 +13,15 @@ export class OptionList extends React.Component {
     onChange: T.func.isRequired,
     onClick: T.func.isRequired,
     disabled: T.bool,
-    mode: T.string,
+    isSingle: T.bool,
     closePanel: T.func.isRequired,
   };
 
   onChange = (option, checked) => {
-    const {value, onChange, disabled, mode, closePanel} = this.props;
+    const {value, onChange, disabled, isSingle, closePanel} = this.props;
 
     if (disabled) return;
-    if (mode === 'single') {
+    if (isSingle) {
       onChange([option.value]);
       closePanel();
       return;
@@ -52,7 +52,7 @@ export class OptionList extends React.Component {
               onClick={event => p.onClick(event, idx)}
               OptionRenderer={p.OptionRenderer}
               disabled={p.disabled}
-              mode={p.mode}
+              isSingle={p.isSingle}
             />
           </li>
         ))}

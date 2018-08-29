@@ -1,6 +1,6 @@
 .MultiSelect {
   &__value {
-    color: $MS-borderColor;
+    color: $SM-borderColor;
   }
 
   &__tags {
@@ -25,31 +25,31 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    height: $MS-fieldHeight - 13px;
-    line-height: $MS-fieldHeight - 13px;
+    height: $SM-fieldHeight - 13px;
+    line-height: $SM-fieldHeight - 13px;
     margin-right: 4px;
 
     &__label {
       box-sizing: border-box;
-      color: $MS-tagColor;
-      background-color: $MS-focusColor;
+      color: $SM-tagColor;
+      background-color: $SM-focusColor;
       padding: 0 11px 0 10px;
-      border-radius: $MS-tagBorderRadius;
+      border-radius: $SM-tagBorderRadius;
     }
 
     &__close {
       box-sizing: border-box;
-      color: $MS-tagCloseColor;
-      background-color: $MS-tagCloseBackgroundColor;
+      color: $SM-tagCloseColor;
+      background-color: $SM-tagCloseBackgroundColor;
       padding: 0 5px;
       position: relative;
-      left: -$MS-tagBorderRadius;
-      border-top-right-radius: $MS-tagBorderRadius;
-      border-bottom-right-radius: $MS-tagBorderRadius;
+      left: -$SM-tagBorderRadius;
+      border-top-right-radius: $SM-tagBorderRadius;
+      border-bottom-right-radius: $SM-tagBorderRadius;
       cursor: pointer;
 
       &:hover {
-        color: $MS-focusColor;
+        color: $SM-focusColor;
       }
     }
   }
@@ -60,19 +60,19 @@
     outline: none;
 
     &__counter {
-      color: $MS-counterColor;
+      color: $SM-counterColor;
     }
 
     &__panel {
-      background-color: $MS-backgroundColor;
-      border: 1px solid $MS-borderColor;
-      border-bottom-right-radius: $MS-borderRadius;
-      border-bottom-left-radius: $MS-borderRadius;
-      border-top-color: $MS-dividerColor;
+      background-color: $SM-backgroundColor;
+      border: 1px solid $SM-borderColor;
+      border-bottom-right-radius: $SM-borderRadius;
+      border-bottom-left-radius: $SM-borderRadius;
+      border-top-color: $SM-dividerColor;
       box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
       box-sizing: border-box;
       margin-top: -2px;
-      max-height: $MS-dropDownHeight;
+      max-height: $SM-dropDownHeight;
       position: absolute;
       top: 100%;
       width: 100%;
@@ -85,20 +85,20 @@
       box-sizing: border-box;
       position: relative;
       display: table;
-      background-color: $MS-backgroundColor;
-      border: 1px solid $MS-borderColor;
-      border-radius: $MS-borderRadius;
-      color: $MS-textColor;
+      background-color: $SM-backgroundColor;
+      border: 1px solid $SM-borderColor;
+      border-radius: $SM-borderRadius;
+      color: $SM-textColor;
       cursor: default;
       border-spacing: 0;
       border-collapse: separate;
-      height: $MS-fieldHeight;
+      height: $SM-fieldHeight;
       outline: none;
       overflow: hidden;
       width: 100%;
 
       &--focused {
-        border-color: $MS-focusColor;
+        border-color: $SM-focusColor;
         box-shadow: none;
       }
 
@@ -118,8 +118,8 @@
       left: 0;
       right: 0;
       padding: 0 15px;
-      line-height: $MS-fieldHeight - 2;
-      color: $MS-textColor;
+      line-height: $SM-fieldHeight - 2;
+      color: $SM-textColor;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -136,7 +136,7 @@
       height: 100%;
       right: 0;
       padding: 0 12px;
-      line-height: $MS-fieldHeight - 2;
+      line-height: $SM-fieldHeight - 2;
       cursor: pointer;
 
       :not(:first-child) {
@@ -146,10 +146,10 @@
 
     &__reset {
       cursor: pointer;
-      color: $MS-borderColor;
+      color: $SM-borderColor;
 
       &:hover {
-        color: $MS-focusColor;
+        color: $SM-focusColor;
       }
     }
 
@@ -159,10 +159,10 @@
       flex-direction: column;
       justify-content: center;
       height: 100%;
-      border-bottom-color: $MS-borderColor;
+      border-bottom-color: $SM-borderColor;
 
       &:hover {
-        border-bottom-color: $MS-focusColor;
+        border-bottom-color: $SM-focusColor;
       }
 
       .arrow {
@@ -177,7 +177,7 @@
       &--up {
         @extend .arrow;
         transform: rotate(360deg);
-        border-bottom-color: $MS-focusColor !important;
+        border-bottom-color: $SM-focusColor !important;
       }
 
       &--down {
@@ -202,9 +202,9 @@
         animation: loading_spin 800ms infinite linear;
         width: 16px;
         height: 16px;
-        border: 3px dotted $MS-dividerColor;
+        border: 3px dotted $SM-dividerColor;
         border-radius: 50%;
-        border-right-color: $MS-textColor;
+        border-right-color: $SM-textColor;
         display: inline-block;
         position: relative;
         vertical-align: middle;
@@ -216,7 +216,7 @@
     box-sizing: border-box;
 
     ::placeholder {
-      color: $MS-searchPlaceholderColor;
+      color: $SM-searchPlaceholderColor;
       opacity: 1;
     }
 
@@ -230,23 +230,23 @@
       box-sizing: border-box;
       display: block;
       max-width: 100%;
-      height: $MS-fieldHeight;
-      line-height: $MS-fieldHeight;
+      height: $SM-fieldHeight;
+      line-height: $SM-fieldHeight;
       border: none;
-      color: $MS-borderColor;
-      border-bottom: 1px solid $MS-dividerColor;
+      color: $SM-borderColor;
+      border-bottom: 1px solid $SM-dividerColor;
       padding: 10px 15px;
       width: 100%;
       outline: none;
     }
 
     &--searchFieldFocused {
-      color: $MS-itemTextColor;
+      color: $SM-itemTextColor;
     }
 
     &__selectAll {
-      font-weight: 500;
-      color: $MS-borderColor !important;
+      //font-weight: 500;
+      color: $SM-selectAllColor !important;
     }
   }
 
@@ -262,14 +262,14 @@
   .Option {
     box-sizing: border-box;
     background-color: #fff;
-    color: $MS-itemTextColor;
+    color: $SM-itemTextColor;
     cursor: pointer;
     display: block;
     padding: 12px 15px;
     outline: none;
 
     &--hover {
-      background-color: $MS-itemHoverColor;
+      background-color: $SM-itemHoverColor;
       outline: 0;
     }
 

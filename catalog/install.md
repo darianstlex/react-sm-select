@@ -41,25 +41,27 @@ state = {
 Can be used css overriding, see compiled css. Or use scss variables for general styling.
 
 ```code
-@import 'react-sm-select/scss/variables';
+@import 'react-sm-select/dist/variables';
 
-$MS-backgroundColor: #fff;
-$MS-focusColor: #1298d4;
-$MS-fieldHeight: 40px;
-$MS-borderRadius: 5px;
-$MS-dividerColor: #cfd4d9;
-$MS-borderColor: #aaa;
-$MS-textColor: #333;
-$MS-itemTextColor: #666666;
-$MS-itemHoverColor: #ebf5ff;
-$MS-searchPlaceholderColor: #c7c7c7;
-$MS-dropDownHeight: 300px;
-$MS-tagBackgroundColor: $MS-focusColor;
-$MS-tagColor: #fff;
-$MS-tagCloseBackgroundColor: #d1d1d1;
-$MS-tagCloseColor: $MS-textColor;
-$MS-tagBorderRadius: 3px;
-$MS-counterColor: $MS-focusColor;
+$SM-textColor: #333;
+$SM-itemTextColor: #666666;
+$SM-itemHoverColor: #ebf5ff;
+$SM-mutedColor: #aaa;
+$SM-backgroundColor: #fff;
+$SM-dividerColor: #cfd4d9;
+$SM-focusColor: #1298d4;
+$SM-borderColor: $SM-mutedColor;
+$SM-searchPlaceholderColor: $SM-mutedColor;
+$SM-tagColor: #fff;
+$SM-tagBackgroundColor: $SM-focusColor;
+$SM-tagCloseColor: $SM-textColor;
+$SM-tagCloseBackgroundColor: #d1d1d1;
+$SM-counterColor: $SM-focusColor;
+$SM-selectAllColor: $SM-itemTextColor;
+$SM-fieldHeight: 40px;
+$SM-dropDownHeight: 300px;
+$SM-borderRadius: 5px;
+$SM-tagBorderRadius: 3px;
 
-@import 'react-sm-select/scss/main';
+@import 'react-sm-select/dist/main';
 ```

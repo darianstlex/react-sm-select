@@ -1,11 +1,10 @@
 ### Props
 
 - **`id: string`** ID attribute of the container
+- **`mode: string: list`** Behaviour mode: 'list', 'tags', 'counter', 'single'
 - **`options: array`** Array of options to select from in format: **Required**
 
 ```code
-lang: js
----
 [
   { value: 'red', label: 'Red' },
   { value: 'blue', label: 'Blue' }
@@ -15,8 +14,6 @@ lang: js
 - **`value: array: []`** Array of preselected options in format:
 
 ```code
-lang: js
----
 [ 'red', 'blue' ]
 ```
 
@@ -36,26 +33,24 @@ onClose(value) {
 }
 ```
 
-- **`mode: string: list`** Behaviour mode: 'list', 'tags', 'counter', 'single'
+- **`resetTo: array: []`** Value to be reset to
 - **`enableSearch: boolean: false`** Enables search field
 - **`isLoading: boolean: false`** Shows loading indicator
 - **`disabled: boolean: false`** Disable component
-- **`hasSelectAll: boolean: true`** Shows 'Select All' options
+- **`hasSelectAll: boolean: false`** Shows 'Select All' options
 - **`resetable: boolean: false`** Add clear button to reset value
-- **`resetTo: array: []`** Value to be reset to
+- **`shouldToggleOnHover: boolean: false`** Toggle select drop-down on hover
 - **`valuePlaceholder: string: 'Select ...'`** Provides custom placeholder for 'Select ...'
+- **`counterLabel: string: 'Selected'`** Provides custom label for counter mode
 - **`searchPlaceholder: string: 'Search'`** Search Field placeholder
 - **`searchMorePlaceholder: string: 'Search to see more ...'`** Placeholder if 'maxOptionsToRender' is defined
 - **`selectAllLabel: string: 'Select All'`** Provides custom label for 'Select All'
 - **`allSelectedLabel: string: 'All items are selected'`** Provides custom label for all selected items
-- **`shouldToggleOnHover: boolean: false`** Toggle select drop-down on hover
 - **`maxOptionsToRender: number: undefined`** Maximum Options to render, but search over all
 
 - **`filterOptions: function`** Custom filter function:
 
 ```code
-lang: js
----
 filterOptions(options, text) {
   // options - see 'options' property
   // text - search string
@@ -67,8 +62,6 @@ filterOptions(options, text) {
 - **`ValueRenderer: function`** Render custom Value:
 
 ```code
-lang: js
----
 ValueRenderer({value, options}) {
   // options: array - see 'options' property
   // value: array - see 'value' property
@@ -80,8 +73,6 @@ ValueRenderer({value, options}) {
 - **`OptionRenderer: function`** Render custom Option
 
 ```code
-lang: js
----
 OptionRenderer({option, checked, disabled, onClick}) {
   // option: object - from options props: { value, label }  
   // checked: boolean - define if option is checked
@@ -95,8 +86,6 @@ OptionRenderer({option, checked, disabled, onClick}) {
 - **`ArrowRenderer: function`** Render custom DropDown Arrow
 
 ```code
-lang: js
----
 ArrowRenderer({options, value, expanded, hasFocus}) {
   // options: array - see 'options' prop 
   // value: array - see 'value' property
@@ -110,8 +99,6 @@ ArrowRenderer({options, value, expanded, hasFocus}) {
 - **`LoadingRenderer: function`** Render custom Loading Indicator
 
 ```code
-lang: js
----
 LoadingRenderer() {
   return - component to render custom Loading Indicator
 }

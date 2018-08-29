@@ -13,7 +13,7 @@ export class SelectPanel extends React.Component {
       label: T.string,
     })).isRequired,
     value: T.arrayOf(T.string),
-    mode: T.string,
+    isSingle: T.bool,
     selectAllLabel: T.string,
     onChange: T.func.isRequired,
     disabled: T.bool,
@@ -142,7 +142,7 @@ export class SelectPanel extends React.Component {
           />
         </div>}
 
-        {p.mode !== 'single' && p.hasSelectAll && !s.searchText &&
+        {!p.isSingle && p.hasSelectAll && !s.searchText &&
           <Option
             className="SelectPanel__selectAll"
             focused={s.focusIndex === 0}
@@ -162,7 +162,7 @@ export class SelectPanel extends React.Component {
           onClick={(e, index) => this.handleItemClick(index + 1)}
           OptionRenderer={p.OptionRenderer}
           disabled={p.disabled}
-          mode={p.mode}
+          isSingle={p.isSingle}
           closePanel={p.closePanel}
         />
       </div>

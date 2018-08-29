@@ -14,7 +14,7 @@ export class Option extends React.Component {
     disabled: T.bool,
     onChange: T.func,
     onClick: T.func,
-    mode: T.string,
+    isSingle: T.bool,
     className: T.string,
   };
   static defaultProps = {
@@ -85,7 +85,7 @@ export class Option extends React.Component {
           checked={p.checked}
           onClick={this.handleClick}
           disabled={p.disabled}
-          mode={p.mode}
+          isSingle={p.isSingle}
         />
       </label>
     );

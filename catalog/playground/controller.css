@@ -20,4 +20,14 @@
   margin-right: 2px;
   border-left: dotted 1px darkgrey;
   border-bottom: dotted 1px darkgrey;
+  padding-top: 10px !important;
+}
+
+.divider {
+  border-bottom: dotted 1px darkgrey;
+  margin: 10px 0 20px;
+}
+
+.select::after {
+  z-index: 0 !important;
 }

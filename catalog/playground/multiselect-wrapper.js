@@ -34,6 +34,7 @@ export class MultiselectWrapper extends React.Component {
     searchPlaceholder: 'Search for color ...',
     searchMorePlaceholder: 'Type to see more ...',
     valuePlaceholder: 'Select something ...',
+    counterLabel: 'Selected',
     allSelectedLabel: 'All colors are selected',
   };
 
@@ -43,7 +44,9 @@ export class MultiselectWrapper extends React.Component {
     {place: 'left', prop: 'searchPlaceholder', type: 'string', value: this.state.searchPlaceholder},
     {place: 'left', prop: 'searchMorePlaceholder', type: 'string', value: this.state.searchMorePlaceholder},
     {place: 'left', prop: 'selectAllLabel', type: 'string', value: this.state.selectAllLabel},
-    {place: 'left', prop: 'maxOptionsToRender', type: 'number', value: this.state.maxOptionsToRender},
+    {place: 'left', prop: 'counterLabel', type: 'string', value: this.state.counterLabel},
+    {place: 'right', prop: 'mode', type: 'select', value: this.state.mode, options: ['list', 'tags', 'counter', 'single']},
+    {place: 'right', prop: 'maxOptionsToRender', type: 'number', value: this.state.maxOptionsToRender},
     {place: 'right', prop: 'resetable', type: 'boolean', value: this.state.resetable},
     {place: 'right', prop: 'enableSearch', type: 'boolean', value: this.state.enableSearch},
     {place: 'right', prop: 'isLoading', type: 'boolean', value: this.state.isLoading},
@@ -68,6 +71,7 @@ export class MultiselectWrapper extends React.Component {
           searchPlaceholder={this.state.searchPlaceholder}
           searchMorePlaceholder={this.state.searchMorePlaceholder}
           selectAllLabel={this.state.selectAllLabel}
+          counterLabel={this.state.counterLabel}
           disabled={this.state.disabled}
           shouldToggleOnHover={this.state.shouldToggleOnHover}
           hasSelectAll={this.state.hasSelectAll}

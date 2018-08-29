@@ -43,32 +43,35 @@ state = {
 Can be used css overriding, see compiled css. Or use scss variables for general styling.
 
 ```code
-@import 'react-sm-select/scss/variables';
+@import 'react-sm-select/dist/variables';
 
-$MS-backgroundColor: #fff;
-$MS-focusColor: #1298d4;
-$MS-fieldHeight: 40px;
-$MS-borderRadius: 5px;
-$MS-dividerColor: #cfd4d9;
-$MS-borderColor: #aaa;
-$MS-textColor: #333;
-$MS-itemTextColor: #666666;
-$MS-itemHoverColor: #ebf5ff;
-$MS-searchPlaceholderColor: #c7c7c7;
-$MS-dropDownHeight: 300px;
-$MS-tagBackgroundColor: $MS-focusColor;
-$MS-tagColor: #fff;
-$MS-tagCloseBackgroundColor: #d1d1d1;
-$MS-tagCloseColor: $MS-textColor;
-$MS-tagBorderRadius: 3px;
-$MS-counterColor: $MS-focusColor;
+$SM-textColor: #333;
+$SM-itemTextColor: #666666;
+$SM-itemHoverColor: #ebf5ff;
+$SM-mutedColor: #aaa;
+$SM-backgroundColor: #fff;
+$SM-dividerColor: #cfd4d9;
+$SM-focusColor: #1298d4;
+$SM-borderColor: $SM-mutedColor;
+$SM-searchPlaceholderColor: $SM-mutedColor;
+$SM-tagColor: #fff;
+$SM-tagBackgroundColor: $SM-focusColor;
+$SM-tagCloseColor: $SM-textColor;
+$SM-tagCloseBackgroundColor: #d1d1d1;
+$SM-counterColor: $SM-focusColor;
+$SM-selectAllColor: $SM-itemTextColor;
+$SM-fieldHeight: 40px;
+$SM-dropDownHeight: 300px;
+$SM-borderRadius: 5px;
+$SM-tagBorderRadius: 3px;
 
-@import 'react-sm-select/scss/main';
+@import 'react-sm-select/dist/main';
 ```
 
 ### Props
 
 - **`id: string`** ID attribute of the container
+- **`mode: string: list`** Behaviour mode: 'list', 'tags', 'counter', 'single'
 - **`options: array`** Array of options to select from in format: **Required**
 
 ```code
@@ -100,19 +103,19 @@ onClose(value) {
 }
 ```
 
-- **`mode: string: list`** Behaviour mode: 'list', 'tags', 'counter', 'single'
+- **`resetTo: array: []`** Value to be reset to
 - **`enableSearch: boolean: false`** Enables search field
 - **`isLoading: boolean: false`** Shows loading indicator
 - **`disabled: boolean: false`** Disable component
-- **`hasSelectAll: boolean: true`** Shows 'Select All' options
+- **`hasSelectAll: boolean: false`** Shows 'Select All' options
 - **`resetable: boolean: false`** Add clear button to reset value
-- **`resetTo: array: []`** Value to be reset to
+- **`shouldToggleOnHover: boolean: false`** Toggle select drop-down on hover
 - **`valuePlaceholder: string: 'Select ...'`** Provides custom placeholder for 'Select ...'
+- **`counterLabel: string: 'Selected'`** Provides custom label for counter mode
 - **`searchPlaceholder: string: 'Search'`** Search Field placeholder
 - **`searchMorePlaceholder: string: 'Search to see more ...'`** Placeholder if 'maxOptionsToRender' is defined
 - **`selectAllLabel: string: 'Select All'`** Provides custom label for 'Select All'
 - **`allSelectedLabel: string: 'All items are selected'`** Provides custom label for all selected items
-- **`shouldToggleOnHover: boolean: false`** Toggle select drop-down on hover
 - **`maxOptionsToRender: number: undefined`** Maximum Options to render, but search over all
 
 - **`filterOptions: function`** Custom filter function:

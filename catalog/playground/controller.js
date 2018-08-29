@@ -55,7 +55,7 @@ export class Controller extends React.Component {
     </div>;
 
   array = control =>
-    <div  key={control.prop} className="field">
+    <div key={control.prop} className="field">
       <label className="label">Property: <span className="propName">{control.prop}</span></label>
       <div className="control">
         <textarea className="textarea"
@@ -63,6 +63,21 @@ export class Controller extends React.Component {
           rows={control.rows}
           onChange={event => this.setState({[control.prop]: event.target.value})}
         />
+      </div>
+    </div>;
+
+  select = control =>
+    <div key={control.prop} className="field">
+      <label className="label">Property: <span className="propName">{control.prop}</span></label>
+      <div className="control">
+        <div className="select is-fullwidth">
+          <select
+            defaultValue={this.state[control.prop]}
+            onChange={event => this.setState({[control.prop]: event.target.value})}
+          >
+            {control.options.map(option => <option key={option}>{option}</option>)}
+          </select>
+        </div>
       </div>
     </div>;
 
@@ -85,9 +100,11 @@ export class Controller extends React.Component {
         <div className="columns">
           <div className="column is-8 leftColumn">
             {this.renderControls(controls, 'string')}
-            {this.renderControls(controls, 'number')}
           </div>
           <div className="column rightColumn">
+            {this.renderControls(controls, 'select')}
+            {this.renderControls(controls, 'number')}
+            <div className="divider"/>
             {this.renderControls(controls, 'boolean')}
           </div>
         </div>

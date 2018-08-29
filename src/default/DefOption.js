@@ -8,11 +8,11 @@ export class DefOption extends Component {
     option: T.object.isRequired,
     disabled: T.bool,
     onClick: T.func,
-    mode: T.string,
+    isSingle: T.bool,
   };
 
   render() {
-    const {checked, option, onClick, disabled, mode} = this.props;
+    const {checked, option, onClick, disabled, isSingle} = this.props;
 
     return (
       <div className="Option__renderer">
@@ -20,7 +20,7 @@ export class DefOption extends Component {
           {option.label}
         </span>
         <input
-          style={{visibility: mode === 'single' ? 'hidden' : 'visible'}}
+          style={{visibility: isSingle ? 'hidden' : 'visible'}}
           type="checkbox"
           checked={checked}
           tabIndex="-1"

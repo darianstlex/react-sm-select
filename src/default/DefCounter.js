@@ -1,8 +1,8 @@
 import React from 'react';
 
-export const DefCounter = ({valuePlaceholder, value, options}) => (
+export const DefCounter = ({valuePlaceholder, counterLabel, value, options}) => (
   <span>
-    {valuePlaceholder}
+    {!!value.length ? counterLabel || valuePlaceholder : valuePlaceholder}
     {!!value.length && (
       <span className="DropDown__counter">
         {' '}
