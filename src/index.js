@@ -57,7 +57,6 @@ export class MultiSelect extends React.Component {
     shouldToggleOnHover: false,
     removableTag: true,
     valuePlaceholder: 'Select',
-    counterLabel: 'Selected',
     allSelectedLabel: 'All items are selected',
   };
 
