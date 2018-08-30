@@ -82,7 +82,16 @@ export class MultiselectWrapper extends React.Component {
           options={this.state.options}
           value={this.state.value}
           removableTag={this.state.removableTag}
-          onChange={value => this.setState({value})}
+          onChange={value => {
+            console.log('OnChange', value);
+            this.setState({value})}
+          }
+          onClose={value => {
+            console.log('OnClose', value);
+          }}
+          onBlur={value => {
+            console.log('OnBlur', value);
+          }}
         />
         <Controller key={this.state.value} controls={controls} onUpdate={value => this.setState(value)} />
       </Fragment>

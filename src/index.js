@@ -63,11 +63,15 @@ export class MultiSelect extends React.Component {
 
   is = mode => this.props.mode === mode;
 
-  state = {
-    localValue: omitDirtyValues(this.props.options, this.props.value, this.is('single')),
-    changed: false,
-  };
+  constructor(props) {
+    super(props);
+    const {options, value} = props;
 
+    this.state = {
+      localValue: omitDirtyValues(options, value, this.is('single')),
+      changed: false,
+    };
+  }
 
   static getDerivedStateFromProps({options, value, mode}, {localValue}) {
     const clearValue = omitDirtyValues(options, value, mode === 'single');
@@ -131,15 +135,11 @@ export class MultiSelect extends React.Component {
     }
   };
 
-  onClose = () => {
+  onClose = hasFocus => {
     const { props: p, state: s } = this;
+    if (p.onBlur && !hasFocus ) p.onBlur(s.localValue);
     if (p.onClose && s.changed && !p.disabled) p.onClose(s.localValue);
     this.setState({changed: false});
-  };
-
-  onBlur = () => {
-    const { props: p, state: s } = this;
-    if (p.onBlur) p.onBlur(s.localValue);
   };
 
   onReset = event => {
@@ -174,10 +174,10 @@ export class MultiSelect extends React.Component {
       searchPlaceholder,
       searchMorePlaceholder,
     } = this.props;
-    const { onClose, onChange, onReset, onBlur, state: {localValue}, is } = this;
+    const { onClose, onChange, onReset, state: {localValue}, is } = this;
 
     return (
-      <div className="MultiSelect" id={id} onBlur={onBlur}>
+      <div className="MultiSelect" id={id}>
         <DropDown
           {...{
             onClose,

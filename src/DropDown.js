@@ -45,7 +45,7 @@ export class DropDown extends Component {
 
   emitClose = (expanded = false) => {
     this.setState(oldState => {
-      if (oldState.expanded) this.props.onClose();
+      if (oldState.expanded) this.props.onClose(oldState.hasFocus);
       return {expanded};
     });
   };
@@ -72,11 +72,11 @@ export class DropDown extends Component {
   };
 
   handleFocus = event => {
-    if (event.target === this.wrapper && !this.state.hasFocus) this.setState({hasFocus: true});
+    if (event.target === this.wrapper) this.setState(({hasFocus}) => !hasFocus ? {hasFocus: true} : null);
   };
 
   handleBlur = () => {
-    if (this.state.hasFocus) this.setState({hasFocus: false});
+    this.setState(({hasFocus}) => hasFocus ? {hasFocus: false} : null);
   };
 
   handleHover = expanded => {
