@@ -45,34 +45,61 @@ Can be used css overriding, see compiled css. Or use scss variables for general 
 ```code
 @import 'react-sm-select/dist/variables';
 
-$SM-textColor: #333;
-$SM-itemTextColor: #666666;
-$SM-itemHoverColor: #ebf5ff;
-$SM-mutedColor: #aaa;
-$SM-backgroundColor: #fff;
-$SM-dividerColor: #cfd4d9;
-$SM-focusColor: #1298d4;
-$SM-borderColor: $SM-mutedColor;
-$SM-searchPlaceholderColor: $SM-mutedColor;
-$SM-tagColor: #fff;
+$SM-white: #fff;
+$SM-brightGrey: #ebf5ff;
+$SM-lightGrey: #cfd4d9;
+$SM-lightBlue: #1298d4;
+$SM-grey: #949ca6;
+$SM-darkBlue: #143154;
+
+// General Colors
+$SM-backgroundColor: $SM-white;
+$SM-focusColor: $SM-lightBlue;
+$SM-mutedColor: $SM-grey;
+$SM-borderColor: $SM-grey;
+$SM-textColor: $SM-darkBlue;
+
+// Value Colors
+$SM-valueColor: $SM-textColor;
+$SM-valuePlaceholderColor: $SM-mutedColor;
+$SM-counterColor: $SM-focusColor;
+
+$SM-tagColor: $SM-white;
 $SM-tagBackgroundColor: $SM-focusColor;
 $SM-tagCloseColor: $SM-textColor;
-$SM-tagCloseBackgroundColor: #d1d1d1;
-$SM-counterColor: $SM-focusColor;
+$SM-tagCloseBackgroundColor: $SM-lightGrey;
+
+// Search Colors
+$SM-searchPlaceholderColor: $SM-mutedColor;
+
+// Option Colors
+$SM-itemTextColor: $SM-textColor;
+$SM-itemBackgroundHoverColor: $SM-brightGrey;
+$SM-dividerColor: $SM-lightGrey;
 $SM-selectAllColor: $SM-itemTextColor;
-$SM-fieldHeight: 40px;
-$SM-dropDownHeight: 300px;
+
+// Size
+$SM-fieldHeight: 42px;
+$SM-itemHeight: $SM-fieldHeight - 4px;
 $SM-borderRadius: 5px;
 $SM-tagBorderRadius: 3px;
+$SM-dropDownHeight: 300px;
+
+// Other
+$SM-dropDownZIndex: 1;
 
 @import 'react-sm-select/dist/main';
 ```
 
 ### Props
 
-- **`id: string`** ID attribute of the container
-- **`mode: string: list`** Behaviour mode: 'list', 'tags', 'counter', 'single'
-- **`options: array`** Array of options to select from in format: **Required**
+#### Controls
+
+---
+
+- **`mode: string: 'list'`** Behaviour mode: 'list', 'tags', 'counter', 'single'
+
+- **`options: array`** Array of options to select from: **Required**
 
 ```code
 [
@@ -81,29 +108,57 @@ $SM-tagBorderRadius: 3px;
 ]
 ```
 
-- **`value: array: []`** Array of preselected options in format:
+
+- **`value: array: []`** Array of preselected options:
 
 ```code
 [ 'red', 'blue' ]
 ```
 
-- **`onChange: function`** Function to be executed on change:
 
-```code
-onChange(value) {
-  // value - array of selected values, see 'value' property
-}
-```
+- **`disabled: boolean: false`** Disable component
 
-- **`onClose: function`** Function to be executed on close:
+- **`enableSearch: boolean: false`** Enables search field
 
-```code
-onClose(value) {
-  // value - array of selected values, see 'value' property
-}
-```
+- **`id: string`** ID attribute of the container
 
-- **`onBlur: function`** Function to be executed on blur:
+- **`isLoading: boolean: false`** Shows loading indicator
+
+- **`hasSelectAll: boolean: false`** Shows 'Select All'
+
+- **`maxOptionsToRender: number: undefined`** Max options to render
+
+- **`resetable: boolean: false`** Add delete button to reset value
+
+- **`resetTo: array: []`** Value to be reset to
+
+- **`shouldToggleOnHover: boolean: false`** Toggle drop-down on hover
+
+
+
+#### Labels / Placeholders
+
+---
+
+- **`allSelectedLabel: string: 'All items are selected'`** Label for all selected items
+
+- **`counterLabel: string: undefined`** Value Label for 'counter' mode
+
+- **`searchPlaceholder: string: 'Search'`** Search field placeholder
+
+- **`searchMorePlaceholder: string: 'Search to see more ...'`** If 'maxOptionsToRender' is defined
+
+- **`selectAllLabel: string: 'Select All'`** Select All label
+
+- **`valuePlaceholder: string: 'Select ...'`** Value placeholder
+
+
+
+#### Events
+
+---
+
+- **`onBlur: function`** On Blur:
 
 ```code
 onBlur(value) {
@@ -111,22 +166,31 @@ onBlur(value) {
 }
 ```
 
-- **`resetTo: array: []`** Value to be reset to
-- **`enableSearch: boolean: false`** Enables search field
-- **`isLoading: boolean: false`** Shows loading indicator
-- **`disabled: boolean: false`** Disable component
-- **`hasSelectAll: boolean: false`** Shows 'Select All' options
-- **`resetable: boolean: false`** Add clear button to reset value
-- **`shouldToggleOnHover: boolean: false`** Toggle select drop-down on hover
-- **`valuePlaceholder: string: 'Select ...'`** Provides custom placeholder for 'Select ...'
-- **`counterLabel: string: 'Selected'`** Provides custom label for counter mode
-- **`searchPlaceholder: string: 'Search'`** Search Field placeholder
-- **`searchMorePlaceholder: string: 'Search to see more ...'`** Placeholder if 'maxOptionsToRender' is defined
-- **`selectAllLabel: string: 'Select All'`** Provides custom label for 'Select All'
-- **`allSelectedLabel: string: 'All items are selected'`** Provides custom label for all selected items
-- **`maxOptionsToRender: number: undefined`** Maximum Options to render, but search over all
 
-- **`filterOptions: function`** Custom filter function:
+- **`onChange: function`** On Change:
+
+```code
+onChange(value) {
+  // value - array of selected values, see 'value' property
+}
+```
+
+
+- **`onClose: function`** On Close:
+
+```code
+onClose(value) {
+  // value - array of selected values, see 'value' property
+}
+```
+
+
+
+#### Helpers
+
+---
+
+- **`filterOptions: function`** Filter / Search:
 
 ```code
 filterOptions(options, text) {
@@ -137,31 +201,13 @@ filterOptions(options, text) {
 }
 ```
 
-- **`ValueRenderer: function`** Render custom Value:
 
-```code
-ValueRenderer({value, options}) {
-  // options: array - see 'options' property
-  // value: array - see 'value' property
-  
-  return - component to render custom value
-}
-```
 
-- **`OptionRenderer: function`** Render custom Option
+#### Renderers
 
-```code
-OptionRenderer({option, checked, disabled, onClick}) {
-  // option: object - from options props: { value, label }  
-  // checked: boolean - define if option is checked
-  // disabled: boolean - disable option if component is disabled
-  // onClick: function - notifies component about option click
-  
-  return - component to render custom Option
-}
-```
+---
 
-- **`ArrowRenderer: function`** Render custom DropDown Arrow
+- **`ArrowRenderer: function`** DropDown Arrow:
 
 ```code
 ArrowRenderer({options, value, expanded, hasFocus}) {
@@ -174,7 +220,8 @@ ArrowRenderer({options, value, expanded, hasFocus}) {
 }
 ```
 
-- **`LoadingRenderer: function`** Render custom Loading Indicator
+
+- **`LoadingRenderer: function`** Loading Indicator:
 
 ```code
 LoadingRenderer() {
@@ -182,15 +229,40 @@ LoadingRenderer() {
 }
 ```
 
-- **`TagRenderer: function`** Render custom Tag, shows in MultiSelect only
+
+- **`OptionRenderer: function`** Option:
 
 ```code
-lang: js
----
+OptionRenderer({option, checked, disabled, onClick}) {
+  // option: object - from options props: { value, label }  
+  // checked: boolean - define if option is checked
+  // disabled: boolean - disable option if component is disabled
+  // onClick: function - notifies component about option click
+  
+  return - component to render custom Option
+}
+```
+
+
+- **`TagRenderer: function`** Tag:
+
+```code
 TagRenderer({label, index, removableTag, onTagRemove}) {
   // label: string - tag label
   // index: number - tag index in array used in removal 
   // removableTag: boolean - display/hide remove tag button
   // onTagRemove: function - callback to remove selected tag
+}
+```
+
+
+- **`ValueRenderer: function`** Value:
+
+```code
+ValueRenderer({value, options}) {
+  // options: array - see 'options' property
+  // value: array - see 'value' property
+  
+  return - component to render custom value
 }
 ```

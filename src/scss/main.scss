@@ -1,6 +1,10 @@
 .MultiSelect {
   &__value {
-    color: $SM-borderColor;
+    color: $SM-valueColor;
+  }
+
+  &__valuePlaceholder {
+    color: $SM-valuePlaceholderColor;
   }
 
   &__tags {
@@ -76,7 +80,7 @@
       position: absolute;
       top: 100%;
       width: 100%;
-      z-index: 1;
+      z-index: $SM-dropDownZIndex;
       overflow-y: auto;
       scroll-behavior: smooth;
     }
@@ -260,15 +264,16 @@
 
   .Option {
     box-sizing: border-box;
+    display: block;
+    padding: 0 15px;
+    line-height: $SM-itemHeight;
     background-color: #fff;
     color: $SM-itemTextColor;
     cursor: pointer;
-    display: block;
-    padding: 12px 15px;
     outline: none;
 
     &--hover {
-      background-color: $SM-itemHoverColor;
+      background-color: $SM-itemBackgroundHoverColor;
       outline: 0;
     }
 

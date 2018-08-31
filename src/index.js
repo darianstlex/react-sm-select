@@ -110,7 +110,7 @@ export class MultiSelect extends React.Component {
     if (!is('tags') && !is('counter') && value.length === options.length)
       return (<span className="MultiSelect__value">{allSelectedLabel}</span>);
 
-    if (!value.length) return (<span className="MultiSelect__value">{valuePlaceholder}</span>);
+    if (!value.length) return (<span className="MultiSelect__valuePlaceholder">{valuePlaceholder}</span>);
 
     if (is('tags')) {
       const labels = value.map(val => options.find(opt => opt.value === val).label);

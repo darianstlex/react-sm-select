@@ -43,25 +43,48 @@ Can be used css overriding, see compiled css. Or use scss variables for general 
 ```code
 @import 'react-sm-select/dist/variables';
 
-$SM-textColor: #333;
-$SM-itemTextColor: #666666;
-$SM-itemHoverColor: #ebf5ff;
-$SM-mutedColor: #aaa;
-$SM-backgroundColor: #fff;
-$SM-dividerColor: #cfd4d9;
-$SM-focusColor: #1298d4;
-$SM-borderColor: $SM-mutedColor;
-$SM-searchPlaceholderColor: $SM-mutedColor;
-$SM-tagColor: #fff;
+$SM-white: #fff;
+$SM-brightGrey: #ebf5ff;
+$SM-lightGrey: #cfd4d9;
+$SM-lightBlue: #1298d4;
+$SM-grey: #949ca6;
+$SM-darkBlue: #143154;
+
+// General Colors
+$SM-backgroundColor: $SM-white;
+$SM-focusColor: $SM-lightBlue;
+$SM-mutedColor: $SM-grey;
+$SM-borderColor: $SM-grey;
+$SM-textColor: $SM-darkBlue;
+
+// Value Colors
+$SM-valueColor: $SM-textColor;
+$SM-valuePlaceholderColor: $SM-mutedColor;
+$SM-counterColor: $SM-focusColor;
+
+$SM-tagColor: $SM-white;
 $SM-tagBackgroundColor: $SM-focusColor;
 $SM-tagCloseColor: $SM-textColor;
-$SM-tagCloseBackgroundColor: #d1d1d1;
-$SM-counterColor: $SM-focusColor;
+$SM-tagCloseBackgroundColor: $SM-lightGrey;
+
+// Search Colors
+$SM-searchPlaceholderColor: $SM-mutedColor;
+
+// Option Colors
+$SM-itemTextColor: $SM-textColor;
+$SM-itemBackgroundHoverColor: $SM-brightGrey;
+$SM-dividerColor: $SM-lightGrey;
 $SM-selectAllColor: $SM-itemTextColor;
-$SM-fieldHeight: 40px;
-$SM-dropDownHeight: 300px;
+
+// Size
+$SM-fieldHeight: 42px;
+$SM-itemHeight: $SM-fieldHeight - 4px;
 $SM-borderRadius: 5px;
 $SM-tagBorderRadius: 3px;
+$SM-dropDownHeight: 300px;
+
+// Other
+$SM-dropDownZIndex: 1;
 
 @import 'react-sm-select/dist/main';
 ```

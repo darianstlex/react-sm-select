@@ -71,15 +71,12 @@ export class SelectPanel extends React.Component {
 
   handleKeyDown = event => {
     if (event.altKey) return;
+    // Up - 38, Down - 40, Tab - 9
+    if (event.which === 38 || (event.shiftKey && event.which === 9)) this.updateFocus(-1);
+    else if (event.which === 40 || event.which === 9) this.updateFocus(1);
 
-    const update = offset => {
-      this.updateFocus(offset);
-      event.stopPropagation();
-      event.preventDefault();
-    };
-
-    if (event.which === 38 || (event.shiftKey && event.which === 9)) update(-1);
-    else if (event.which === 40 || event.which === 9) update(1);
+    event.stopPropagation();
+    event.preventDefault();
   };
 
   searchFocus = () => {
@@ -158,7 +155,7 @@ export class SelectPanel extends React.Component {
         <OptionList
           {...this.props}
           options={this.filteredOptions()}
-          focusIndex={p.focusIndex - 1}
+          focusIndex={s.focusIndex - 1}
           onClick={(e, index) => this.handleItemClick(index + 1)}
           OptionRenderer={p.OptionRenderer}
           disabled={p.disabled}
