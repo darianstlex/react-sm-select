@@ -81,8 +81,6 @@
       top: 100%;
       width: 100%;
       z-index: $SM-dropDownZIndex;
-      overflow-y: auto;
-      scroll-behavior: smooth;
     }
 
     &__header {
@@ -163,10 +161,10 @@
       flex-direction: column;
       justify-content: center;
       height: 100%;
-      border-bottom-color: $SM-borderColor;
+      border-bottom-color: $SM-dropDownArrowColor;
 
       &:hover {
-        border-bottom-color: $SM-focusColor;
+        border-bottom-color: $SM-dropDownActiveArrowColor;
       }
 
       .arrow {
@@ -181,7 +179,7 @@
       &--up {
         @extend .arrow;
         transform: rotate(360deg);
-        border-bottom-color: $SM-focusColor !important;
+        border-bottom-color: $SM-dropDownActiveArrowColor !important;
       }
 
       &--down {
@@ -224,6 +222,14 @@
       opacity: 1;
     }
 
+    &__optionContainer {
+      max-height: $SM-dropDownHeight - $SM-fieldHeight - 2;
+      border-bottom-left-radius: $SM-borderRadius;
+      border-bottom-right-radius: $SM-borderRadius;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+    }
+
     &__searchContainer {
       box-sizing: border-box;
       position: sticky;
@@ -235,7 +241,7 @@
       display: block;
       max-width: 100%;
       height: $SM-fieldHeight;
-      line-height: $SM-fieldHeight;
+      line-height: 1;
       border: none;
       color: $SM-borderColor;
       border-bottom: 1px solid $SM-dividerColor;

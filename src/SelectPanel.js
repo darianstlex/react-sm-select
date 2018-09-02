@@ -32,16 +32,20 @@ export class SelectPanel extends React.Component {
     selectAllLabel: 'Select All',
   };
 
-  searchInput = null;
+  constructor(props) {
+    super(props);
 
-  state = {
-    searchHasFocus: false,
-    searchText: "",
-    focusIndex: 0,
-  };
+    this.state = {
+      searchHasFocus: false,
+      searchText: '',
+      focusIndex: props.hasSelectAll ? 0 : 1,
+    };
+
+    this.searchInput = React.createRef();
+  }
 
   componentDidMount() {
-    if (this.searchInput) this.searchInput.focus();
+    if (this.searchInput.current) this.searchInput.current.focus();
   }
 
   selectAll = () => {
@@ -71,12 +75,19 @@ export class SelectPanel extends React.Component {
 
   handleKeyDown = event => {
     if (event.altKey) return;
-    // Up - 38, Down - 40, Tab - 9
-    if (event.which === 38 || (event.shiftKey && event.which === 9)) this.updateFocus(-1);
-    else if (event.which === 40 || event.which === 9) this.updateFocus(1);
 
-    event.stopPropagation();
-    event.preventDefault();
+    const update = (offset) => {
+      this.updateFocus(offset);
+
+      event.stopPropagation();
+      event.preventDefault();
+    };
+
+    ({
+      [event.which]: () => {},
+      38: () => update(-1), // Up
+      40: () => update(1), // Down
+    }[event.which])();
   };
 
   searchFocus = () => {
@@ -107,9 +118,10 @@ export class SelectPanel extends React.Component {
   };
 
   updateFocus = offset => {
-    this.setState(({searchText, focusIndex}) => {
-      const start = !!searchText ? 1 : 0;
-      return {focusIndex: Math.min(Math.max(start, focusIndex + offset), this.filteredOptions().length)}
+    const {props: p, filteredOptions} = this;
+    this.setState((s) => {
+      const start = !!s.searchText || !p.hasSelectAll ? 1 : 0;
+      return {focusIndex: Math.min(Math.max(start, s.focusIndex + offset), filteredOptions().length)};
     });
   };
 
@@ -132,36 +144,38 @@ export class SelectPanel extends React.Component {
             className={classes('SelectPanel__searchField', {'SelectPanel--searchFieldFocused': s.searchHasFocus})}
             placeholder={!p.maxOptionsToRender ? p.searchPlaceholder : p.searchMorePlaceholder}
             type="text"
-            ref={ref => (this.searchInput = ref)}
+            ref={this.searchInput}
             onChange={this.handleSearchChange}
             onFocus={this.searchFocus}
             onBlur={this.searchBlur}
           />
         </div>}
 
-        {!p.isSingle && p.hasSelectAll && !s.searchText &&
-          <Option
-            className="SelectPanel__selectAll"
-            focused={s.focusIndex === 0}
-            checked={this.allAreSelected()}
-            option={selectAllOption}
-            onChange={this.selectAllChange}
-            onClick={() => this.handleItemClick(0)}
+        <div className="SelectPanel__optionContainer">
+          {!p.isSingle && p.hasSelectAll && !s.searchText &&
+            <Option
+              className="SelectPanel__selectAll"
+              focused={s.focusIndex === 0}
+              checked={this.allAreSelected()}
+              option={selectAllOption}
+              onChange={this.selectAllChange}
+              onClick={() => this.handleItemClick(0)}
+              OptionRenderer={p.OptionRenderer}
+              disabled={p.disabled}
+            />
+          }
+
+          <OptionList
+            {...this.props}
+            options={this.filteredOptions()}
+            focusIndex={s.focusIndex - 1}
+            onClick={(e, index) => this.handleItemClick(index + 1)}
             OptionRenderer={p.OptionRenderer}
             disabled={p.disabled}
+            isSingle={p.isSingle}
+            closePanel={p.closePanel}
           />
-        }
-
-        <OptionList
-          {...this.props}
-          options={this.filteredOptions()}
-          focusIndex={s.focusIndex - 1}
-          onClick={(e, index) => this.handleItemClick(index + 1)}
-          OptionRenderer={p.OptionRenderer}
-          disabled={p.disabled}
-          isSingle={p.isSingle}
-          closePanel={p.closePanel}
-        />
+        </div>
       </div>
     );
   }

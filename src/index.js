@@ -73,10 +73,11 @@ export class MultiSelect extends React.Component {
     };
   }
 
-  static getDerivedStateFromProps({options, value, mode}, {localValue}) {
-    const clearValue = omitDirtyValues(options, value, mode === 'single');
-    if (!areValuesEqual(value, localValue)) return {localValue: clearValue};
-    return null;
+  componentDidUpdate(prevProps) {
+    const {props: p, is} = this;
+    const clearCurrValue = omitDirtyValues(p.options, p.value, is('single'));
+    const clearPrevValue = omitDirtyValues(p.options, prevProps.value, is('single'));
+    if (!areValuesEqual(clearCurrValue, clearPrevValue)) this.setState(p.value)
   }
 
   onTagRemove = (index, event) => {
@@ -126,11 +127,11 @@ export class MultiSelect extends React.Component {
   };
 
   onChange = value => {
-    const { props: p } = this;
+    const { props: p, is } = this;
     if (!p.disabled) {
       if (p.onChange) p.onChange(value);
       this.setState({localValue: value, changed: true}, () => {
-        if (this.is('single') && p.onClose) p.onClose(value);
+        if (is('single') && p.onClose) p.onClose(value);
       });
     }
   };

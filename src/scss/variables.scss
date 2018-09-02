@@ -15,12 +15,17 @@ $SM-textColor: $SM-darkBlue;
 // Value Colors
 $SM-valueColor: $SM-textColor;
 $SM-valuePlaceholderColor: $SM-mutedColor;
+
 $SM-counterColor: $SM-focusColor;
 
 $SM-tagColor: $SM-white;
 $SM-tagBackgroundColor: $SM-focusColor;
 $SM-tagCloseColor: $SM-textColor;
 $SM-tagCloseBackgroundColor: $SM-lightGrey;
+
+// DropDown
+$SM-dropDownArrowColor: $SM-grey;
+$SM-dropDownActiveArrowColor: $SM-lightBlue;
 
 // Search Colors
 $SM-searchPlaceholderColor: $SM-mutedColor;

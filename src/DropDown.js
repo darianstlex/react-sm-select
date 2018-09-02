@@ -55,20 +55,18 @@ export class DropDown extends Component {
   };
 
   handleKeyDown = event => {
-    switch (event.which) {
-      case 27: // Escape
-        this.toggleExpanded(false);
-        break;
-      case 38: // Up Arrow
-        this.toggleExpanded(false);
-        break;
-      case 40: // Down Arrow
-        this.toggleExpanded(true);
-        break;
-      default:
-        return;
-    }
-    event.preventDefault();
+    const toggle = state => {
+      this.toggleExpanded(state);
+      event.preventDefault();
+    };
+
+    ({
+      [event.which]: () => {},
+      27: () => toggle(false), // Esc
+      38: () => toggle(false), // Up
+      40: () => toggle(true), // Down
+      9: () => this.toggleExpanded(false), // Tab
+    }[event.which])();
   };
 
   handleFocus = event => {

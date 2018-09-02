@@ -15,18 +15,17 @@ export class DefOption extends Component {
     const {checked, option, onClick, disabled, isSingle} = this.props;
 
     return (
-      <div className="Option__renderer">
+      <div className="Option__renderer" onMouseDown={onClick}>
         <span className={classes('Option__label', {'Option--labelDisabled': disabled})}>
           {option.label}
         </span>
-        <input
-          style={{visibility: isSingle ? 'hidden' : 'visible'}}
+        {!isSingle && <input
           type="checkbox"
           checked={checked}
           tabIndex="-1"
           disabled={disabled}
-          onChange={onClick}
-        />
+          onChange={() => {}}
+        />}
       </div>
     );
   }
