@@ -1,139 +1,71 @@
 .MultiSelect {
-  &__value {
-    color: $SM-valueColor;
-  }
+  outline: none;
+  position: relative;
 
-  &__valuePlaceholder {
-    color: $SM-valuePlaceholderColor;
-  }
-
-  &__tags {
+  .Header {
     box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
-    overflow-x: auto;
-    padding-right: 20px;
-    margin-right: 40px;
-    margin-bottom: -50px;
-    padding-bottom: 50px;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-
-  &__tag {
-    box-sizing: border-box;
+    position: relative;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    height: $SM-fieldHeight - 13px;
-    line-height: $SM-fieldHeight - 13px;
-    margin-right: 4px;
-
-    &__label {
-      box-sizing: border-box;
-      color: $SM-tagColor;
-      background-color: $SM-focusColor;
-      padding: 0 11px 0 10px;
-      border-radius: $SM-tagBorderRadius;
-    }
-
-    &__close {
-      box-sizing: border-box;
-      color: $SM-tagCloseColor;
-      background-color: $SM-tagCloseBackgroundColor;
-      padding: 0 5px;
-      position: relative;
-      left: -$SM-tagBorderRadius;
-      border-top-right-radius: $SM-tagBorderRadius;
-      border-bottom-right-radius: $SM-tagBorderRadius;
-      cursor: pointer;
-
-      &:hover {
-        color: $SM-focusColor;
-      }
-    }
-  }
-
-  .DropDown {
-    position: relative;
-    box-sizing: border-box;
+    justify-content: space-between;
+    background-color: $SM-backgroundColor;
+    border: 1px solid $SM-borderColor;
+    border-radius: $SM-borderRadius;
+    color: $SM-textColor;
+    overflow: hidden;
+    max-width: 100%;
+    padding: 0 15px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     outline: none;
 
-    &__counter {
-      color: $SM-counterColor;
+    &--selected {
+      box-shadow: inset 0 0 4px $SM-headerSelectedColor;
     }
 
-    &__panel {
-      background-color: $SM-backgroundColor;
-      border: 1px solid $SM-borderColor;
-      border-bottom-right-radius: $SM-borderRadius;
-      border-bottom-left-radius: $SM-borderRadius;
-      border-top-color: $SM-dividerColor;
-      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+    &--disabled {
+      border-color: $SM-dividerColor;
+    }
+
+    &--focusedActive {
+      border-color: $SM-focusColor;
+    }
+
+    &--focusedDisabled {
+      border-color: darken($SM-dividerColor, 10);
+    }
+
+    &--expanded {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom-color: $SM-dividerColor;
+    }
+
+    &__value {
       box-sizing: border-box;
-      margin-top: -2px;
-      max-height: $SM-dropDownHeight;
-      position: absolute;
-      top: 100%;
-      width: 100%;
-      z-index: $SM-dropDownZIndex;
-    }
-
-    &__header {
-      box-sizing: border-box;
-      position: relative;
-      display: table;
-      background-color: $SM-backgroundColor;
-      border: 1px solid $SM-borderColor;
-      border-radius: $SM-borderRadius;
-      color: $SM-textColor;
-      cursor: default;
-      border-spacing: 0;
-      border-collapse: separate;
-      height: $SM-fieldHeight;
-      outline: none;
-      overflow: hidden;
-      width: 100%;
-
-      &--focused {
-        border-color: $SM-focusColor;
-        box-shadow: none;
-      }
-
-      &--expanded {
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-      }
-    }
-
-    &__child {
       display: flex;
-      box-sizing: border-box;
-      position: absolute;
-      max-width: 100%;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 0 15px;
-      line-height: $SM-fieldHeight - 2;
-      color: $SM-textColor;
-      overflow: hidden;
+      flex-grow: 1;
+      height: $SM-fieldHeight - 2;
+      line-height: $SM-fieldHeight - 1;
+      color: $SM-valueColor;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    &--disabledChild {
-      opacity: 0.5;
+    &__valuePlaceholder {
+      color: $SM-valuePlaceholderColor;
     }
 
-    &__rightBlock {
-      display: flex;
+    &__valueCounter {
+      color: $SM-counterColor;
+    }
+
+    &__controls {
       box-sizing: border-box;
+      display: flex;
       position: absolute;
       height: 100%;
       right: 0;
@@ -146,12 +78,54 @@
       }
     }
 
-    &__reset {
-      cursor: pointer;
-      color: $SM-borderColor;
+    &__tags {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      align-items: center;
+      overflow-x: auto;
+      padding-right: 20px;
+      margin-right: 40px;
+      margin-bottom: -50px;
+      padding-bottom: 50px;
 
-      &:hover {
-        color: $SM-focusColor;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &__tag {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      height: $SM-fieldHeight - 13px;
+      line-height: $SM-fieldHeight - 13px;
+      margin-right: 4px;
+
+      &__label {
+        box-sizing: border-box;
+        color: $SM-tagColor;
+        background-color: $SM-focusColor;
+        padding: 0 11px 0 10px;
+        border-radius: $SM-tagBorderRadius;
+      }
+
+      &__close {
+        box-sizing: border-box;
+        color: $SM-tagCloseColor;
+        background-color: $SM-tagCloseBackgroundColor;
+        padding: 0 5px;
+        position: relative;
+        left: -$SM-tagBorderRadius;
+        border-top-right-radius: $SM-tagBorderRadius;
+        border-bottom-right-radius: $SM-tagBorderRadius;
+        cursor: pointer;
+
+        &:hover {
+          color: $SM-focusColor;
+        }
       }
     }
 
@@ -168,6 +142,7 @@
       }
 
       .arrow {
+        position: relative;
         border: 5.5px solid transparent;
         border-top-width: 0;
         border-bottom-color: inherit;
@@ -179,12 +154,17 @@
       &--up {
         @extend .arrow;
         transform: rotate(360deg);
-        border-bottom-color: $SM-dropDownActiveArrowColor !important;
+        top: -1px;
       }
 
       &--down {
         @extend .arrow;
         transform: rotate(180deg);
+        top: 1px;
+      }
+
+      &--active {
+        border-bottom-color: $SM-dropDownActiveArrowColor !important;
       }
     }
 
@@ -212,14 +192,57 @@
         vertical-align: middle;
       }
     }
+
+    &__reset {
+      cursor: pointer;
+      color: $SM-borderColor;
+
+      &:hover {
+        color: $SM-focusColor;
+      }
+    }
   }
 
-  .SelectPanel {
+  .DropDown {
     box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    border-bottom-left-radius: $SM-borderRadius;
+    border-bottom-right-radius: $SM-borderRadius;
+    border: 1px solid $SM-focusColor;
+    border-top: none;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+    max-height: $SM-dropDownHeight;
+    z-index: $SM-dropDownZIndex;
+    overflow: hidden;
 
-    ::placeholder {
-      color: $SM-searchPlaceholderColor;
-      opacity: 1;
+    &--disabled {
+      border-color: $SM-dividerColor;
+    }
+
+    &__searchField {
+      box-sizing: border-box;
+      display: block;
+      border: none;
+      border-bottom: 1px solid $SM-dividerColor;
+      height: $SM-fieldHeight - 2;
+      width: 100%;
+      max-width: 100%;
+      line-height: 1;
+      padding: 10px 15px;
+      color: $SM-searchTextColor;
+      outline: none;
+      font-family: inherit;
+
+      &::placeholder {
+        color: $SM-searchPlaceholderColor;
+        opacity: 1;
+      }
+
+      &--selected {
+        box-shadow: inset 0 0 3px $SM-searchSelectedColor;
+        color: $SM-itemTextColor;
+      }
     }
 
     &__optionContainer {
@@ -230,30 +253,6 @@
       scroll-behavior: smooth;
     }
 
-    &__searchContainer {
-      box-sizing: border-box;
-      position: sticky;
-      top: 0;
-    }
-
-    &__searchField {
-      box-sizing: border-box;
-      display: block;
-      max-width: 100%;
-      height: $SM-fieldHeight;
-      line-height: 1;
-      border: none;
-      color: $SM-borderColor;
-      border-bottom: 1px solid $SM-dividerColor;
-      padding: 10px 15px;
-      width: 100%;
-      outline: none;
-    }
-
-    &--searchFieldFocused {
-      color: $SM-itemTextColor;
-    }
-
     &__selectAll {
       color: $SM-selectAllColor !important;
     }
@@ -262,6 +261,8 @@
   .OptionList {
     margin: 0;
     padding-left: 0;
+    max-height: $SM-dropDownHeight - $SM-fieldHeight + 1;
+    overflow-y: scroll;
 
     &__item {
       list-style: none;
@@ -273,10 +274,15 @@
     display: block;
     padding: 0 15px;
     line-height: $SM-itemHeight;
-    background-color: #fff;
+    background-color: $SM-backgroundColor;
     color: $SM-itemTextColor;
     cursor: pointer;
     outline: none;
+
+    &--focus {
+      background-color: $SM-itemBackgroundFocusColor;
+      outline: 0;
+    }
 
     &--hover {
       background-color: $SM-itemBackgroundHoverColor;

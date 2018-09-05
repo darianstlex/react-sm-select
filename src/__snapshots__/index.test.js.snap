@@ -1,0 +1,438 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MultiSelect should render properly 1`] = `
+<div
+  className="MultiSelect"
+  id="ms-id"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
+  <Header
+    disabled={false}
+    expanded={false}
+    focused={false}
+    nodeRef={
+      Object {
+        "current": null,
+      }
+    }
+    onClick={[Function]}
+    selected={false}
+  >
+    <div
+      className="Header__value"
+    >
+      <Value
+        allSelectedLabel="All items are selected"
+        mode="list"
+        onRemove={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "One",
+              "value": "one",
+            },
+            Object {
+              "label": "Two",
+              "value": "two",
+            },
+            Object {
+              "label": "Five",
+              "value": "five",
+            },
+          ]
+        }
+        removableTag={true}
+        value={
+          Array [
+            "one",
+          ]
+        }
+        valuePlaceholder="Select"
+      />
+    </div>
+    <div
+      className="Header__controls"
+    >
+      <div
+        className="Header__reset"
+        onClick={[Function]}
+      >
+        ✕
+      </div>
+      <DefArrow
+        disabled={false}
+        expanded={false}
+        hasFocus={false}
+        options={
+          Array [
+            Object {
+              "label": "One",
+              "value": "one",
+            },
+            Object {
+              "label": "Two",
+              "value": "two",
+            },
+            Object {
+              "label": "Five",
+              "value": "five",
+            },
+          ]
+        }
+        value={
+          Array [
+            "one",
+          ]
+        }
+      />
+    </div>
+  </Header>
+</div>
+`;
+
+exports[`MultiSelect should render properly expanded 1`] = `
+<div
+  className="MultiSelect"
+  id="ms-id"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
+  <Header
+    disabled={false}
+    expanded={true}
+    focused={false}
+    nodeRef={
+      Object {
+        "current": null,
+      }
+    }
+    onClick={[Function]}
+    selected={false}
+  >
+    <div
+      className="Header__value"
+    >
+      <Value
+        allSelectedLabel="All items are selected"
+        mode="list"
+        onRemove={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "One",
+              "value": "one",
+            },
+            Object {
+              "label": "Two",
+              "value": "two",
+            },
+            Object {
+              "label": "Five",
+              "value": "five",
+            },
+          ]
+        }
+        removableTag={true}
+        value={
+          Array [
+            "one",
+          ]
+        }
+        valuePlaceholder="Select"
+      />
+    </div>
+    <div
+      className="Header__controls"
+    >
+      <div
+        className="Header__reset"
+        onClick={[Function]}
+      >
+        ✕
+      </div>
+      <DefArrow
+        disabled={false}
+        expanded={true}
+        hasFocus={false}
+        options={
+          Array [
+            Object {
+              "label": "One",
+              "value": "one",
+            },
+            Object {
+              "label": "Two",
+              "value": "two",
+            },
+            Object {
+              "label": "Five",
+              "value": "five",
+            },
+          ]
+        }
+        value={
+          Array [
+            "one",
+          ]
+        }
+      />
+    </div>
+  </Header>
+  <div
+    className="DropDown"
+    role="listbox"
+  >
+    <input
+      autoFocus={true}
+      className="DropDown__searchField DropDown__searchField--selected"
+      onChange={[Function]}
+      onMouseDown={[Function]}
+      placeholder="Search to see more ..."
+      type="text"
+      value=""
+    />
+    <ul
+      className="OptionList"
+    >
+      <SelectAll
+        checked={false}
+        focused={false}
+        key="one"
+        onClick={[Function]}
+        selectAllLabel="Select All"
+      />
+      <li
+        className="OptionList__item"
+        key="one"
+      >
+        <Option
+          Option={[Function]}
+          checked={true}
+          focused={false}
+          isSingle={false}
+          key="one"
+          onClick={[Function]}
+          option={
+            Object {
+              "label": "One",
+              "value": "one",
+            }
+          }
+        />
+      </li>
+      <li
+        className="OptionList__item"
+        key="two"
+      >
+        <Option
+          Option={[Function]}
+          checked={false}
+          focused={false}
+          isSingle={false}
+          key="one"
+          onClick={[Function]}
+          option={
+            Object {
+              "label": "Two",
+              "value": "two",
+            }
+          }
+        />
+      </li>
+      <li
+        className="OptionList__item"
+        key="five"
+      >
+        <Option
+          Option={[Function]}
+          checked={false}
+          focused={false}
+          isSingle={false}
+          key="one"
+          onClick={[Function]}
+          option={
+            Object {
+              "label": "Five",
+              "value": "five",
+            }
+          }
+        />
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`MultiSelect should render properly with custom Arrow 1`] = `
+<div
+  className="MultiSelect"
+  id="ms-id"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
+  <Header
+    disabled={false}
+    expanded={false}
+    focused={false}
+    nodeRef={
+      Object {
+        "current": null,
+      }
+    }
+    onClick={[Function]}
+    selected={false}
+  >
+    <div
+      className="Header__value"
+    >
+      <Value
+        allSelectedLabel="All items are selected"
+        mode="list"
+        onRemove={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "One",
+              "value": "one",
+            },
+            Object {
+              "label": "Two",
+              "value": "two",
+            },
+            Object {
+              "label": "Five",
+              "value": "five",
+            },
+          ]
+        }
+        removableTag={true}
+        value={
+          Array [
+            "one",
+          ]
+        }
+        valuePlaceholder="Select"
+      />
+    </div>
+    <div
+      className="Header__controls"
+    >
+      <div
+        className="Header__reset"
+        onClick={[Function]}
+      >
+        ✕
+      </div>
+      <Arrow
+        disabled={false}
+        expanded={false}
+        hasFocus={false}
+        options={
+          Array [
+            Object {
+              "label": "One",
+              "value": "one",
+            },
+            Object {
+              "label": "Two",
+              "value": "two",
+            },
+            Object {
+              "label": "Five",
+              "value": "five",
+            },
+          ]
+        }
+        value={
+          Array [
+            "one",
+          ]
+        }
+      />
+    </div>
+  </Header>
+</div>
+`;
+
+exports[`MultiSelect should render properly with custom Loader 1`] = `
+<div
+  className="MultiSelect"
+  id="ms-id"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
+  <Header
+    disabled={false}
+    expanded={false}
+    focused={false}
+    nodeRef={
+      Object {
+        "current": null,
+      }
+    }
+    onClick={[Function]}
+    selected={false}
+  >
+    <div
+      className="Header__value"
+    >
+      <Value
+        allSelectedLabel="All items are selected"
+        mode="list"
+        onRemove={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "One",
+              "value": "one",
+            },
+            Object {
+              "label": "Two",
+              "value": "two",
+            },
+            Object {
+              "label": "Five",
+              "value": "five",
+            },
+          ]
+        }
+        removableTag={true}
+        value={
+          Array [
+            "one",
+          ]
+        }
+        valuePlaceholder="Select"
+      />
+    </div>
+    <div
+      className="Header__controls"
+    >
+      <div
+        className="Header__reset"
+        onClick={[Function]}
+      >
+        ✕
+      </div>
+      <Loading />
+    </div>
+  </Header>
+</div>
+`;

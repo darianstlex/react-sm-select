@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counter should render properly 1`] = `
+<span>
+  Counter Label
+  <span
+    className="Header__valueCounter"
+  >
+     
+    (
+    1
+    )
+  </span>
+</span>
+`;
+
+exports[`Counter should render properly if all selected 1`] = `
+<span>
+  Counter Label
+  <span
+    className="Header__valueCounter"
+  >
+     
+    (
+    All
+    )
+  </span>
+</span>
+`;
+
+exports[`Counter should render properly if no counterLabel 1`] = `
+<span>
+  Some Placeholder
+  <span
+    className="Header__valueCounter"
+  >
+     
+    (
+    All
+    )
+  </span>
+</span>
+`;

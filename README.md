@@ -212,47 +212,47 @@ filterOptions(options, text) {
 
 ---
 
-- **`ArrowRenderer: function`** DropDown Arrow:
+- **`Arrow: function`** DropDown Arrow:
 
 ```code
-ArrowRenderer({options, value, expanded, hasFocus}) {
+Arrow({options, value, expanded, hasFocus, disabled}) {
   // options: array - see 'options' prop 
   // value: array - see 'value' property
   // expanded: boolean - expanded component status
   // hasFocus: boolean - hasFocus component status
+  // disabled: boolean - disabled component status
   
   return - component to render custom Arrow
 }
 ```
 
 
-- **`LoadingRenderer: function`** Loading Indicator:
+- **`Loading: function`** Loading Indicator:
 
 ```code
-LoadingRenderer() {
+Loading() {
   return - component to render custom Loading Indicator
 }
 ```
 
 
-- **`OptionRenderer: function`** Option:
+- **`Option: function`** Option:
 
 ```code
-OptionRenderer({option, checked, disabled, onClick}) {
+Option({checked, option, isSingle}) {
   // option: object - from options props: { value, label }  
   // checked: boolean - define if option is checked
-  // disabled: boolean - disable option if component is disabled
-  // onClick: function - notifies component about option click
+  // isSingle: boolean - single selection mode
   
   return - component to render custom Option
 }
 ```
 
 
-- **`TagRenderer: function`** Tag:
+- **`Tag: function`** Tag:
 
 ```code
-TagRenderer({label, index, removableTag, onTagRemove}) {
+Tag({label, index, removableTag, onTagRemove}) {
   // label: string - tag label
   // index: number - tag index in array used in removal 
   // removableTag: boolean - display/hide remove tag button
@@ -261,10 +261,10 @@ TagRenderer({label, index, removableTag, onTagRemove}) {
 ```
 
 
-- **`ValueRenderer: function`** Value:
+- **`Value: function`** Value:
 
 ```code
-ValueRenderer({value, options}) {
+Value({value, options}) {
   // options: array - see 'options' property
   // value: array - see 'value' property
   

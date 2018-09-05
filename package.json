@@ -13,7 +13,8 @@
     "scss:w": "node-sass -w src/styles.scss -o src && postcss src/styles.css -u autoprefixer -o src/styles.css",
     "catalog-start": "catalog start catalog",
     "catalog-build": "catalog build -o .tmp --public-url /react-sm-select",
-    "catalog-publish": "bash scripts/publish_catalog.sh"
+    "catalog-publish": "bash scripts/publish_catalog.sh",
+    "test": "jest"
   },
   "peerDependencies": {
     "prop-types": "^15.6.2",
@@ -32,8 +33,12 @@
     "bulma-switch": "^2.0.0",
     "catalog": "^3.5.5",
     "copy-webpack-plugin": "^4.5.2",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "enzyme-to-json": "^3.3.4",
     "gh-pages": "^1.2.0",
     "git-url-parse": "^10.0.1",
+    "jest": "^23.6.0",
     "node-sass": "^4.9.3",
     "npm-run-all": "^4.1.3",
     "path": "^0.12.7",

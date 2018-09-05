@@ -13,15 +13,29 @@ export const defaultFilterOptions = (options, filter) =>
     option.label.toLowerCase().includes(filter.toLowerCase())
   );
 
-export const areValuesEqual = (first, second) => {
-  if (!Array.isArray(first)) return first === second;
-  return !first.reduce((A, item, idx) => item !== second[idx] ? [...A, item] : A,[]).length
+export const areArraysEqual = (first, second) => {
+  if (first.length !== second.length) return false;
+  return !first.reduce((A, item, idx) => item !== second[idx] ? [...A, item] : A, []).length
 };
 
 export const omitDirtyValues = (origin, part, single) => {
   const flatOrigin = origin.map(item => item.value);
-  const result = part.reduce((A, item) => flatOrigin.includes(item) ? [...A, item] : A, []);
-  if (!single) return result;
-  else if (single && result.length) return [result[0]];
-  else return [];
+  const [first, ...rest] = part.reduce((A, item) => flatOrigin.includes(item) ? [...A, item] : A, []);
+  return first ? (single ? [first] : [first, ...rest]) : [];
+};
+
+
+export const attachDocumentClickListener = (cb) => {
+  document.addEventListener('touchstart', cb, false);
+  document.addEventListener('mousedown', cb, false);
+};
+
+export const removeDocumentClickListener = (cb) => {
+  document.removeEventListener('touchstart', cb, false);
+  document.removeEventListener('mousedown', cb, false);
+};
+
+export const stopPreventPropagation = event => {
+  event.stopPropagation();
+  event.preventDefault();
 };
