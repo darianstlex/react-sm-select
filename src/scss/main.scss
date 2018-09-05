@@ -127,6 +127,13 @@
       white-space: nowrap;
     }
 
+    &__value {
+      width: calc(100% - 32px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     &--disabledChild {
       opacity: 0.5;
     }

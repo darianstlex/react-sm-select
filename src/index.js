@@ -68,23 +68,23 @@ export class MultiSelect extends React.Component {
     const {options, value} = props;
 
     this.state = {
-      localValue: omitDirtyValues(options, value, this.is('single')),
+      value: omitDirtyValues(options, value, this.is('single')),
       changed: false,
     };
   }
 
-  componentDidUpdate(prevProps) {
-    const {props: p, is} = this;
-    const clearCurrValue = omitDirtyValues(p.options, p.value, is('single'));
-    const clearPrevValue = omitDirtyValues(p.options, prevProps.value, is('single'));
-    if (!areValuesEqual(clearCurrValue, clearPrevValue)) this.setState(p.value)
+  componentDidUpdate(prev) {
+    const {props: {value, options}, is} = this;
+    const clearCurrValue = omitDirtyValues(options, value, is('single'));
+    const clearPrevValue = omitDirtyValues(options, prev.value, is('single'));
+    if (!areValuesEqual(clearCurrValue, clearPrevValue)) this.setState({value})
   }
 
   onTagRemove = (index, event) => {
-    const {localValue} = this.state;
+    const {value} = this.state;
     const removed = [
-      ...localValue.slice(0, index),
-      ...localValue.slice(index + 1),
+      ...value.slice(0, index),
+      ...value.slice(index + 1),
     ];
     this.onChange(removed);
 
@@ -103,7 +103,7 @@ export class MultiSelect extends React.Component {
         counterLabel,
         allSelectedLabel,
       },
-      state: {localValue: value},
+      state: {value},
       onTagRemove,
       is,
     } = this;
@@ -130,7 +130,7 @@ export class MultiSelect extends React.Component {
     const { props: p, is } = this;
     if (!p.disabled) {
       if (p.onChange) p.onChange(value);
-      this.setState({localValue: value, changed: true}, () => {
+      this.setState({value, changed: true}, () => {
         if (is('single') && p.onClose) p.onClose(value);
       });
     }
@@ -138,8 +138,8 @@ export class MultiSelect extends React.Component {
 
   onClose = hasFocus => {
     const { props: p, state: s } = this;
-    if (p.onBlur && !hasFocus ) p.onBlur(s.localValue);
-    if (p.onClose && s.changed && !p.disabled) p.onClose(s.localValue);
+    if (p.onBlur && !hasFocus ) p.onBlur(s.value);
+    if (p.onClose && s.changed && !p.disabled) p.onClose(s.value);
     this.setState({changed: false});
   };
 
@@ -147,7 +147,7 @@ export class MultiSelect extends React.Component {
     const { props: p } = this;
 
     if (!p.disabled && !p.isLoading) {
-      this.setState({localValue: p.resetTo});
+      this.setState({value: p.resetTo});
       if (p.onChange) p.onChange(p.resetTo);
     }
 
@@ -175,7 +175,7 @@ export class MultiSelect extends React.Component {
       searchPlaceholder,
       searchMorePlaceholder,
     } = this.props;
-    const { onClose, onChange, onReset, state: {localValue}, is } = this;
+    const { onClose, onChange, onReset, state: {value}, is } = this;
 
     return (
       <div className="MultiSelect" id={id}>
@@ -195,7 +195,7 @@ export class MultiSelect extends React.Component {
             isSingle: is('single'),
             OptionRenderer,
             options,
-            value: localValue,
+            value,
             hasSelectAll,
             selectAllLabel,
             onChange,

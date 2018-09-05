@@ -17,7 +17,7 @@ state: {
 />
 ```
 
-### Without Select All
+### With Select All
 
 ```react
 state: {
@@ -31,7 +31,7 @@ state: {
 ---
 <MultiSelect
   id="some-id"
-  hasSelectAll={false}
+  hasSelectAll
   options={state.options}
   onChange={value => setState({ value })}
 />
