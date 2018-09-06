@@ -13,9 +13,9 @@ export const defaultFilterOptions = (options, filter) =>
     option.label.toLowerCase().includes(filter.toLowerCase())
   );
 
-export const areValuesEqual = (first, second) => {
-  if (!Array.isArray(first)) return first === second;
-  return !first.reduce((A, item, idx) => item !== second[idx] ? [...A, item] : A,[]).length
+export const areArraysEqual = (first, second) => {
+  if (first.length !== second.length) return false;
+  return !first.reduce((A, item, idx) => item !== second[idx] ? [...A, item] : A, []).length
 };
 
 export const omitDirtyValues = (origin, part, single) => {

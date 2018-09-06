@@ -1,7 +1,7 @@
 import React from 'react';
 import T from 'prop-types';
 
-import {areValuesEqual, omitDirtyValues} from './utils';
+import {areArraysEqual, omitDirtyValues} from './utils';
 import {DropDown} from './DropDown';
 import {DefValue} from './default/DefValue';
 import {DefTag} from './default/DefTag';
@@ -77,7 +77,7 @@ export class MultiSelect extends React.Component {
     const {props: {value, options}, is} = this;
     const clearCurrValue = omitDirtyValues(options, value, is('single'));
     const clearPrevValue = omitDirtyValues(options, prev.value, is('single'));
-    if (!areValuesEqual(clearCurrValue, clearPrevValue)) this.setState({value})
+    if (!areArraysEqual(clearCurrValue, clearPrevValue)) this.setState({value})
   }
 
   onTagRemove = (index, event) => {
