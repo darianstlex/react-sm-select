@@ -77,9 +77,10 @@ export class MultiSelect extends React.Component {
     const {props: {value, options, isLoading}, is} = this;
     const loadingStart = !prev.isLoading && isLoading;
     const loadingEnd = prev.isLoading && !isLoading;
+    const optionsChanges = prev.options.length !== options.length;
     const clearCurrValue = loadingStart ? value : omitDirtyValues(options, value, is('single'));
     const clearPrevValue = loadingStart ? prev.value : omitDirtyValues(options, prev.value, is('single'));
-    if (!areArraysEqual(clearPrevValue, clearCurrValue) || loadingStart || loadingEnd) this.setState({value})
+    if (!areArraysEqual(clearPrevValue, clearCurrValue) || loadingStart || loadingEnd || optionsChanges) this.setState({value: clearCurrValue})
   }
 
   onTagRemove = (index, event) => {
