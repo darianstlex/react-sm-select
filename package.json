@@ -1,6 +1,6 @@
 {
   "name": "react-sm-select",
-  "version": "0.4.5",
+  "version": "0.4.9",
   "description": "React Multi/Single Select Component",
   "main": "./dist/index.js",
   "module": "./es/index.js",
@@ -22,7 +22,7 @@
     "react-dom": "^16.4.2"
   },
   "devDependencies": {
-    "autoprefixer": "^9.1.2",
+    "autoprefixer": "^9.1.5",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
@@ -47,7 +47,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "webpack": "^4.16.5",
+    "webpack": "^4.17.2",
     "webpack-cli": "^3.1.0"
   },
   "keywords": [
