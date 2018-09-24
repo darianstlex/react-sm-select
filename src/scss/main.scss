@@ -51,8 +51,23 @@
       height: $SM-fieldHeight - 2;
       line-height: $SM-fieldHeight - 1;
       color: $SM-valueColor;
+      overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      span {
+        position: absolute;
+        width: calc(100% - 45px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    &__value--resetable {
+      span {
+        width: calc(100% - 65px);
+      }
     }
 
     &__valuePlaceholder {

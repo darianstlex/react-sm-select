@@ -417,7 +417,9 @@ export class MultiSelect extends React.Component {
           selected={s.focusIndex === -2}
           onClick={() => this.toggleDropDown()}
         >
-          <div className="Header__value">
+          <div className={classes('Header__value', {
+            'Header__value--resetable': p.resetable && (!!s.value.length || !!p.resetTo.length),
+          })}>
             <Value
               mode={p.mode}
               options={p.options}
