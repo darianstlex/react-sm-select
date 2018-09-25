@@ -274,16 +274,15 @@ export class MultiSelect extends React.Component {
    * @param event
    */
   handleKeyPress = event => {
-    const toggle = state => {
-      this.toggleDropDown(state);
-      stopPreventPropagation(event);
-    };
-
     ({
       [event.which]: () => {},
       8: () => this.clearValue(event), // BackSpace
       9: () => this.toggleDropDown(false), // Tab
-      27: () => toggle(false), // Esc
+      27: () => { // Esc
+        this.toggleDropDown(false);
+        this.handleFocusControl(-2);
+        stopPreventPropagation(event);
+      },
       38: () => this.keyUp(event), // Up
       40: () => this.keyDown(event), // Down
     }[event.which])();

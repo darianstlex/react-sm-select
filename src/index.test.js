@@ -406,6 +406,8 @@ describe('MultiSelect', () => {
 
     describe('handleKeyPress', () => {
       it('should do correct calls', () => {
+        wrapper.instance().headerRef.current = { focus: jest.fn() };
+
         wrapper.instance().handleKeyPress({ ...event, which: 8 });
         expect(clearValue).toHaveBeenCalledWith({ ...event, which: 8 });
 
@@ -414,6 +416,7 @@ describe('MultiSelect', () => {
 
         wrapper.instance().handleKeyPress({ ...event, which: 27 });
         expect(toggleDropDown).toHaveBeenCalledWith(false);
+        expect(wrapper.instance().headerRef.current.focus).toHaveBeenCalled();
         expect(utils.stopPreventPropagation).toHaveBeenCalledWith({ ...event, which: 27 });
 
         wrapper.instance().handleKeyPress({ ...event, which: 38 });

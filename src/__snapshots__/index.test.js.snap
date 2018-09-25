@@ -24,7 +24,7 @@ exports[`MultiSelect should render properly 1`] = `
     selected={false}
   >
     <div
-      className="Header__value"
+      className="Header__value Header__value--resetable"
     >
       <Value
         allSelectedLabel="All items are selected"
@@ -119,7 +119,7 @@ exports[`MultiSelect should render properly expanded 1`] = `
     selected={false}
   >
     <div
-      className="Header__value"
+      className="Header__value Header__value--resetable"
     >
       <Value
         allSelectedLabel="All items are selected"
@@ -296,7 +296,7 @@ exports[`MultiSelect should render properly with custom Arrow 1`] = `
     selected={false}
   >
     <div
-      className="Header__value"
+      className="Header__value Header__value--resetable"
     >
       <Value
         allSelectedLabel="All items are selected"
@@ -391,7 +391,7 @@ exports[`MultiSelect should render properly with custom Loader 1`] = `
     selected={false}
   >
     <div
-      className="Header__value"
+      className="Header__value Header__value--resetable"
     >
       <Value
         allSelectedLabel="All items are selected"
