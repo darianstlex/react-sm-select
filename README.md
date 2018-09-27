@@ -1,12 +1,8 @@
 > Single/Multi Select React Component
 
-Inspired by [React MultiSelect](https://github.com/Khan/react-multi-select)
-
 [Demo and Specimens](https://darianstlex.github.io/react-sm-select) Catalog
 
 ### Installation
-
-Install the react-sm-select npm package:
 
 ```code
 npm install react-sm-select
@@ -47,10 +43,12 @@ Can be used css overriding, see compiled css. Or use scss variables for general 
 
 $SM-white: #fff;
 $SM-brightGrey: #ebf5ff;
+$SM-smoothGray: #f3f3f3;
 $SM-lightGrey: #cfd4d9;
 $SM-lightBlue: #1298d4;
 $SM-grey: #949ca6;
 $SM-darkBlue: #143154;
+$SM-shadowBlue: rgba(18,152,212,0.5);
 
 // General Colors
 $SM-backgroundColor: $SM-white;
@@ -60,6 +58,7 @@ $SM-borderColor: $SM-grey;
 $SM-textColor: $SM-darkBlue;
 
 // Value Colors
+$SM-headerSelectedColor: $SM-shadowBlue;
 $SM-valueColor: $SM-textColor;
 $SM-valuePlaceholderColor: $SM-mutedColor;
 
@@ -71,15 +70,18 @@ $SM-tagCloseColor: $SM-textColor;
 $SM-tagCloseBackgroundColor: $SM-lightGrey;
 
 // DropDown
-$SM-dropDownArrowColor: $SM-grey;
+$SM-dropDownArrowColor: $SM-mutedColor;
 $SM-dropDownActiveArrowColor: $SM-lightBlue;
 
 // Search Colors
+$SM-searchTextColor: $SM-textColor;
 $SM-searchPlaceholderColor: $SM-mutedColor;
+$SM-searchSelectedColor: $SM-shadowBlue;
 
 // Option Colors
 $SM-itemTextColor: $SM-textColor;
 $SM-itemBackgroundHoverColor: $SM-brightGrey;
+$SM-itemBackgroundFocusColor: $SM-smoothGray;
 $SM-dividerColor: $SM-lightGrey;
 $SM-selectAllColor: $SM-itemTextColor;
 
