@@ -5,7 +5,6 @@ export const Counter = ({valuePlaceholder, counterLabel, value, options}) => (
     {!!value.length ? counterLabel || valuePlaceholder : valuePlaceholder}
     {!!value.length && (
       <span className="Header__valueCounter">
-        {' '}
         ({value.length === options.length ? 'All' : value.length})
       </span>
     )}
