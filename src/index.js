@@ -2,6 +2,7 @@ import React from 'react';
 import T from 'prop-types';
 import {
   classes,
+  eventPath,
   areArraysEqual,
   omitDirtyValues,
   attachDocumentClickListener,
@@ -144,7 +145,7 @@ export class MultiSelect extends React.Component {
   handleDocumentClick = event => {
     if (this.props.disabled) return;
 
-    if (!event.path.includes(this.multiSelectRef.current)) {
+    if (!eventPath(event).includes(this.multiSelectRef.current)) {
       this.setState({ expanded: false, hasFocus: false });
       removeDocumentClickListener(this.handleDocumentClick);
       this.onEvent('onBlur');

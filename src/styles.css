@@ -21,7 +21,7 @@
     right: 0;
     outline: none; }
     .MultiSelect .Header--selected {
-      box-shadow: inset 0 0 4px rgba(18, 152, 212, 0.5); }
+      box-shadow: inset 0 0 4px rgba(18, 152, 212, 0.3); }
     .MultiSelect .Header--disabled {
       border-color: #cfd4d9; }
     .MultiSelect .Header--focusedActive {
@@ -186,21 +186,16 @@
         color: #949ca6;
         opacity: 1; }
       .MultiSelect .DropDown__searchField--selected {
-        box-shadow: inset 0 0 3px rgba(18, 152, 212, 0.5);
+        box-shadow: inset 0 0 3px rgba(18, 152, 212, 0.3);
         color: #143154; }
-    .MultiSelect .DropDown__optionContainer {
-      max-height: 256px;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-      overflow-y: scroll;
-      scroll-behavior: smooth; }
     .MultiSelect .DropDown__selectAll {
       color: #143154 !important; }
   .MultiSelect .OptionList {
     margin: 0;
     padding-left: 0;
     max-height: 259px;
-    overflow-y: scroll; }
+    overflow-y: auto;
+    scroll-behavior: smooth; }
     .MultiSelect .OptionList__item {
       list-style: none; }
   .MultiSelect .Option {

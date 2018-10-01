@@ -261,14 +261,6 @@
       }
     }
 
-    &__optionContainer {
-      max-height: $SM-dropDownHeight - $SM-fieldHeight - 2;
-      border-bottom-left-radius: $SM-borderRadius;
-      border-bottom-right-radius: $SM-borderRadius;
-      overflow-y: scroll;
-      scroll-behavior: smooth;
-    }
-
     &__selectAll {
       color: $SM-selectAllColor !important;
     }
@@ -278,7 +270,8 @@
     margin: 0;
     padding-left: 0;
     max-height: $SM-dropDownHeight - $SM-fieldHeight + 1;
-    overflow-y: scroll;
+    overflow-y: auto;
+    scroll-behavior: smooth;
 
     &__item {
       list-style: none;

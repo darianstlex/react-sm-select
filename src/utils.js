@@ -39,3 +39,26 @@ export const stopPreventPropagation = event => {
   event.stopPropagation();
   event.preventDefault();
 };
+
+export const eventPath = event => {
+  const path = (event.composedPath && event.composedPath()) || event.path;
+  const target = event.target;
+
+  if (path != null) {
+    // Safari doesn't include Window, but it should.
+    return (path.indexOf(window) < 0) ? path.concat(window) : path;
+  }
+
+  if (target === window) {
+    return [window];
+  }
+
+  const getParents = (node, memo) => {
+    memo = memo || [];
+    const parentNode = node.parentNode;
+
+    return parentNode ? getParents(parentNode, memo.concat(parentNode)) : memo;
+  };
+
+  return [target].concat(getParents(target), window);
+};
