@@ -1,3 +1,5 @@
+[![NPM](https://nodei.co/npm/react-sm-select.png)](https://nodei.co/npm/react-sm-select/)
+
 [![Package Quality](http://npm.packagequality.com/shield/react-sm-select.svg)](http://packagequality.com/#?package=react-sm-select)
 
 > Single/Multi Select React Component
