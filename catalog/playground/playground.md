@@ -3,5 +3,5 @@
 ```react
 noSource: true
 ---
-<MultiselectWrapper />
+<MultiSelectWrapper />
 ```

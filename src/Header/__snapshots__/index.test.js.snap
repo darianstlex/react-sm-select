@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should render properly 1`] = `
+<div
+  aria-disabled={false}
+  aria-expanded={true}
+  aria-readonly="true"
+  className="Header Header--focusedActive Header--expanded Header--selected"
+  role="combobox"
+  tabIndex="0"
+>
+  <div>
+    Some Children
+  </div>
+</div>
+`;
+
+exports[`Header should render properly if disabled and focused 1`] = `
+<div
+  aria-disabled={true}
+  aria-expanded={false}
+  aria-readonly="true"
+  className="Header Header--disabled Header--focusedDisabled"
+  role="combobox"
+  tabIndex="0"
+>
+  <div>
+    Some Children
+  </div>
+</div>
+`;
+
+exports[`Header should render properly if disabled and not focused 1`] = `
+<div
+  aria-disabled={true}
+  aria-expanded={false}
+  aria-readonly="true"
+  className="Header Header--disabled"
+  role="combobox"
+  tabIndex="0"
+>
+  <div>
+    Some Children
+  </div>
+</div>
+`;
+
+exports[`Header should render properly if enabled, selected and focused 1`] = `
+<div
+  aria-disabled={false}
+  aria-expanded={false}
+  aria-readonly="true"
+  className="Header Header--focusedActive Header--selected"
+  role="combobox"
+  tabIndex="0"
+>
+  <div>
+    Some Children
+  </div>
+</div>
+`;

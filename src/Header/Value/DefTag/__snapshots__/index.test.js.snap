@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DefTag should render properly 1`] = `
+<div
+  className="Header__tag"
+>
+  <div
+    className="Header__tag__label"
+  >
+    One
+  </div>
+  <div
+    className="Header__tag__close"
+    onClick={[Function]}
+  >
+    ✕
+  </div>
+</div>
+`;
+
+exports[`DefTag should render properly without close 1`] = `
+<div
+  className="Header__tag"
+>
+  <div
+    className="Header__tag__label"
+  >
+    One
+  </div>
+</div>
+`;

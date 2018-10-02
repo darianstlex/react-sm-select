@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DefArrow should render properly 1`] = `
+<div
+  className="Header__arrow"
+>
+  <div
+    className="Header__arrow--up"
+  />
+</div>
+`;
+
+exports[`DefArrow should render properly if noe expanded - disables 1`] = `
+<div
+  className="Header__arrow"
+>
+  <div
+    className="Header__arrow--down"
+  />
+</div>
+`;

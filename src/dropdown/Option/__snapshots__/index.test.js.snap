@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Option should render not focused 1`] = `
+<label
+  aria-selected={false}
+  onKeyDown={[Function]}
+  onMouseDown={[MockFunction]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+  role="option"
+  tabIndex="-1"
+>
+  <DefOption
+    checked={false}
+    isSingle={true}
+    option={
+      Object {
+        "label": "One",
+        "value": "one",
+      }
+    }
+  />
+</label>
+`;
+
+exports[`Option should render properly 1`] = `
+<label
+  aria-selected={true}
+  onKeyDown={[Function]}
+  onMouseDown={[MockFunction]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+  role="option"
+  tabIndex="-1"
+>
+  <DefOption
+    checked={true}
+    isSingle={false}
+    option={
+      Object {
+        "label": "One",
+        "value": "one",
+      }
+    }
+  />
+</label>
+`;
+
+exports[`Option should render properly with custom Option 1`] = `
+<label
+  aria-selected={true}
+  onKeyDown={[Function]}
+  onMouseDown={[MockFunction]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+  role="option"
+  tabIndex="-1"
+>
+  <Option
+    checked={true}
+    isSingle={false}
+    option={
+      Object {
+        "label": "One",
+        "value": "one",
+      }
+    }
+  />
+</label>
+`;

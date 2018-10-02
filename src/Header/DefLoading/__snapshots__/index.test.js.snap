@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DefLoading should render properly 1`] = `
+<span
+  className="Header__loading"
+>
+  <span
+    className="Header__loading__icon"
+  />
+</span>
+`;

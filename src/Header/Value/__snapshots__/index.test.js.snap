@@ -1,0 +1,217 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Value should render Counter 1`] = `
+<Counter
+  counterLabel="Counter Label"
+  options={
+    Array [
+      Object {
+        "label": "One",
+        "value": "one",
+      },
+      Object {
+        "label": "Two",
+        "value": "two",
+      },
+      Object {
+        "label": "Five",
+        "value": "five",
+      },
+    ]
+  }
+  value={
+    Array [
+      "one",
+      "two",
+      "five",
+    ]
+  }
+  valuePlaceholder="Value Placeholder"
+/>
+`;
+
+exports[`Value should render Custom Tags 1`] = `
+<div
+  className="Header__tags"
+>
+  <Tag
+    index={0}
+    key="0"
+    label="One"
+    onTagRemove={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    removableTag={true}
+  />
+  <Tag
+    index={1}
+    key="1"
+    label="Two"
+    onTagRemove={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    removableTag={true}
+  />
+  <Tag
+    index={2}
+    key="2"
+    label="Five"
+    onTagRemove={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    removableTag={true}
+  />
+</div>
+`;
+
+exports[`Value should render Tags 1`] = `
+<div
+  className="Header__tags"
+>
+  <DefTag
+    index={0}
+    key="0"
+    label="One"
+    onTagRemove={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    removableTag={true}
+  />
+  <DefTag
+    index={1}
+    key="1"
+    label="Two"
+    onTagRemove={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    removableTag={true}
+  />
+  <DefTag
+    index={2}
+    key="2"
+    label="Five"
+    onTagRemove={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    removableTag={true}
+  />
+</div>
+`;
+
+exports[`Value should render properly all selected 1`] = `
+<span>
+  All are Selected
+</span>
+`;
+
+exports[`Value should render properly custom value 1`] = `
+<Value
+  options={
+    Array [
+      Object {
+        "label": "One",
+        "value": "one",
+      },
+      Object {
+        "label": "Two",
+        "value": "two",
+      },
+      Object {
+        "label": "Five",
+        "value": "five",
+      },
+    ]
+  }
+  value={
+    Array [
+      "one",
+    ]
+  }
+/>
+`;
+
+exports[`Value should render properly default value 1`] = `
+<DefValue
+  options={
+    Array [
+      Object {
+        "label": "One",
+        "value": "one",
+      },
+      Object {
+        "label": "Two",
+        "value": "two",
+      },
+      Object {
+        "label": "Five",
+        "value": "five",
+      },
+    ]
+  }
+  value={
+    Array [
+      "one",
+    ]
+  }
+/>
+`;

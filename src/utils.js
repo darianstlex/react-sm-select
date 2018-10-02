@@ -20,8 +20,45 @@ export const areArraysEqual = (first, second) => {
 
 export const omitDirtyValues = (origin, part, single) => {
   const flatOrigin = origin.map(item => item.value);
-  const result = part.reduce((A, item) => flatOrigin.includes(item) ? [...A, item] : A, []);
-  if (!single) return result;
-  else if (single && result.length) return [result[0]];
-  else return [];
+  const [first, ...rest] = part.reduce((A, item) => flatOrigin.includes(item) ? [...A, item] : A, []);
+  return first ? (single ? [first] : [first, ...rest]) : [];
+};
+
+
+export const attachDocumentClickListener = (cb) => {
+  document.addEventListener('touchstart', cb, false);
+  document.addEventListener('mousedown', cb, false);
+};
+
+export const removeDocumentClickListener = (cb) => {
+  document.removeEventListener('touchstart', cb, false);
+  document.removeEventListener('mousedown', cb, false);
+};
+
+export const stopPreventPropagation = event => {
+  event.stopPropagation();
+  event.preventDefault();
+};
+
+export const eventPath = event => {
+  const path = (event.composedPath && event.composedPath()) || event.path;
+  const target = event.target;
+
+  if (path != null) {
+    // Safari doesn't include Window, but it should.
+    return (path.indexOf(window) < 0) ? path.concat(window) : path;
+  }
+
+  if (target === window) {
+    return [window];
+  }
+
+  const getParents = (node, memo) => {
+    memo = memo || [];
+    const parentNode = node.parentNode;
+
+    return parentNode ? getParents(parentNode, memo.concat(parentNode)) : memo;
+  };
+
+  return [target].concat(getParents(target), window);
 };

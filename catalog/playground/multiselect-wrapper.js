@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {Controller} from './controller';
 import {MultiSelect} from '../../src'
 
-export class MultiselectWrapper extends React.Component {
+export class MultiSelectWrapper extends React.Component {
 
   state = {
     mode: 'list',

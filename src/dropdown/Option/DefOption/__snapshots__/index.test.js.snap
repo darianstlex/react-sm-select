@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DefOption should render properly 1`] = `
+<div
+  className="Option__renderer"
+>
+  <span
+    className="Option__label"
+  >
+    One
+  </span>
+  <input
+    defaultChecked={true}
+    tabIndex="-1"
+    type="checkbox"
+  />
+</div>
+`;
+
+exports[`DefOption should render properly in Single mode 1`] = `
+<div
+  className="Option__renderer"
+>
+  <span
+    className="Option__label"
+  >
+    One
+  </span>
+</div>
+`;

@@ -11,14 +11,14 @@ state: {
  ],
 }
 ---
-const LoadingRenderer  = () => 'Loading ...';
+const Loading  = () => 'Loading ...';
 
 <MultiSelect
   isLoading
   options={state.options}
   value={state.value}
   onChange={value => setState({ value })}
-  LoadingRenderer={LoadingRenderer}
+  Loading={Loading}
 />
 ```
 
@@ -35,7 +35,7 @@ state: {
  ],
 }
 ---
-const ValueRenderer = ({value, options}) => {
+const Value = ({value, options}) => {
   if(!value.length) return 'Colors';
   return `Colors (${!!value.length && value.length === options.length ? 'All' : value.length})`;
 };
@@ -44,7 +44,7 @@ const ValueRenderer = ({value, options}) => {
   options={state.options}
   value={state.value}
   onChange={value => setState({ value })}
-  ValueRenderer={ValueRenderer}
+  Value={Value}
 />
 ```
 
@@ -62,7 +62,7 @@ state: {
  ],
 }
 ---
-const ArrowRenderer = ({expanded}) => {
+const Arrow = ({expanded}) => {
   return expanded ? String.fromCharCode(0x027F0) : String.fromCharCode(0x027F1);
 };
 
@@ -70,7 +70,7 @@ const ArrowRenderer = ({expanded}) => {
   options={state.options}
   value={state.value}
   onChange={value => setState({ value })}
-  ArrowRenderer={ArrowRenderer}
+  Arrow={Arrow}
 />
 ```
 
@@ -87,25 +87,23 @@ state: {
  ],
 }
 ---
-const OptionRenderer = ({checked, option, disabled, onClick }) => (
-  <span className="SelectItem__renderer">
-    <input
+const Option = ({checked, option, isSingle}) => (
+  <div className="Option__renderer">
+    {!isSingle && <input
       type="checkbox"
-      onChange={onClick}
-      checked={checked}
+      defaultChecked={checked}
       tabIndex="-1"
-      disabled={disabled}
-    />
-    <span className="SelectItem__label">
+    />}
+    <span className="Option__label">
       {option.label}
     </span>
-  </span>
+  </div>
 );
 
 <MultiSelect
   options={state.options}
   value={state.value}
   onChange={value => setState({ value })}
-  OptionRenderer={OptionRenderer}
+  Option={Option}
 />
 ```

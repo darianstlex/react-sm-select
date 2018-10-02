@@ -1,217 +1,494 @@
 import React from 'react';
 import T from 'prop-types';
+import {
+  classes,
+  eventPath,
+  areArraysEqual,
+  omitDirtyValues,
+  attachDocumentClickListener,
+  removeDocumentClickListener,
+  stopPreventPropagation,
+  defaultFilterOptions,
+} from './utils';
 
-import {areArraysEqual, omitDirtyValues} from './utils';
-import {DropDown} from './DropDown';
-import {DefValue} from './default/DefValue';
-import {DefTag} from './default/DefTag';
-import {DefCounter} from './default/DefCounter';
+import { MODE } from './consts';
+
+import { Header, Value, DefArrow, DefLoading } from './Header';
+import { SelectAll, Option } from './dropdown';
 
 export class MultiSelect extends React.Component {
   static displayName = 'MultiSelect';
   static propTypes = {
     // data
     id: T.string,
+    mode: T.oneOf([MODE.LIST, MODE.TAGS, MODE.COUNTER, MODE.SINGLE]),
     options: T.arrayOf(T.shape({
       value: T.string,
       label: T.string,
     })).isRequired,
     value: T.arrayOf(T.string),
-    mode: T.oneOf(['list', 'tags', 'counter', 'single']),
-    resetTo:T.arrayOf(T.string),
+    resetTo: T.arrayOf(T.string),
+    maxOptionsToRender: T.number,
     // methods
     onChange: T.func,
-    onClose: T.func,
     onBlur: T.func,
-    // renderers / overrides
-    ArrowRenderer: T.func,
-    ValueRenderer: T.func,
-    TagRenderer: T.func,
-    OptionRenderer: T.func,
-    LoadingRenderer: T.func,
+    onClose: T.func,
+    // custom rendering
+    Value: T.func,
+    Tag: T.func,
+    Loading: T.func,
+    Arrow: T.func,
+    Option: T.func,
+    // search
     filterOptions: T.func,
     // labels / placeholders
     valuePlaceholder: T.string,
-    counterLabel: T.string,
     allSelectedLabel: T.string,
-    selectAllLabel: T.string,
+    counterLabel: T.string,
     searchPlaceholder: T.string,
     searchMorePlaceholder: T.string,
+    selectAllLabel: T.string,
     // controls
-    removableTag: T.bool,
-    hasSelectAll: T.bool,
-    isLoading: T.bool,
     disabled: T.bool,
-    enableSearch: T.bool,
-    resetable: T.bool,
     shouldToggleOnHover: T.bool,
-    maxOptionsToRender: T.number,
+    isLoading: T.bool,
+    removableTag: T.bool,
+    resetable: T.bool,
+    enableSearch: T.bool,
+    hasSelectAll: T.bool,
   };
   static defaultProps = {
-    mode: 'list',
+    mode: MODE.LIST,
     value: [],
-    ValueRenderer: DefValue,
-    TagRenderer: DefTag,
-    hasSelectAll: false,
-    resetable: false,
     resetTo: [],
-    shouldToggleOnHover: false,
-    removableTag: true,
+    Loading: DefLoading,
+    Arrow: DefArrow,
+    filterOptions: defaultFilterOptions,
     valuePlaceholder: 'Select',
     allSelectedLabel: 'All items are selected',
+    searchPlaceholder: 'Search',
+    searchMorePlaceholder: 'Search to see more ...',
+    selectAllLabel: 'Select All',
+    shouldToggleOnHover: false,
+    removableTag: true,
+    resetable: false,
+    enableSearch: false,
+    hasSelectAll: false,
   };
 
-  is = mode => this.props.mode === mode;
-
-  constructor(props) {
-    super(props);
-    const {options, value, isLoading} = props;
+  constructor(p) {
+    super(p);
 
     this.state = {
-      value: isLoading ? value : omitDirtyValues(options, value, this.is('single')),
-      changed: false,
+      value: p.isLoading ? p.value : omitDirtyValues(p.options, p.value, this.isSingle()),
+      expanded: false,
+      hasFocus: false,
+      selectAll: false,
+      focusIndex: p.enableSearch ? -1 : -2,
+      searchText: '',
     };
+
+    this.multiSelectRef = React.createRef();
+    this.headerRef = React.createRef();
+    this.searchRef = React.createRef();
+    this.hasListener = false;
   }
 
-  componentDidUpdate(prev) {
-    const {props: {value, options, isLoading}, is} = this;
-    const loadingStart = !prev.isLoading && isLoading;
-    const loadingEnd = prev.isLoading && !isLoading;
-    const optionsChanges = prev.options.length !== options.length;
-    const clearCurrValue = loadingStart ? value : omitDirtyValues(options, value, is('single'));
-    const clearPrevValue = loadingStart ? prev.value : omitDirtyValues(options, prev.value, is('single'));
-    if (!areArraysEqual(clearPrevValue, clearCurrValue) || loadingStart || loadingEnd || optionsChanges) this.setState({value: clearCurrValue})
-  }
+  componentDidUpdate(pp, ps) {
+    const { props: p, state: s } = this;
 
-  onTagRemove = (index, event) => {
-    const {value} = this.state;
-    const removed = [
-      ...value.slice(0, index),
-      ...value.slice(index + 1),
-    ];
-    this.onChange(removed);
+    const loadingStart = !pp.isLoading && p.isLoading;
+    const loadingEnd = pp.isLoading && !p.isLoading;
+    const optionsChanges = pp.options.length !== p.options.length;
 
-    event.stopPropagation();
-    event.preventDefault();
-  };
+    const getClearValue = (value) => loadingStart ? value : omitDirtyValues(p.options, value, this.isSingle());
 
-  renderValue = () => {
-    const {
-      props: {
-        ValueRenderer,
-        TagRenderer,
-        options,
-        removableTag,
-        valuePlaceholder,
-        counterLabel,
-        allSelectedLabel,
-      },
-      state: {value},
-      onTagRemove,
-      is,
-    } = this;
+    const clearCurrValue = getClearValue(p.value);
+    const clearPrevValue = getClearValue(pp.value);
 
-    if (!is('tags') && !is('counter') && value.length === options.length)
-      return (<span className="MultiSelect__value">{allSelectedLabel}</span>);
+    if (!areArraysEqual(clearPrevValue, clearCurrValue) || loadingStart || loadingEnd || optionsChanges)
+      this.setState({ value: clearCurrValue });
 
-    if (!value.length) return (<span className="MultiSelect__valuePlaceholder">{valuePlaceholder}</span>);
+    // Call onClose if it was closed
+    if (ps.expanded === true && s.expanded === false) this.onEvent('onClose');
 
-    if (is('tags')) {
-      const labels = value.map(val => options.find(opt => opt.value === val).label);
-      return (
-        <div className="MultiSelect__tags">
-          {labels.map((label, index) => <TagRenderer key={index} {...{label, index, onTagRemove, removableTag}}/>)}
-        </div>
-      );
+    // Call onChange if value was changed
+    if (!areArraysEqual(ps.value, s.value)) this.onEvent('onChange');
+
+    // Subscribe - Unsubscribe for click outside if enabled - disabled
+    if (pp.disabled && !p.disabled) {
+      this.hasListener = true;
+      attachDocumentClickListener(this.handleDocumentClick);
     }
-    if (is('counter')) return <DefCounter {...{valuePlaceholder, counterLabel, value, options}}/>;
+    if (!pp.disabled && p.disabled) {
+      this.hasListener = false;
+      removeDocumentClickListener(this.handleDocumentClick);
+    }
+  }
 
-    return <ValueRenderer {...{options, value}}/>;
+  componentWillUnmount() {
+    if (this.hasListener) removeDocumentClickListener(this.handleDocumentClick);
+  }
+
+
+  // Common
+
+  /**
+   * Checks if mode is single
+   * @returns {boolean}
+   */
+  isSingle = () => this.props.mode === MODE.SINGLE;
+
+  /**
+   * Handle click on document, to detect click outside
+   */
+  handleDocumentClick = event => {
+    if (this.props.disabled) return;
+
+    if (!eventPath(event).includes(this.multiSelectRef.current)) {
+      this.setState({ expanded: false, hasFocus: false });
+      removeDocumentClickListener(this.handleDocumentClick);
+      this.onEvent('onBlur');
+    }
   };
 
-  onChange = value => {
-    const { props: p, is } = this;
-    if (!p.disabled) {
-      if (p.onChange) p.onChange(value);
-      this.setState({value, changed: true}, () => {
-        if (is('single') && p.onClose) p.onClose(value);
+  /**
+   * Handle MultiSelect click to subscribe for click outside
+   */
+  handleClick = () => {
+    if (!this.props.disabled && !this.hasListener) attachDocumentClickListener(this.handleDocumentClick);
+  };
+
+  /**
+   * Handle focus to control focus state
+   */
+  handleFocus = () => {
+    this.setState(({hasFocus}) => !hasFocus ? { hasFocus: true } : null);
+  };
+
+  /**
+   * Handle blur to control focus state
+   */
+  handleBlur = () => {
+    this.setState(({hasFocus}) => hasFocus ? { hasFocus: false } : null);
+  };
+
+  /**
+   * Toggle MultiSelect DropDown
+   * @param value Boolean
+   */
+  toggleDropDown = value => {
+    const { props: p } = this;
+    if (p.disabled || p.isLoading) return;
+
+    this.setState(({expanded}) => ({
+      expanded: value !== undefined ? value : !expanded,
+      ...(!expanded ? {
+        focusIndex: p.enableSearch ? -1 : -2,
+        searchText: '',
+      } : {}),
+    }));
+  };
+
+  /**
+   * Handle hover to trigger DropDown list
+   * @param expanded Boolean
+   */
+  handleHover = expanded => {
+    if (this.props.shouldToggleOnHover) this.toggleDropDown(expanded);
+  };
+
+  /**
+   * Detect if SelectAll should be visible
+   * @returns {boolean|Boolean}
+   */
+  isSelectAllVisible = () => !this.isSingle() && this.props.hasSelectAll && !this.state.searchText;
+
+  /**
+   * Handle focus over search field and header depend on focus index
+   * @param focusIndex Number
+   */
+  handleFocusControl = focusIndex => {
+    if (focusIndex === -1) this.searchRef.current.focus();
+    if (focusIndex === -2) this.headerRef.current.focus();
+  };
+
+
+  // Keyboard Navigation
+
+  /**
+   * Handle Keyboard Key Down and set focus
+   * Skip search and select all if needed
+   * @param event
+   */
+  keyDown = event => {
+    const { props: p, state: s } = this;
+
+    if (!s.expanded) this.toggleDropDown(true);
+    else this.setState(({focusIndex}) => {
+      let nextIndex = focusIndex + 1;
+
+      if (nextIndex === -1) nextIndex = p.enableSearch ? nextIndex : nextIndex + 1;
+      if (nextIndex === 0) nextIndex = this.isSelectAllVisible() ? nextIndex : nextIndex + 1;
+
+      return s.focusIndex < this.filteredOptions().length ? { focusIndex: nextIndex } : null;
+    }, () => {
+      this.handleFocusControl(this.state.focusIndex);
+    });
+    stopPreventPropagation(event);
+  };
+
+  /**
+   * Handle Keyboard Key Up and set focus
+   * Skip search and select all if needed
+   * @param event
+   */
+  keyUp = event => {
+    const { props: p, state: s } = this;
+
+    if (s.expanded) {
+      if (s.focusIndex === -2) this.toggleDropDown(false);
+      else this.setState(({focusIndex}) => {
+        let nextIndex = focusIndex - 1;
+
+        if (nextIndex === 0) nextIndex = this.isSelectAllVisible() ? nextIndex : nextIndex - 1;
+        if (nextIndex === -1) nextIndex = p.enableSearch ? nextIndex : nextIndex - 1;
+
+        return { focusIndex: nextIndex }
+      }, () => {
+        this.handleFocusControl(this.state.focusIndex);
       });
     }
+    stopPreventPropagation(event);
   };
 
-  onClose = hasFocus => {
-    const { props: p, state: s } = this;
-    if (p.onBlur && !hasFocus ) p.onBlur(s.value);
-    if (p.onClose && s.changed && !p.disabled) p.onClose(s.value);
-    this.setState({changed: false});
+  /**
+   * Resets value if it needed
+   * @param event
+   */
+  clearValue = event => {
+    if (this.props.resetable && this.state.focusIndex === -2) this.reset(event);
   };
 
-  onReset = event => {
+  /**
+   * Handle Key Press
+   * @param event
+   */
+  handleKeyPress = event => {
+    ({
+      [event.which]: () => {},
+      8: () => this.clearValue(event), // BackSpace
+      9: () => this.toggleDropDown(false), // Tab
+      27: () => { // Esc
+        this.toggleDropDown(false);
+        this.handleFocusControl(-2);
+        stopPreventPropagation(event);
+      },
+      38: () => this.keyUp(event), // Up
+      40: () => this.keyDown(event), // Down
+    }[event.which])();
+  };
+
+
+  // Value
+
+  /**
+   * Add selected value to selected or select in single mode
+   * @param optionValue value string
+   */
+  select = optionValue => {
+    if (this.isSingle()) this.setState({ value: [optionValue] }, () => this.toggleDropDown(false));
+    else this.setState({ value: [...this.state.value, optionValue] });
+  };
+
+  /**
+   * Removes/Deselect value at index
+   * @param index Number value index
+   * @param event
+   */
+  deselect = (index, event) => {
+    const { value } = this.state;
+    this.setState({ value: [...value.slice(0, index), ...value.slice(index + 1)] });
+
+    if (event) stopPreventPropagation(event);
+  };
+
+  /**
+   * Resets value to provided state or default
+   * @param event
+   */
+  reset = event => {
     const { props: p } = this;
+    if (!p.disabled || !p.isLoading) this.setState({ value: p.resetTo });
+    stopPreventPropagation(event);
+  };
 
-    if (!p.disabled && !p.isLoading) {
-      this.setState({value: p.resetTo});
-      if (p.onChange) p.onChange(p.resetTo);
-    }
 
-    event.stopPropagation();
-    event.preventDefault();
+  // Search
+
+  /**
+   * Handle search field changes
+   * @param event
+   */
+  handleSearchChange = event => {
+    this.setState({ searchText: event.target.value });
+  };
+
+
+  // Select All
+
+  /**
+   * Checks if all options are selected
+   * @returns {boolean}
+   */
+  allAreSelected = () => this.props.options.length === this.state.value.length;
+
+  /**
+   * Select/Deselect all options
+   */
+  toggleAll = () => {
+    if (!this.allAreSelected()) {
+      const value = this.props.options.map(option => option.value);
+      this.setState({ value, focusIndex: 0 });
+    } else this.setState({ value: [], focusIndex: 0 });
+  };
+
+
+  // Options
+
+  /**
+   * Returns array of filtered options used by search field
+   * @returns []
+   */
+  filteredOptions = () => {
+    const { state: s, props: p } = this;
+    const optionsToRender = p.filterOptions(p.options, s.searchText);
+
+    return p.maxOptionsToRender
+      ? optionsToRender.slice(0, p.maxOptionsToRender)
+      : optionsToRender;
+  };
+
+  /**
+   * Handle Option Click
+   * @param optionValue String
+   * @param index Number
+   */
+  optionClick = (optionValue, index) => {
+    const { state: s } = this;
+    const valueIndex = s.value.indexOf(optionValue);
+
+    if (valueIndex === -1 || this.isSingle()) this.select(optionValue);
+    else this.deselect(valueIndex);
+    this.setState({ focusIndex: index + 1 });
+  };
+
+
+  // Events
+
+  /**
+   * Any event coming from props
+   * @param event
+   */
+  onEvent = event => {
+    const { props: p, state: s } = this;
+    if (p[event]) p[event](s.value)
   };
 
   render() {
-    const {
-      id,
-      options,
-      ArrowRenderer,
-      OptionRenderer,
-      LoadingRenderer,
-      filterOptions,
-      selectAllLabel,
-      isLoading,
-      disabled,
-      enableSearch,
-      resetable,
-      resetTo,
-      shouldToggleOnHover,
-      hasSelectAll,
-      maxOptionsToRender,
-      searchPlaceholder,
-      searchMorePlaceholder,
-    } = this.props;
-    const { onClose, onChange, onReset, state: {value}, is } = this;
+    const { props: p, state: s } = this;
 
     return (
-      <div className="MultiSelect" id={id}>
-        <DropDown
-          {...{
-            onClose,
-            onReset,
-            ArrowRenderer,
-            LoadingRenderer,
-            isLoading,
-            shouldToggleOnHover,
-            disabled,
-            resetable,
-            resetTo,
-          }}
-          contentProps={{
-            isSingle: is('single'),
-            OptionRenderer,
-            options,
-            value,
-            hasSelectAll,
-            selectAllLabel,
-            onChange,
-            disabled,
-            enableSearch,
-            filterOptions,
-            maxOptionsToRender,
-            searchPlaceholder,
-            searchMorePlaceholder,
-          }}
+      <div className="MultiSelect"
+        id={p.id}
+        ref={this.multiSelectRef}
+        onMouseDown={this.handleClick}
+        onMouseEnter={() => this.handleHover(true)}
+        onMouseLeave={() => this.handleHover(false)}
+        onKeyDown={this.handleKeyPress}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+      >
+        <Header
+          nodeRef={this.headerRef}
+          focused={s.hasFocus}
+          expanded={s.expanded}
+          disabled={p.disabled}
+          selected={s.focusIndex === -2}
+          onClick={() => this.toggleDropDown()}
         >
-          {this.renderValue()}
-        </DropDown>
+          <div className={classes('Header__value', {
+            'Header__value--resetable': p.resetable && (!!s.value.length || !!p.resetTo.length),
+          })}>
+            <Value
+              mode={p.mode}
+              options={p.options}
+              value={s.value}
+              Value={p.Value}
+              valuePlaceholder={p.valuePlaceholder}
+              allSelectedLabel={p.allSelectedLabel}
+              counterLabel={p.counterLabel}
+              Tag={p.Tag}
+              removableTag={p.removableTag}
+              onRemove={this.deselect}
+            />
+          </div>
+          <div className="Header__controls">
+            {
+              p.resetable && (!!s.value.length || !!p.resetTo.length)
+              && <div className="Header__reset" onClick={this.reset}>✕</div>
+            }
+            {p.isLoading && <p.Loading />}
+            {!p.isLoading && <p.Arrow
+              value={s.value}
+              options={p.options}
+              hasFocus={s.hasFocus}
+              disabled={p.disabled}
+              expanded={s.expanded}
+            />}
+          </div>
+        </Header>
+        {s.expanded && <div className="DropDown" role="listbox">
+          {p.enableSearch && (
+            <input
+              type="text"
+              className={classes('DropDown__searchField', {
+                'DropDown__searchField--selected': s.focusIndex === -1,
+              })}
+              placeholder={!p.maxOptionsToRender ? p.searchPlaceholder : p.searchMorePlaceholder}
+              value={s.searchText}
+              ref={this.searchRef}
+              onChange={this.handleSearchChange}
+              onMouseDown={() => this.setState({ focusIndex: -1 })}
+              autoFocus={s.focusIndex === -1}
+            />
+          )}
+          <ul className="OptionList">
+            {this.isSelectAllVisible() && (
+              <SelectAll
+                key={s.value || this.filteredOptions()}
+                Option={p.Option}
+                focused={s.focusIndex === 0}
+                checked={this.allAreSelected()}
+                selectAllLabel={p.selectAllLabel}
+                onClick={this.toggleAll}
+              />
+            )}
+            {this.filteredOptions().map((option, index) => (
+              <li className="OptionList__item" key={option.value}>
+                <Option
+                  key={s.value || this.filteredOptions()}
+                  isSingle={this.isSingle()}
+                  focused={s.focusIndex === index + 1}
+                  checked={s.value.includes(option.value)}
+                  option={option}
+                  Option={p.Option}
+                  onClick={() => this.optionClick(option.value, index)}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>}
       </div>
     );
   }

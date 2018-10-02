@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectAll should render properly 1`] = `
+<li
+  className="OptionList__item DropDown__selectAll"
+>
+  <Option
+    Option={[Function]}
+    checked={true}
+    focused={true}
+    onClick={[Function]}
+    option={
+      Object {
+        "label": undefined,
+        "value": "",
+      }
+    }
+  />
+</li>
+`;
