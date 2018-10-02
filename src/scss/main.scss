@@ -262,7 +262,9 @@
     }
 
     &__selectAll {
-      color: $SM-selectAllColor !important;
+      .Option__label {
+        color: $SM-selectAllColor;
+      }
     }
   }
 
@@ -305,10 +307,6 @@
       border-top-right-radius: 2px;
       cursor: default;
       padding: 2px 5px;
-    }
-
-    &--labelDisabled {
-      opacity: 0.5;
     }
 
     &__renderer {

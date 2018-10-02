@@ -2,7 +2,7 @@
 
 exports[`SelectAll should render properly 1`] = `
 <li
-  className="OptionList__item"
+  className="OptionList__item DropDown__selectAll"
 >
   <Option
     Option={[Function]}

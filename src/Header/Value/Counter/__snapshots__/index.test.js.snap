@@ -6,7 +6,6 @@ exports[`Counter should render properly 1`] = `
   <span
     className="Header__valueCounter"
   >
-     
     (
     1
     )
@@ -20,7 +19,6 @@ exports[`Counter should render properly if all selected 1`] = `
   <span
     className="Header__valueCounter"
   >
-     
     (
     All
     )
@@ -34,7 +32,6 @@ exports[`Counter should render properly if no counterLabel 1`] = `
   <span
     className="Header__valueCounter"
   >
-     
     (
     All
     )
