@@ -2,6 +2,8 @@
 
 [![Package Quality](http://npm.packagequality.com/badge/react-sm-select.png)](http://packagequality.com/#?package=react-sm-select)
 
+[![Package Quality](http://npm.packagequality.com/shield/react-sm-select.svg)](http://packagequality.com/#?package=react-sm-select)
+
 [Demo and Specimens](https://darianstlex.github.io/react-sm-select) Catalog
 
 ### Installation
