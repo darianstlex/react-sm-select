@@ -1,5 +1,3 @@
-import { SelectAll } from './SelectAll';
-import { Option } from './Option';
-
-export { SelectAll, Option };
+export { SelectAll } from './SelectAll';
+export { Option } from './Option';
 

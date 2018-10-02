@@ -1,11 +1,9 @@
 import React from 'react';
 import { classes } from '../utils';
 
-import { Value } from './Value';
-import { DefArrow } from './DefArrow';
-import { DefLoading } from './DefLoading';
-
-export { Value, DefArrow, DefLoading };
+export { Value } from './Value';
+export { DefArrow } from './DefArrow';
+export { DefLoading } from './DefLoading';
 
 export const Header = ({ children, disabled, expanded, focused, selected, nodeRef, onClick }) => (
   <div
