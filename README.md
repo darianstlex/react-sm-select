@@ -1,5 +1,7 @@
 > Single/Multi Select React Component
 
+[![Package Quality](http://npm.packagequality.com/badge/react-sm-select.png)](http://packagequality.com/#?package=react-sm-select)
+
 [Demo and Specimens](https://darianstlex.github.io/react-sm-select) Catalog
 
 ### Installation
