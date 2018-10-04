@@ -41,20 +41,15 @@ export const stopPreventPropagation = event => {
 };
 
 export const eventPath = event => {
-  const path = (event.composedPath && event.composedPath()) || event.path;
+  const inPath = (event.composedPath && event.composedPath()) || event.path;
   const target = event.target;
 
   // Safari doesn't include Window, but it should.
-  if (path != null) return (path.indexOf(window) < 0) ? path.concat(window) : path;
+  if (inPath != null) return (inPath.indexOf(window) < 0) ? inPath.concat(window) : inPath;
 
   if (target === window) return [window];
 
-  const getParents = (node, memo) => {
-    memo = memo || [];
-    const parentNode = node.parentNode;
-
-    return parentNode ? getParents(parentNode, memo.concat(parentNode)) : memo;
-  };
+  const getParents = ({parentNode}, memo = []) => parentNode ? getParents(parentNode, memo.concat(parentNode)) : memo;
 
   return [target].concat(getParents(target), window);
 };
