@@ -44,14 +44,10 @@ export const eventPath = event => {
   const path = (event.composedPath && event.composedPath()) || event.path;
   const target = event.target;
 
-  if (path != null) {
-    // Safari doesn't include Window, but it should.
-    return (path.indexOf(window) < 0) ? path.concat(window) : path;
-  }
+  // Safari doesn't include Window, but it should.
+  if (path != null) return (path.indexOf(window) < 0) ? path.concat(window) : path;
 
-  if (target === window) {
-    return [window];
-  }
+  if (target === window) return [window];
 
   const getParents = (node, memo) => {
     memo = memo || [];
