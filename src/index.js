@@ -1,15 +1,6 @@
 import React from 'react';
 import T from 'prop-types';
-import {
-  classes,
-  eventPath,
-  areArraysEqual,
-  omitDirtyValues,
-  attachDocumentClickListener,
-  removeDocumentClickListener,
-  stopPreventPropagation,
-  defaultFilterOptions,
-} from './utils';
+import * as u from './utils';
 
 import { MODE } from './consts';
 
@@ -63,7 +54,7 @@ export class MultiSelect extends React.Component {
     resetTo: [],
     Loading: DefLoading,
     Arrow: DefArrow,
-    filterOptions: defaultFilterOptions,
+    filterOptions: u.defaultFilterOptions,
     valuePlaceholder: 'Select',
     allSelectedLabel: 'All items are selected',
     searchPlaceholder: 'Search',
@@ -80,7 +71,7 @@ export class MultiSelect extends React.Component {
     super(p);
 
     this.state = {
-      value: p.isLoading ? p.value : omitDirtyValues(p.options, p.value, this.isSingle()),
+      value: p.isLoading ? p.value : u.omitDirtyValues(p.options, p.value, this.isSingle()),
       expanded: false,
       hasFocus: false,
       selectAll: false,
@@ -101,33 +92,33 @@ export class MultiSelect extends React.Component {
     const loadingEnd = pp.isLoading && !p.isLoading;
     const optionsChanges = pp.options.length !== p.options.length;
 
-    const getClearValue = (value) => loadingStart ? value : omitDirtyValues(p.options, value, this.isSingle());
+    const getClearValue = (value) => loadingStart ? value : u.omitDirtyValues(p.options, value, this.isSingle());
 
     const clearCurrValue = getClearValue(p.value);
     const clearPrevValue = getClearValue(pp.value);
 
-    if (!areArraysEqual(clearPrevValue, clearCurrValue) || loadingStart || loadingEnd || optionsChanges)
+    if (!u.areArraysEqual(clearPrevValue, clearCurrValue) || loadingStart || loadingEnd || optionsChanges)
       this.setState({ value: clearCurrValue });
 
     // Call onClose if it was closed
     if (ps.expanded === true && s.expanded === false) this.onEvent('onClose');
 
     // Call onChange if value was changed
-    if (!areArraysEqual(ps.value, s.value)) this.onEvent('onChange');
+    if (!u.areArraysEqual(ps.value, s.value)) this.onEvent('onChange');
 
     // Subscribe - Unsubscribe for click outside if enabled - disabled
     if (pp.disabled && !p.disabled) {
       this.hasListener = true;
-      attachDocumentClickListener(this.handleDocumentClick);
+      u.attachDocumentClickListener(this.handleDocumentClick);
     }
     if (!pp.disabled && p.disabled) {
       this.hasListener = false;
-      removeDocumentClickListener(this.handleDocumentClick);
+      u.removeDocumentClickListener(this.handleDocumentClick);
     }
   }
 
   componentWillUnmount() {
-    if (this.hasListener) removeDocumentClickListener(this.handleDocumentClick);
+    if (this.hasListener) u.removeDocumentClickListener(this.handleDocumentClick);
   }
 
 
@@ -145,9 +136,9 @@ export class MultiSelect extends React.Component {
   handleDocumentClick = event => {
     if (this.props.disabled) return;
 
-    if (!eventPath(event).includes(this.multiSelectRef.current)) {
+    if (!u.eventPath(event).includes(this.multiSelectRef.current)) {
       this.setState({ expanded: false, hasFocus: false });
-      removeDocumentClickListener(this.handleDocumentClick);
+      u.removeDocumentClickListener(this.handleDocumentClick);
       this.onEvent('onBlur');
     }
   };
@@ -156,7 +147,7 @@ export class MultiSelect extends React.Component {
    * Handle MultiSelect click to subscribe for click outside
    */
   handleClick = () => {
-    if (!this.props.disabled && !this.hasListener) attachDocumentClickListener(this.handleDocumentClick);
+    if (!this.props.disabled && !this.hasListener) u.attachDocumentClickListener(this.handleDocumentClick);
   };
 
   /**
@@ -235,7 +226,7 @@ export class MultiSelect extends React.Component {
     }, () => {
       this.handleFocusControl(this.state.focusIndex);
     });
-    stopPreventPropagation(event);
+    u.stopPreventPropagation(event);
   };
 
   /**
@@ -259,7 +250,7 @@ export class MultiSelect extends React.Component {
         this.handleFocusControl(this.state.focusIndex);
       });
     }
-    stopPreventPropagation(event);
+    u.stopPreventPropagation(event);
   };
 
   /**
@@ -282,7 +273,7 @@ export class MultiSelect extends React.Component {
       27: () => { // Esc
         this.toggleDropDown(false);
         this.handleFocusControl(-2);
-        stopPreventPropagation(event);
+        u.stopPreventPropagation(event);
       },
       38: () => this.keyUp(event), // Up
       40: () => this.keyDown(event), // Down
@@ -310,7 +301,7 @@ export class MultiSelect extends React.Component {
     const { value } = this.state;
     this.setState({ value: [...value.slice(0, index), ...value.slice(index + 1)] });
 
-    if (event) stopPreventPropagation(event);
+    if (event) u.stopPreventPropagation(event);
   };
 
   /**
@@ -320,7 +311,7 @@ export class MultiSelect extends React.Component {
   reset = event => {
     const { props: p } = this;
     if (!p.disabled || !p.isLoading) this.setState({ value: p.resetTo });
-    stopPreventPropagation(event);
+    u.stopPreventPropagation(event);
   };
 
 
@@ -417,7 +408,7 @@ export class MultiSelect extends React.Component {
           selected={s.focusIndex === -2}
           onClick={() => this.toggleDropDown()}
         >
-          <div className={classes('Header__value', {
+          <div className={u.classes('Header__value', {
             'Header__value--resetable': p.resetable && (!!s.value.length || !!p.resetTo.length),
           })}>
             <Value
@@ -452,7 +443,7 @@ export class MultiSelect extends React.Component {
           {p.enableSearch && (
             <input
               type="text"
-              className={classes('DropDown__searchField', {
+              className={u.classes('DropDown__searchField', {
                 'DropDown__searchField--selected': s.focusIndex === -1,
               })}
               placeholder={!p.maxOptionsToRender ? p.searchPlaceholder : p.searchMorePlaceholder}

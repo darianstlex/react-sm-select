@@ -74,7 +74,8 @@ export const removeDocumentClickListener = (cb) => {
 
 /**
  * Stops event propagation
- * @param event
+ * @param event.stopPropagation
+ * @param event.preventDefault
  */
 export const stopPreventPropagation = event => {
   event.stopPropagation();
@@ -83,16 +84,16 @@ export const stopPreventPropagation = event => {
 
 /**
  * Calculate element path for browser compatibility
- * @param event
+ * @param event.composedPath
+ * @param event.path return
+ * @param event.target
  * @returns {*}
  */
 export const eventPath = event => {
   const inPath = (event.composedPath && event.composedPath()) || event.path;
   const target = event.target;
 
-  // Safari doesn't include Window, but it should.
-  if (inPath != null) return (inPath.indexOf(window) < 0) ? inPath.concat(window) : inPath;
-
+  if (inPath != null) return (inPath.indexOf(window) < 0) ? inPath.concat(window) : inPath; // safari
   if (target === window) return [window];
 
   const getParents = ({parentNode}, memo = []) => parentNode ? getParents(parentNode, memo.concat(parentNode)) : memo;
