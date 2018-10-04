@@ -1,6 +1,6 @@
-[![NPM](https://nodei.co/npm/react-sm-select.png)](https://nodei.co/npm/react-sm-select/)
+[![npm version](https://badge.fury.io/js/react-sm-select.svg)](https://badge.fury.io/js/react-sm-select) [![GitHub license](https://img.shields.io/github/license/darianstlex/react-sm-select.svg)](https://github.com/darianstlex/react-sm-select/blob/master/LICENSE) [![Hackage-Deps](https://img.shields.io/hackage-deps/v/lens.svg)](https://github.com/darianstlex/react-sm-select) [![Package Quality](http://npm.packagequality.com/shield/react-sm-select.svg)](http://packagequality.com/#?package=react-sm-select)
 
-[![Package Quality](http://npm.packagequality.com/shield/react-sm-select.svg)](http://packagequality.com/#?package=react-sm-select)
+[![NPM](https://nodei.co/npm/react-sm-select.png)](https://nodei.co/npm/react-sm-select/)
 
 > Single/Multi Select React Component
 
