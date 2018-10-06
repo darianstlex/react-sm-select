@@ -1,6 +1,6 @@
 import React from 'react';
 import T from 'prop-types';
-import { classes, stopPreventPropagation } from '../../utils';
+import * as u from '../../utils';
 
 import { DefOption } from './DefOption';
 
@@ -37,15 +37,13 @@ export class Option extends React.Component {
   }
 
   updateFocus = () => {
-    if (this.props.focused && this.optionRef.current) {
-      this.optionRef.current.focus();
-    }
+    if (this.props.focused && this.optionRef.current) this.optionRef.current.focus();
   };
 
   handleKeyDown = event => {
     if (event.which === 13 || event.which === 32) { // Enter || Space
       this.props.onClick();
-      stopPreventPropagation(event);
+      u.stopPreventPropagation(event);
     }
   };
 
@@ -54,7 +52,7 @@ export class Option extends React.Component {
 
     return (
       <label
-        className={classes('Option', {
+        className={u.classes('Option', {
           'Option--focus': p.focused,
           'Option--hover': s.hovered,
         })}
