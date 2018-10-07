@@ -1,7 +1,5 @@
 > Single/Multi Select React Component
 
-Inspired by [React MultiSelect](https://github.com/Khan/react-multi-select)
-
 ## Installation
 
 Install the react-sm-select npm package:
@@ -38,7 +36,7 @@ state = {
 
 ### Styling
 
-Can be used css overriding, see compiled css. Or use scss variables for general styling.
+CSS can be overrided, see compiled css. Or use scss variables for general styling.
 
 ```code
 @import 'react-sm-select/dist/variables';

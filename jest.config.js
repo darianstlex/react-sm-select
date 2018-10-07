@@ -1,7 +1,7 @@
 module.exports = {
   cacheDirectory: 'node_modules/.jest-cache',
   setupFiles: [
-    '<rootDir>/scripts/enzymeConfiguration.js',
+    '<rootDir>/config/enzymeConfiguration.js',
   ],
   testMatch: [
     '<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}',
