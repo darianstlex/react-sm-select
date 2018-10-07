@@ -290,24 +290,33 @@ If you have found an issue or would like to request a new feature, simply create
 
 Fork, install dependencies
 
-```code
-yarn / npm install
+```bash
+yarn
+# or
+npm install
 ```
 
 Run catalog web server at http://localhost:4000/
 
-```code
-yarn start / npm start
+```bash
+yarn start
+# or
+npm start
 ```
 
 Run unit tests
 
-```code
-yarn test / npm test
+```bash
+yarn test
+# or
+npm test
 ```
 
 Watch unit tests
 
-```code
-yarn test:w / npm run test:w
+```bash
+yarn test:w
+# or
+npm run test:w
 ```
+
