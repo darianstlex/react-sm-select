@@ -94,6 +94,11 @@ const pages = [
     path: 'playground/playground',
     content: markdownLoader('playground/playground'),
   },
+  {
+    title: 'Dev / Contribute',
+    path: 'dev',
+    content: markdownLoader('dev'),
+  },
 ];
 
 ReactDOM.render(
