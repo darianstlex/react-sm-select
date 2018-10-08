@@ -221,7 +221,7 @@ filterOptions(options, text) {
 - **`Arrow: function`** DropDown Arrow:
 
 ```code
-Arrow({options, value, expanded, hasFocus, disabled}) {
+({options, value, expanded, hasFocus, disabled}) => {
   // options: array - see 'options' prop 
   // value: array - see 'value' property
   // expanded: boolean - expanded component status
@@ -236,7 +236,7 @@ Arrow({options, value, expanded, hasFocus, disabled}) {
 - **`Loading: function`** Loading Indicator:
 
 ```code
-Loading() {
+() => {
   return - component to render custom Loading Indicator
 }
 ```
@@ -245,7 +245,7 @@ Loading() {
 - **`Option: function`** Option:
 
 ```code
-Option({checked, option, isSingle}) {
+({checked, option, isSingle}) => {
   // option: object - from options props: { value, label }  
   // checked: boolean - define if option is checked
   // isSingle: boolean - single selection mode
@@ -258,7 +258,7 @@ Option({checked, option, isSingle}) {
 - **`Tag: function`** Tag:
 
 ```code
-Tag({label, index, removableTag, onTagRemove}) {
+({label, index, removableTag, onTagRemove}) => {
   // label: string - tag label
   // index: number - tag index in array used in removal 
   // removableTag: boolean - display/hide remove tag button
@@ -270,7 +270,7 @@ Tag({label, index, removableTag, onTagRemove}) {
 - **`Value: function`** Value:
 
 ```code
-Value({value, options}) {
+({value, options}) => {
   // options: array - see 'options' property
   // value: array - see 'value' property
   
