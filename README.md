@@ -263,6 +263,8 @@ filterOptions(options, text) {
   // index: number - tag index in array used in removal 
   // removableTag: boolean - display/hide remove tag button
   // onTagRemove: function - callback to remove selected tag
+  
+  return - component to render custom Tag
 }
 ```
 
