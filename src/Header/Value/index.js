@@ -20,7 +20,7 @@ export const Value = ({
 }) => {
   const isMode = expected => mode === expected;
 
-  if (!isMode(MODE.TAGS) && !isMode(MODE.COUNTER) && value.length === options.length)
+  if (Value === DefValue && !isMode(MODE.TAGS) && !isMode(MODE.COUNTER) && value.length === options.length)
     return (<span>{allSelectedLabel}</span>);
 
   if (!value.length) return (<span className="Header__valuePlaceholder">{valuePlaceholder}</span>);

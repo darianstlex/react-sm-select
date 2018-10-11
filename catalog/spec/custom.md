@@ -37,7 +37,7 @@ state: {
 ---
 const Value = ({value, options}) => {
   if(!value.length) return 'Colors';
-  return `Colors (${!!value.length && value.length === options.length ? 'All' : value.length})`;
+  return `Colors {> ${!!value.length && value.length === options.length ? 'All' : value.length} <}`;
 };
 
 <MultiSelect

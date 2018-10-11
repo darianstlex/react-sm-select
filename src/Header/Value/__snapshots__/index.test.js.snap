@@ -164,6 +164,34 @@ exports[`Value should render properly all selected 1`] = `
 </span>
 `;
 
+exports[`Value should render properly all selected with custom Value 1`] = `
+<Numbers
+  options={
+    Array [
+      Object {
+        "label": "One",
+        "value": "one",
+      },
+      Object {
+        "label": "Two",
+        "value": "two",
+      },
+      Object {
+        "label": "Five",
+        "value": "five",
+      },
+    ]
+  }
+  value={
+    Array [
+      "one",
+      "two",
+      "five",
+    ]
+  }
+/>
+`;
+
 exports[`Value should render properly custom value 1`] = `
 <Value
   options={

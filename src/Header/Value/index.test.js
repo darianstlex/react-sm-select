@@ -41,6 +41,13 @@ describe('Value', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
+  it('should render properly all selected with custom Value', () => {
+    const Numbers = () => {};
+    const wrapper = shallow(<Value {...props} value={['one', 'two', 'five']} Value={Numbers}/>);
+
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
   it('should render Tags', () => {
     const wrapper = shallow(<Value {...props} mode={MODE.TAGS} value={['one', 'two', 'five']}/>);
     wrapper.find(DefTag).at(0).prop('onTagRemove')();
