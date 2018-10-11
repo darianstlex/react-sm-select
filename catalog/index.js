@@ -109,6 +109,9 @@ ReactDOM.render(
     specimens={{
       'js': props => <ReactSpecimen {...props} lang="javascript" />,
     }}
+    theme={{
+      pageHeadingHeight: 140,
+    }}
   />,
   document.getElementById("catalog")
 );

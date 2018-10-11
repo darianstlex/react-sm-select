@@ -276,7 +276,7 @@ filterOptions(options, text) {
   // options: array - see 'options' property
   // value: array - see 'value' property
   
-  return - component to render custom value
+  return - component to render custom Value
 }
 ```
 

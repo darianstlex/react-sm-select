@@ -6,3 +6,11 @@ body {
 input, textarea, select {
   font-size: 1rem;
 }
+
+a h1 {
+  padding: 5px 16px !important;
+}
+
+a h1 div {
+  margin: 0 !important;
+}
