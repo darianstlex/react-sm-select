@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  unit-tests:
+  unit-testing:
     working_directory: ~/rsm-select
     docker:
     - image: circleci/node:8.12
