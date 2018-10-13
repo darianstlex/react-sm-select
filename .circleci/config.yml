@@ -1,27 +1,32 @@
 version: 2
 jobs:
-  build:
+  unit-testing:
     working_directory: ~/rsm-select
 
     docker:
-      - image: circleci/node:8.12
+    - image: circleci/node:8.12
 
     steps:
-      - checkout
+    - checkout
 
-      # download and cache dependencies
-      - restore_cache:
-          keys:
-            - dependency-cache-{{ checksum "package.json" }}
-            # fallback
-            - dependency-cache-
+    # download / cache dependencies
+    - restore_cache:
+      keys:
+        - dependency-cache-{{ checksum "package.json" }}
+        # fallback
+        - dependency-cache-
 
-      - run: yarn
+    # install dependencies
+    - run:
+      name: Install Dependencies
+      command: yarn install
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: dependency-cache-{{ checksum "package.json" }}
+    - save_cache:
+      paths:
+        - node_modules
+      key: dependency-cache-{{ checksum "package.json" }}
 
-      # run tests!
-      - run: yarn test
+    # run tests!
+    - run:
+      name: Run Unit Tests
+      command: yarn test
