@@ -1,10 +1,12 @@
 catalog
+config
 scripts
 .vscode
 .tmp
 .babelrc
 .gitignore
 .idea
+.editorconfig
 webpack.config.js
 jest.config.js
 *.test.js
