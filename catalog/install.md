@@ -69,7 +69,7 @@ $SM-tagBackgroundColor: $SM-focusColor;
 $SM-tagCloseColor: $SM-textColor;
 $SM-tagCloseBackgroundColor: $SM-lightGrey;
 
-// DropDown
+// DropDown Arrow
 $SM-dropDownArrowColor: $SM-mutedColor;
 $SM-dropDownActiveArrowColor: $SM-lightBlue;
 
