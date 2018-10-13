@@ -10,14 +10,18 @@ jobs:
         keys:
         - dependency-cache-{{ checksum "package.json" }}
         - dependency-cache-
-    - run: yarn install
+    - run:
+        name: Install Dependencies
+        command: yarn install
     - save_cache:
         paths:
         - node_modules
         key: dependency-cache-{{ checksum "package.json" }}
-    - run: yarn test
+    - run:
+        name: Unit Tests
+        command: yarn test
 workflows:
   version: 2
   workflow:
     jobs:
-    - unit-tests
+    - unit-testing
