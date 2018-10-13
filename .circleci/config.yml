@@ -30,3 +30,9 @@ jobs:
     - run:
       name: Run Unit Tests
       command: yarn test
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+    - unit-testing
