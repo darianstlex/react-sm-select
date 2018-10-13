@@ -1,12 +1,12 @@
 {
   "name": "react-sm-select",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "React Multi/Single Select Component",
   "main": "./dist/index.js",
   "module": "./es/index.js",
   "scripts": {
     "start": "run-p scss:w catalog-start",
-    "es": "babel src -d es -D",
+    "es": "babel src -d es -D --ignore '**/*.test.js'",
     "build": "npm run scss && webpack --mode production && npm run es",
     "prepublish": "rm -rf dist es && npm run build",
     "scss": "node-sass src/styles.scss src/styles.css && postcss src/styles.css -u autoprefixer -o src/styles.css",
