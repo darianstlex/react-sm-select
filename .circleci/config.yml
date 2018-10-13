@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   unit-testing:
     working_directory: ~/rsm-select
@@ -21,7 +21,6 @@ jobs:
         name: Unit Tests
         command: yarn test
 workflows:
-  version: 2
   workflow:
     jobs:
     - unit-testing
