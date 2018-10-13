@@ -19,7 +19,8 @@ jobs:
       - run: yarn
 
       - save_cache:
-          path: node_modules
+          paths:
+            - node_modules
           key: dependency-cache-{{ checksum "package.json" }}
 
       # run tests!
