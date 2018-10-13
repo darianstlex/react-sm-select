@@ -7,6 +7,7 @@ scripts
 .gitignore
 .idea
 .editorconfig
+.circleci
 webpack.config.js
 jest.config.js
 *.test.js

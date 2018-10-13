@@ -1,0 +1,26 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/rsm-select
+
+    docker:
+      - image: circleci/node:8.12
+
+    steps:
+      - checkout
+
+      # download and cache dependencies
+      - restore_cache:
+          keys:
+            - dependency-cache-{{ checksum "package.json" }}
+            # fallback
+            - dependency-cache-
+
+      - run: yarn
+
+      - save_cache:
+          path: node_modules
+          key: dependency-cache-{{ checksum "package.json" }}
+
+      # run tests!
+      - run: yarn test
