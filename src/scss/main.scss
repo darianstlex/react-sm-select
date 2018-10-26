@@ -182,6 +182,10 @@
       &--active {
         border-bottom-color: $SM-dropDownActiveArrowColor !important;
       }
+
+      &--disabled {
+        border-bottom-color: $SM-dropDownArrowColor !important;
+      }
     }
 
     &__loading {

@@ -8,6 +8,7 @@ export const DefArrow = ({expanded, disabled}) => (
         'Header__arrow--down': !expanded,
         'Header__arrow--up': expanded,
         'Header__arrow--active': !disabled && expanded,
+        'Header__arrow--disabled': disabled,
       })}
     />
   </div>
