@@ -166,9 +166,10 @@ export class MultiSelect extends React.Component {
 
   /**
    * Toggle MultiSelect DropDown
+   * @param event
    * @param value Boolean
    */
-  toggleDropDown = value => {
+  toggleDropDown = (event, value) => {
     const { props: p } = this;
     if (p.disabled || p.isLoading) return;
 
@@ -179,6 +180,8 @@ export class MultiSelect extends React.Component {
         searchText: '',
       } : {}),
     }));
+
+    if (event) u.stopPreventPropagation(event);
   };
 
   /**
@@ -186,7 +189,7 @@ export class MultiSelect extends React.Component {
    * @param expanded Boolean
    */
   handleHover = expanded => {
-    if (this.props.shouldToggleOnHover) this.toggleDropDown(expanded);
+    if (this.props.shouldToggleOnHover) this.toggleDropDown(null, expanded);
   };
 
   /**
@@ -215,7 +218,7 @@ export class MultiSelect extends React.Component {
   keyDown = event => {
     const { props: p, state: s } = this;
 
-    if (!s.expanded) this.toggleDropDown(true);
+    if (!s.expanded) this.toggleDropDown(null, true);
     else this.setState(({focusIndex}) => {
       let nextIndex = focusIndex + 1;
 
@@ -238,7 +241,7 @@ export class MultiSelect extends React.Component {
     const { props: p, state: s } = this;
 
     if (s.expanded) {
-      if (s.focusIndex === -2) this.toggleDropDown(false);
+      if (s.focusIndex === -2) this.toggleDropDown(null, false);
       else this.setState(({focusIndex}) => {
         let nextIndex = focusIndex - 1;
 
@@ -269,9 +272,9 @@ export class MultiSelect extends React.Component {
     ({
       [event.which]: () => {},
       8: () => this.clearValue(event), // BackSpace
-      9: () => this.toggleDropDown(false), // Tab
+      9: () => this.toggleDropDown(null, false), // Tab
       27: () => { // Esc
-        this.toggleDropDown(false);
+        this.toggleDropDown(null, false);
         this.handleFocusControl(-2);
         u.stopPreventPropagation(event);
       },
@@ -288,7 +291,7 @@ export class MultiSelect extends React.Component {
    * @param optionValue value string
    */
   select = optionValue => {
-    if (this.isSingle()) this.setState({ value: [optionValue] }, () => this.toggleDropDown(false));
+    if (this.isSingle()) this.setState({ value: [optionValue] }, () => this.toggleDropDown(null,false));
     else this.setState({ value: [...this.state.value, optionValue] });
   };
 
@@ -406,7 +409,7 @@ export class MultiSelect extends React.Component {
           expanded={s.expanded}
           disabled={p.disabled}
           selected={s.focusIndex === -2}
-          onClick={() => this.toggleDropDown()}
+          onClick={this.toggleDropDown}
         >
           <div className={u.classes('Header__value', {
             'Header__value--resetable': p.resetable && (!!s.value.length || !!p.resetTo.length),
