@@ -145,6 +145,8 @@ $SM-dropDownZIndex: 1;
 
 - **`shouldToggleOnHover: boolean: false`** Toggle drop-down on hover
 
+- **`stopClickPropagation: boolean: false`** Stop Header click event propagation
+
 
 
 #### Labels / Placeholders

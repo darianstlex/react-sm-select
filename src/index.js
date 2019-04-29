@@ -47,6 +47,7 @@ export class MultiSelect extends React.Component {
     resetable: T.bool,
     enableSearch: T.bool,
     hasSelectAll: T.bool,
+    stopClickPropagation: T.bool,
   };
   static defaultProps = {
     mode: MODE.LIST,
@@ -65,6 +66,7 @@ export class MultiSelect extends React.Component {
     resetable: false,
     enableSearch: false,
     hasSelectAll: false,
+    stopClickPropagation: false,
   };
 
   constructor(p) {
@@ -181,7 +183,7 @@ export class MultiSelect extends React.Component {
       } : {}),
     }));
 
-    if (event) u.stopPreventPropagation(event);
+    if (event && p.stopClickPropagation) u.stopPreventPropagation(event);
   };
 
   /**
