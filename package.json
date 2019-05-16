@@ -1,6 +1,6 @@
 {
   "name": "react-sm-select",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "React Multi/Single Select Component",
   "main": "./dist/index.js",
   "module": "./es/index.js",

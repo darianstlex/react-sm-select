@@ -276,7 +276,7 @@ describe('MultiSelect', () => {
         wrapper.setProps({ shouldToggleOnHover: true });
         wrapper.instance().handleHover(true);
 
-        expect(toggleDropDown).toHaveBeenCalledWith(true);
+        expect(toggleDropDown).toHaveBeenCalledWith(null, true);
       });
 
       it('should not call toggleDropDown if not shouldToggleOnHover', () => {
@@ -348,7 +348,7 @@ describe('MultiSelect', () => {
       it('should toggle DropDown and call stopPreventPropagation', () => {
         wrapper.instance().keyDown(event);
 
-        expect(toggleDropDown).toHaveBeenCalledWith(true);
+        expect(toggleDropDown).toHaveBeenCalledWith(null, true);
         expect(utils.stopPreventPropagation).toHaveBeenCalledWith(event);
       });
 
@@ -368,7 +368,7 @@ describe('MultiSelect', () => {
         wrapper.setState({ expanded: true, focusIndex: -2 });
         wrapper.instance().keyUp(event);
 
-        expect(toggleDropDown).toHaveBeenCalledWith(false);
+        expect(toggleDropDown).toHaveBeenCalledWith(null, false);
         expect(utils.stopPreventPropagation).toHaveBeenCalledWith(event);
       });
 
@@ -412,10 +412,10 @@ describe('MultiSelect', () => {
         expect(clearValue).toHaveBeenCalledWith({ ...event, which: 8 });
 
         wrapper.instance().handleKeyPress({ ...event, which: 9 });
-        expect(toggleDropDown).toHaveBeenCalledWith(false);
+        expect(toggleDropDown).toHaveBeenCalledWith(null, false);
 
         wrapper.instance().handleKeyPress({ ...event, which: 27 });
-        expect(toggleDropDown).toHaveBeenCalledWith(false);
+        expect(toggleDropDown).toHaveBeenCalledWith(null, false);
         expect(wrapper.instance().headerRef.current.focus).toHaveBeenCalled();
         expect(utils.stopPreventPropagation).toHaveBeenCalledWith({ ...event, which: 27 });
 
@@ -441,7 +441,7 @@ describe('MultiSelect', () => {
         setState.mock.calls[0][1]();
 
         expect(setState.mock.calls[0][0]).toEqual({ value: ['two'] });
-        expect(toggleDropDown).toHaveBeenCalledWith(false);
+        expect(toggleDropDown).toHaveBeenCalledWith(null, false);
       });
     });
 
