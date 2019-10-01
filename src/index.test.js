@@ -186,7 +186,8 @@ describe('MultiSelect', () => {
 
     describe('handleDocumentClick', () => {
       it('should remove document click listener, set state and call onBlur', () => {
-        wrapper.instance().handleDocumentClick({ path: ['test'] });
+        wrapper.setState({ mouseHover: false });
+        wrapper.instance().handleDocumentClick();
 
         expect(setState).toHaveBeenCalledWith({ expanded: false, hasFocus: false });
         expect(utils.removeDocumentClickListener).toHaveBeenCalledWith(wrapper.instance().handleDocumentClick);
@@ -194,8 +195,8 @@ describe('MultiSelect', () => {
       });
 
       it('should not remove document click listener, set state and call onBlur if click is internal', () => {
-        wrapper.instance().multiSelectRef.current = 'test';
-        wrapper.instance().handleDocumentClick({ path: ['test'] });
+        wrapper.setState({ mouseHover: true });
+        wrapper.instance().handleDocumentClick();
 
         expect(setState).not.toHaveBeenCalled();
         expect(utils.removeDocumentClickListener).not.toHaveBeenCalled();
@@ -204,7 +205,8 @@ describe('MultiSelect', () => {
 
       it('should not remove document click listener, set state and call onBlur if disabled', () => {
         const wrapper = shallow(<MultiSelect {...props} disabled={true} />);
-        wrapper.instance().handleDocumentClick({ path: ['test'] });
+        wrapper.setState({ mouseHover: true });
+        wrapper.instance().handleDocumentClick();
 
         expect(setState).not.toHaveBeenCalled();
         expect(utils.removeDocumentClickListener).not.toHaveBeenCalled();

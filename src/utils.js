@@ -81,22 +81,3 @@ export const stopPreventPropagation = event => {
   event.stopPropagation();
   event.preventDefault();
 };
-
-/**
- * Calculate element path for browser compatibility
- * @param event.composedPath
- * @param event.path return
- * @param event.target
- * @returns {*}
- */
-export const eventPath = event => {
-  const inPath = (event.composedPath && event.composedPath()) || event.path;
-  const target = event.target;
-
-  if (inPath != null) return (inPath.indexOf(window) < 0) ? inPath.concat(window) : inPath; // safari
-  if (target === window) return [window];
-
-  const getParents = ({parentNode}, memo = []) => parentNode ? getParents(parentNode, memo.concat(parentNode)) : memo;
-
-  return [target].concat(getParents(target), window);
-};
