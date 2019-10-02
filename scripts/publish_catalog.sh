@@ -11,8 +11,11 @@ if [[ ${GIT_URL} == "" ]]; then
 fi
 
 # clear and re-create the out directory
-rm -rf .tmp || exit 0;
-mkdir .tmp;
+rm -rf .tmp || exit 0
+mkdir .tmp
+
+# copy circle ci config to not trigger build for this branch
+cp -r .circleci .tmp
 
 # run our compile script, discussed above
 npm run scss
