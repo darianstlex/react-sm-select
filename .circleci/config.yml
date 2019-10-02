@@ -23,4 +23,7 @@ jobs:
 workflows:
   workflow:
     jobs:
-    - unit-testing
+    - unit-testing:
+        filters:
+          branches:
+            ignore: gh-pages
