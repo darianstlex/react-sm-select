@@ -107,3 +107,33 @@ const Option = ({checked, option, isSingle}) => (
   Option={Option}
 />
 ```
+
+### Option Custom Icon
+
+```react
+state: {
+ value: ['red', 'blue'],
+ options: [
+   {value: 'red', label: 'Red'},
+   {value: 'green', label: 'Green'},
+   {value: 'blue', label: 'Blue'},
+   {value: 'brown', label: 'Brown'},
+ ],
+}
+---
+const Option = ({checked, option, isSingle}) => (
+  <div className="Option__renderer">
+    {checked ? '\u263A' : '\u263B'}
+    <span className="Option__label">
+      {option.label}
+    </span>
+  </div>
+);
+
+<MultiSelect
+  options={state.options}
+  value={state.value}
+  onChange={value => setState({ value })}
+  Option={Option}
+/>
+```
