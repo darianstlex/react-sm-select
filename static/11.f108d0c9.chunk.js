@@ -1,0 +1,2 @@
+webpackJsonp([11],{804:function(e,n,t){var r=t(8),o=t(45),a=t(297).PageRenderer;a.__esModule&&(a=a.default);var c=o({displayName:"WrappedPageRenderer",getInitialState:function(){return{content:t(818)}},componentWillMount:function(){},render:function(){return r.createElement(a,Object.assign({},this.props,{content:this.state.content}))}});c.__catalog_loader__=!0,e.exports=c},818:function(e,n){e.exports="```react\nnoSource: true\n---\n<MultiSelectWrapper />\n```\n"}});
+//# sourceMappingURL=11.f108d0c9.chunk.js.map
